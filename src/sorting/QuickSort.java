@@ -24,7 +24,7 @@ public class QuickSort extends AbstractSortWithTimer {
   }
 
   private void sort(int[] input, int startIndex, int endIndex) {
-    if (startIndex >= endIndex - 1) { return; }
+    if (startIndex >= endIndex) { return; }
 
     //System.out.println(Arrays.toString(input));
 
@@ -56,7 +56,7 @@ public class QuickSort extends AbstractSortWithTimer {
     input[i] = pivot;
 
     if (startIndex < i) {
-      sort(input, startIndex, i);
+      sort(input, startIndex, i - 1);
     }
 
     if (endIndex > i) {

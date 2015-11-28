@@ -32,27 +32,21 @@ public class QuickSort extends AbstractSortWithTimer {
     int i = startIndex, j = endIndex;
     while (i < j) {
 
-      int jElem = input[j];
-      while (jElem > pivot && i < j) {
+      while (input[j] >= pivot && i < j) {
         j--;
       }
-
-      int iElem = input[i];
-      
       
       if (i < j) {
-        input[i] = jElem;
+        input[i] = input[j];
         i++;
       }
 
-      while (input[i] < pivot && i < j) {
+      while (input[i] <= pivot && i < j) {
         i++;
       }
-
-      iElem = input[i];
-      jElem = input[j];
+      
       if (i < j) {
-        input[j] = iElem;
+        input[j] = input[i];
         j--;
       }
       
@@ -61,8 +55,8 @@ public class QuickSort extends AbstractSortWithTimer {
 
     input[i] = pivot;
 
-    if (startIndex < i - 1) {
-      sort(input, startIndex, i - 1);
+    if (startIndex < i) {
+      sort(input, startIndex, i);
     }
 
     if (endIndex > i) {

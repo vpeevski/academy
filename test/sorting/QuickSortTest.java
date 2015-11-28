@@ -1,12 +1,10 @@
-package sorting.test;
+package sorting;
 
 import static org.junit.Assert.*;
 
 import java.util.Arrays;
 
 import org.junit.Test;
-
-import sorting.QuickSort;
 
 public class QuickSortTest extends AbstractTest {
 

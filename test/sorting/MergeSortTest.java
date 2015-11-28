@@ -1,4 +1,4 @@
-package sorting.test;
+package sorting;
 
 import static org.junit.Assert.assertArrayEquals;
 
@@ -6,40 +6,38 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-import sorting.BubleSort;
-
-public class BulbeSortTest extends AbstractTest {
+public class MergeSortTest extends AbstractTest {
 
   @Test
   public void testSortedArray() {
-    BubleSort bubleSorter = new BubleSort();
-    int[] sortedArrayExpected = {1, 2, 3, 4, 5, 6, 6, 7, 8, 9, 10, 10};
-    bubleSorter.sortForTime(sortedArray);
+    MergeSort mergeSorter = new MergeSort();
+    int[] sortedArrayExpected = { 1, 2, 3, 4, 5, 6, 6, 7, 8, 9, 10, 10 };
+    mergeSorter.sortForTime(sortedArray);
     assertArrayEquals(sortedArrayExpected, sortedArray);
   }
-  
+
   @Test
   public void testResersedSortedArray() {
-    BubleSort bubleSorter = new BubleSort();
-    int[] sortedArrayExpected = {1, 1, 2, 2, 3, 3, 4, 5, 6, 7, 8, 9, 10};
-    bubleSorter.sortForTime(reverseSortedArray);
+    MergeSort mergeSorter = new MergeSort();
+    int[] sortedArrayExpected = { 1, 1, 2, 2, 3, 3, 4, 5, 6, 7, 8, 9, 10 };
+    mergeSorter.sortForTime(reverseSortedArray);
     assertArrayEquals(sortedArrayExpected, reverseSortedArray);
   }
-  
+
   @Test
   public void testBigArrayWithJavaInternalSort() {
-    BubleSort bubleSorter = new BubleSort();
+    MergeSort mergeSorter = new MergeSort();
     int[] clone = arr.clone();
     Arrays.sort(clone);
-    bubleSorter.sortForTime(arr);
+    mergeSorter.sortForTime(arr);
     assertArrayEquals(clone, arr);
   }
   
   @Test
   public void testRandomArraySort() {
-    BubleSort bubleSorter = new BubleSort();
+    MergeSort mergeSorter = new MergeSort();
     
-    bubleSorter.sortForTime(randomArray);
+    mergeSorter.sortForTime(randomArray);
     assertArrayEquals(randomArraySorted, randomArray);
   }
 

@@ -1,4 +1,4 @@
-package sorting.test;
+package sorting;
 
 public abstract class AbstractTest {
   

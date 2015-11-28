@@ -1,4 +1,4 @@
-package sorting.test;
+package sorting;
 
 import static org.junit.Assert.assertArrayEquals;
 
@@ -6,40 +6,38 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-import sorting.MergeSort;
-
-public class MergeSortTest extends AbstractTest {
+public class HeapSortTest extends AbstractTest {
 
   @Test
   public void testSortedArray() {
-    MergeSort mergeSorter = new MergeSort();
+    HeapSort heapSort = new HeapSort();
     int[] sortedArrayExpected = { 1, 2, 3, 4, 5, 6, 6, 7, 8, 9, 10, 10 };
-    mergeSorter.sortForTime(sortedArray);
+    heapSort.sortForTime(sortedArray);
     assertArrayEquals(sortedArrayExpected, sortedArray);
   }
 
   @Test
   public void testResersedSortedArray() {
-    MergeSort mergeSorter = new MergeSort();
+    HeapSort heapSort = new HeapSort();
     int[] sortedArrayExpected = { 1, 1, 2, 2, 3, 3, 4, 5, 6, 7, 8, 9, 10 };
-    mergeSorter.sortForTime(reverseSortedArray);
+    heapSort.sortForTime(reverseSortedArray);
     assertArrayEquals(sortedArrayExpected, reverseSortedArray);
   }
 
   @Test
   public void testBigArrayWithJavaInternalSort() {
-    MergeSort mergeSorter = new MergeSort();
+    HeapSort heapSort = new HeapSort();
     int[] clone = arr.clone();
     Arrays.sort(clone);
-    mergeSorter.sortForTime(arr);
+    heapSort.sortForTime(arr);
     assertArrayEquals(clone, arr);
   }
   
   @Test
-  public void testRandomArraySort() {
-    MergeSort mergeSorter = new MergeSort();
+  public void testRandomArray() {
+    HeapSort heapSort = new HeapSort();
     
-    mergeSorter.sortForTime(randomArray);
+    heapSort.sortForTime(randomArray);
     assertArrayEquals(randomArraySorted, randomArray);
   }
 

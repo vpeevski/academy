@@ -16,6 +16,8 @@ public abstract class AbstractTest {
   
   protected final int[] reverseSortedArray = {10, 9, 8, 7, 6, 5, 4, 3, 3, 2, 2, 1, 1};
   
+  private final static int ITERATIONS = 10000;
+  
   protected int[] randomArray;
   
   protected int[] randomArrayClone1;
@@ -25,8 +27,8 @@ public abstract class AbstractTest {
   
 
   @Test
-  public void testRandomArrayHundredTimes () {
-	 for (int i = 0; i < 10000; i++) {
+  public void testRandomArrayMultipleTimes () {
+	 for (int i = 0; i < ITERATIONS; i++) {
 		 randomArray = RandomGenerator.genRandomArray();
 		 randomArrayClone1 = randomArray.clone();
 		 randomArrayClone2 = randomArray.clone();

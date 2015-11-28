@@ -29,10 +29,10 @@ public class QuickSortTest extends AbstractTest {
 	
 	@Test
 	public void testConcreteArray () {
-		int[] array = {316, 636, 923, 265, 862, 200, 1006, 826, 328, 974};
+		int[] array = {9,3,3,3,9};
 		QuickSort quickSorter = new QuickSort();
 		quickSorter.sort(array);
-		int[] arraySorted = {200, 265, 316, 328, 636, 826, 862, 923, 974, 1006};
+		int[] arraySorted = {3, 3, 3, 9, 9};
 		assertArrayEquals(arraySorted, array);
 	}
 

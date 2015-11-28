@@ -26,5 +26,14 @@ public class HeapSortTest extends AbstractTest {
 	protected AbstractSort provideSorter() {
 		return new HeapSort();
 	}
+	
+	@Test
+	public void testConcreteArray () {
+		int[] array = {9, 3, 3, 5, 9, 1, 2, 4};
+		HeapSort heapSorter = new HeapSort();
+		heapSorter.sort(array);
+		int[] arraySorted = {1, 2, 3, 3, 4, 5, 9, 9};
+		assertArrayEquals(arraySorted, array);
+	}
 
 }

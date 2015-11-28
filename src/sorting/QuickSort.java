@@ -55,13 +55,10 @@ public class QuickSort extends AbstractSortWithTimer {
 
     input[i] = pivot;
 
-    if (startIndex < i) {
-      sort(input, startIndex, i - 1);
-    }
-
-    if (endIndex > i) {
-      sort(input, i + 1, endIndex);
-    }
+    
+    sort(input, startIndex, j - 1);
+    sort(input, i + 1, endIndex);
+    
   }
 
 }

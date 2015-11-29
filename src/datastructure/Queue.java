@@ -18,36 +18,47 @@ public class Queue {
 
 	public void enqueue(int value) throws IndexOutOfBoundsException {
 		int newBack = (_back + 1) % _size;
-		
-		if(newBack == _front) {
+
+		if (isFull()) {
 			throw new IndexOutOfBoundsException();
 		}
-		
-		if (_back == -1 && _front == -1) {
+
+		if (isEmpty()) {
 			_front = 0;
 		}
-		
+
 		_back = newBack;
 		_data[_back] = value;
 	}
 
 	public int dequeue() throws NoSuchElementException {
-		int newFront = (_front + 1) % _size;
-		int newBack = _back;
-		if(_front == _back) {
-			newFront = -1;
-			newBack = -1;
-		}
-		
-		 
-		if (_front > -1) {
-			int oldFront = _data[_front];
-			_front = newFront;
-			_back = newBack;
-			return oldFront;
-		} else {
+		if (isEmpty()) {
 			throw new NoSuchElementException();
 		}
+		
+		int newFront = (_front + 1) % _size;
+		if (isLastElement()) {
+			newFront = -1;
+			_back = -1;
+		}
+
+		int oldFront = _data[_front];
+		_front = newFront;
+		return oldFront;
+
+	}
+
+	private boolean isLastElement() {
+		return _front == _back;
+	}
+
+	public boolean isFull() {
+		int newBack = (_back + 1) % _size;
+		return newBack == _front;
+	}
+
+	public boolean isEmpty() {
+		return _back == -1 && _front == -1;
 	}
 
 }

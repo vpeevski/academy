@@ -9,21 +9,21 @@ public class HeapSort extends AbstractSortWithTimer {
 	}
 
 	private void heapSort(int numbers[]) {
-		buildMaxHeap(numbers, numbers.length);
+		buildMaxHeap(numbers);
 		
 		for (int i = numbers.length - 1; i >= 0; i--) {
 			swap(numbers, 0, i);
-			buildMaxHeap(numbers, i);
-			//maxHeapify(numbers, i / 2 , i);
+			maxHeapify(numbers, 0, i);
 		}
 	}
 	
-	public void buildMaxHeap(int[] arr, int lenght )
+	private void buildMaxHeap(int[] arr )
 	{
-		for( int i = lenght / 2; i >= 0; i-- )
-	        maxHeapify( arr, i, lenght);
+		for( int i = arr.length / 2; i >= 0; i-- )
+	        maxHeapify( arr, i, arr.length);
 	}
-	public void maxHeapify( int[ ] arr, int rootIndex, int effectiveLenght )
+	
+	private void maxHeapify( int[ ] arr, int rootIndex, int effectiveLenght)
 	{
 	    int leftChildIndex = 2 * rootIndex + 1;
 	    int rightChildIndex = 2 * rootIndex + 2;

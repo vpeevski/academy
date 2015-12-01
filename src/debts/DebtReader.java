@@ -27,7 +27,7 @@ public final class DebtReader {
 			;
 			while ((line = reader.readLine()) != null) {
 				String[] lineStr = line.replace("|", ":").split(":");
-				Vector vectoLine = new Vector(Arrays.asList(lineStr));
+				Vector<String> vectoLine = new Vector<String> (Arrays.asList(lineStr));
 				debts.add(vectoLine);
 			}
 		} finally {
@@ -47,7 +47,7 @@ public final class DebtReader {
 
 		}
 
-		File fileDir = new File("resources/debts_out.txt");
+//		File fileDir = new File("resources/debts_out.txt");
 //		writeDebts(strBuilder.toString(), fileDir);
 		return debts;
 	}

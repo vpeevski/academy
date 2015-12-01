@@ -12,7 +12,7 @@ public class QueueTest {
 
 	@Test
 	public void dequeueEmptyQueueTest() {
-		Queue queue = new Queue(1);
+		ArrayQueue queue = new ArrayQueue();
 		queue.enqueue(5);
 		queue.dequeue();
 		try {
@@ -25,32 +25,31 @@ public class QueueTest {
 
 	@Test
 	public void enqueueDequeueTest() {
-		Queue queue = new Queue(5);
-		queue.enqueue(1);
-		queue.enqueue(2);
-		queue.enqueue(3);
-		queue.enqueue(4);
-		queue.enqueue(5);
-
-		try {
-		 queue.enqueue(6);
-		 fail("IndexOutOfBoundsException expexted !");
-		} catch (IndexOutOfBoundsException iobEx) {
-			assertTrue(true);
-		}
+	  
+		ArrayQueue queue = new ArrayQueue();
+		for (int i = 0; i < 15; i++) {
+		  assertEquals(queue.lenght(), i);
+		  queue.enqueue(1);
+		  assertEquals(queue.lenght(), i + 1);
+        }
 		
-		assertEquals(queue.dequeue(), 1);
-		assertEquals(queue.dequeue(), 2);
+		for (int i = 8; 0 < i ; i--) {
+		  assertEquals(queue.lenght(), i + 7);
+		  assertEquals(queue.dequeue(), 1);
+		  assertEquals(queue.lenght(), i + 6);
+        }
 		
-		queue.enqueue(6);
-		queue.enqueue(7);
+		for (int i = 0; i < 15; i++) {
+          assertEquals(queue.lenght(), i + 7);
+          queue.enqueue(1);
+          assertEquals(queue.lenght(), i + 8);
+        }
 		
-		
-		assertEquals(queue.dequeue(), 3);
-		assertEquals(queue.dequeue(), 4);
-		assertEquals(queue.dequeue(), 5);
-		assertEquals(queue.dequeue(), 6);
-		assertEquals(queue.dequeue(), 7);
+		for (int i = 22; 0 < i; i--) {
+          assertEquals(queue.lenght(), i);
+          assertEquals(queue.dequeue(), 1);
+          assertEquals(queue.lenght(), i - 1 );
+        }
 
 		try {
 			queue.dequeue();
@@ -58,6 +57,8 @@ public class QueueTest {
 		} catch (NoSuchElementException noSushElemEx) {
 			assertTrue(true);
 		}
+		
+		assertTrue(queue.isEmpty());
 	}
 
 }

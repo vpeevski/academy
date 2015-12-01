@@ -23,7 +23,7 @@ public class InsertionSortTest extends AbstractTest {
 	}
 
 	@Override
-	protected AbstractSort provideSorter() {
+	protected AbstractSortWithTimer provideSorter() {
 		return new InstertionSort();
 	}
 

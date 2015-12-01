@@ -23,7 +23,7 @@ public class BulbeSortTest extends AbstractTest {
 	}
 
 	@Override
-	protected AbstractSort provideSorter() {
+	protected AbstractSortWithTimer provideSorter() {
 		return new BubleSort();
 	}
 

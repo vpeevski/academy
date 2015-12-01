@@ -2,12 +2,16 @@ package sorting;
 
 import java.util.Arrays;
 
+import org.apache.log4j.Logger;
+
 import sorting.time.TimeInterceptor;
 import sorting.time.Timer;
 
 public abstract class AbstractSortWithTimer extends AbstractSort {
   
   private final TimeInterceptor _timeInterceptor;
+  
+  private Logger _logger = Logger.getLogger(this.getClass().getName());
   
   public AbstractSortWithTimer (TimeInterceptor timeInterceptor) {
     _timeInterceptor = timeInterceptor;
@@ -18,12 +22,14 @@ public abstract class AbstractSortWithTimer extends AbstractSort {
   }
 
   public long sortForTime (int[] inputArray) {
+	 int[] clonedInput = inputArray.clone();
     _timeInterceptor.startTime();
     sort(inputArray);
     _timeInterceptor.endTime();
     long time = _timeInterceptor.executingTime();
-    System.out.println("Done for : " + time + " msec.");
-    System.out.println("Sorted: " + Arrays.toString(inputArray));
+    _logger.debug("Done for : " + time + " msec.");
+    _logger.debug("Input array : " + Arrays.toString(clonedInput));
+    _logger.debug("Sorted: " + Arrays.toString(inputArray));
     return time;
   }
 

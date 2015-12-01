@@ -3,9 +3,8 @@ package sorting;
 import static org.junit.Assert.assertArrayEquals;
 
 import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+import org.apache.log4j.Logger;
 import org.junit.Test;
 
 import util.RandomGenerator;
@@ -16,7 +15,9 @@ public abstract class AbstractTest {
   
   protected final int[] reverseSortedArray = {10, 9, 8, 7, 6, 5, 4, 3, 3, 2, 2, 1, 1};
   
-  private final static int ITERATIONS = 10000;
+  private final static int ITERATIONS = 1000;
+  
+  private final Logger _logger = Logger.getLogger(this.getClass().getName());;
   
   protected int[] randomArray;
   
@@ -35,16 +36,16 @@ public abstract class AbstractTest {
 		 try {
 			 testRandomArraySort();
 		 } catch (AssertionError asserError) {
-			 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "Iteration (" + i + ") " + "\n" + asserError.getCause().getMessage() + "\n" +  asserError.getMessage()); 
+			 _logger.error("Iteration (" + i + ") " + "\n" + asserError.getCause().getMessage() + "\n" +  asserError.getMessage()); 
 			 throw asserError;
 		 }
 	 }
   }
   
   private void testRandomArraySort() {
-	AbstractSort sorter = provideSorter();
+	AbstractSortWithTimer sorter = provideSorter();
     
-	sorter.sort(randomArray);
+	sorter.sortForTime(randomArray);
     Arrays.sort(randomArrayClone1);
     try {
     	assertArrayEquals(randomArrayClone1, randomArray);
@@ -54,6 +55,6 @@ public abstract class AbstractTest {
     }
   }
   
-  protected abstract AbstractSort provideSorter();
+  protected abstract AbstractSortWithTimer provideSorter();
 }
 	

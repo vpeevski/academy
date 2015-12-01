@@ -23,7 +23,7 @@ public class QuickSortTest extends AbstractTest {
 	}
 
 	@Override
-	protected AbstractSort provideSorter() {
+	protected AbstractSortWithTimer provideSorter() {
 		return new QuickSort();
 	}
 	

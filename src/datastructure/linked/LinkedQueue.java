@@ -6,57 +6,31 @@ import datastructure.Queue;
 
 public class LinkedQueue<T> implements Queue<T> {
 
-	private Node<T> _back = null;
-	private Node<T> _front = null;
+  private Node<T> _back  = null;
+  private Node<T> _front = null;
 
-	public void enqueue(T value) {
-		Node<T> node = new Node<T>(value);
-		if (_back != null) {
-			_back.setNext(node);
-			_back = node;
-		} else {
-			_back = node;
-			_front = node;
-		}
+  public void enqueue(T value) {
+    Node<T> node = new Node<T>(value);
+    if (_back != null) {
+      _back.setNext(node);
+      _back = node;
+    } else {
+      _back = node;
+      _front = node;
+    }
 
-	}
+  }
 
-	public T dequeue() throws NoSuchElementException {
+  public T dequeue() throws NoSuchElementException {
 
-		if (_front == null) {
-			throw new NoSuchElementException();
-		}
-		
-		Node<T> oldFront = _front;
-		_front = _front.getNext();
-		
-		return oldFront.getValue();
+    if (_front == null) { throw new NoSuchElementException(); }
 
-	}
+    Node<T> oldFront = _front;
+    _front = _front.next();
 
-	private static class Node<T> {
+    return oldFront.getValue();
 
-		private T _value;
-
-		private Node<T> _next;
-
-		public Node(T value) {
-			_value = value;
-		}
-
-		public T getValue() {
-			return _value;
-		}
-
-		public Node<T> getNext() {
-			return _next;
-		}
-
-		public void setNext(Node<T> _next) {
-			this._next = _next;
-		}
-
-	}
+  }
 
   @Override
   public boolean isEmpty() {
@@ -65,10 +39,10 @@ public class LinkedQueue<T> implements Queue<T> {
 
   @Override
   public int lenght() {
-    Node<T> currentFront =_front;
+    Node<T> currentFront = _front;
     int count = 0;
     while (currentFront != null) {
-      currentFront = currentFront.getNext();
+      currentFront = currentFront.next();
       count++;
     }
     return count;

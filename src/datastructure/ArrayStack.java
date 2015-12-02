@@ -94,13 +94,13 @@ public class ArrayStack<T> implements Stack<T> {
 
     public ArrayStackSized<T> copy (int size) {
       ArrayStackSized<T> sizedStackNew = new ArrayStackSized<T>(size);
-      Queue<T> helpQueue = new ArrayQueue<T>();
+      Stack<T> helpStack = new ArrayStack<T>();
       while (!isEmpty()) {
-        helpQueue.enqueue(pop());
+        helpStack.push(pop());
       }
 
-      while (!helpQueue.isEmpty()) {
-        sizedStackNew.push(helpQueue.dequeue());
+      while (!helpStack.isEmpty()) {
+        sizedStackNew.push(helpStack.pop());
       }
 
       return sizedStackNew;

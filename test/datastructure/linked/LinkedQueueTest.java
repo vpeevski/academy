@@ -47,5 +47,21 @@ public class LinkedQueueTest {
 			assertTrue(true);
 		}
 	}
+	
+	@Test
+	  public void isEmptyQueueTest() {
+	    Queue<Integer> queue = new LinkedQueue<Integer>();
+	    assertTrue(queue.isEmpty());
+	    queue.enqueue(1);
+	    assertTrue(!queue.isEmpty());
+	  }
+
+	  @Test
+	  public void lenghtQueueTest() {
+	    Queue<Integer> queue = new LinkedQueue<Integer>();
+	    assertEquals(0, queue.lenght());
+	    queue.enqueue(1);
+	    assertEquals(1, queue.lenght());
+	  }
 
 }

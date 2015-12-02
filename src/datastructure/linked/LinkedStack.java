@@ -65,7 +65,7 @@ public class LinkedStack<T> implements Stack<T> {
     Node<T> currentNode = _topNode;
     int count = 0;
     while (currentNode != null) {
-      currentNode.getPrevious();
+      currentNode = currentNode.getPrevious();
       count++;
     }
     return count;

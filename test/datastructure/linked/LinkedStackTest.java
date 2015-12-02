@@ -1,8 +1,8 @@
 package datastructure.linked;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-import static org.junit.Assert.assertEquals;
 
 import java.util.EmptyStackException;
 
@@ -11,18 +11,6 @@ import org.junit.Test;
 import datastructure.Stack;
 
 public class LinkedStackTest {
-	
-//	@Test
-//	public void pushInFullStackTest () {
-//		LinkedStack stack = new LinkedStack();
-//		stack.push(5);
-//		try {
-//			stack.push(5);
-//			fail("StackOverflowError expexted !");
-//		} catch (StackOverflowError stackOverFlow) {
-//			assertTrue(true);
-//		}
-//	}
 	
 	@Test
 	public void popEmptyStackTest () {
@@ -59,5 +47,24 @@ public class LinkedStackTest {
 			assertTrue(true);
 		}
 	}
+	
+	
+	@Test
+	  public void isEmptyStackTest() {
+	    Stack<Integer> stack = new LinkedStack<Integer>();
+	    assertTrue(stack.isEmpty());
+	    stack.push(1);
+	    assertTrue(!stack.isEmpty());
+	  }
+	  
+	  
+	  @Test
+	  public void lenghtStackTest() {
+	    Stack<Integer> stack = new LinkedStack<Integer>();
+	    assertEquals(0, stack.lenght());
+	    stack.push(1);
+	    assertEquals(1, stack.lenght());
+	  }
+	  
 
 }

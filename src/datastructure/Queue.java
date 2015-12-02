@@ -1,9 +1,9 @@
 package datastructure;
 
-public interface Queue extends DataStructureInterface {
+public interface Queue<T> extends DataStructureInterface<T> {
   
-  void enqueue(int value);
+  void enqueue(T value);
   
-  int dequeue ();
+  T dequeue ();
 
 }

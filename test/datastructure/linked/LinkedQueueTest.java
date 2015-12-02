@@ -12,7 +12,7 @@ public class LinkedQueueTest {
 
 	@Test
 	public void dequeueEmptyQueueTest() {
-		LinkedQueue queue = new LinkedQueue();
+		LinkedQueue<Integer> queue = new LinkedQueue<Integer>();
 		queue.enqueue(5);
 		queue.dequeue();
 		try {
@@ -25,18 +25,18 @@ public class LinkedQueueTest {
 
 	@Test
 	public void enqueueDequeueTest() {
-		LinkedQueue queue = new LinkedQueue();
-		queue.enqueue(1);
-		queue.enqueue(2);
-		queue.enqueue(3);
-		queue.enqueue(4);
-		queue.enqueue(5);
+		LinkedQueue<String> queue = new LinkedQueue<String>();
+		queue.enqueue("one");
+		queue.enqueue("two");
+		queue.enqueue("three");
+		queue.enqueue("four");
+		queue.enqueue("five");
 
-		assertEquals(queue.dequeue(), 1);
-		assertEquals(queue.dequeue(), 2);
-		assertEquals(queue.dequeue(), 3);
-		assertEquals(queue.dequeue(), 4);
-		assertEquals(queue.dequeue(), 5);
+		assertEquals(queue.dequeue(), "one");
+		assertEquals(queue.dequeue(), "two");
+		assertEquals(queue.dequeue(), "three");
+		assertEquals(queue.dequeue(), "four");
+		assertEquals(queue.dequeue(), "five");
 
 		try {
 			queue.dequeue();

@@ -12,9 +12,9 @@ public class QueueTest {
 
 	@Test
 	public void dequeueEmptyQueueTest() {
-		ArrayQueue queue = new ArrayQueue();
-		queue.enqueue(5);
-		queue.dequeue();
+		ArrayQueue<String> queue = new ArrayQueue<String>();
+		queue.enqueue("five");
+		assertEquals("five", queue.dequeue());
 		try {
 			queue.dequeue();
 			fail("NoSuchElementException expexted !");
@@ -26,7 +26,7 @@ public class QueueTest {
 	@Test
 	public void enqueueDequeueTest() {
 	  
-		ArrayQueue queue = new ArrayQueue();
+		ArrayQueue<Integer> queue = new ArrayQueue<Integer>();
 		for (int i = 0; i < 15; i++) {
 		  assertEquals(queue.lenght(), i);
 		  queue.enqueue(1);
@@ -35,7 +35,7 @@ public class QueueTest {
 		
 		for (int i = 8; 0 < i ; i--) {
 		  assertEquals(queue.lenght(), i + 7);
-		  assertEquals(queue.dequeue(), 1);
+		  assertEquals(queue.dequeue().intValue(), 1);
 		  assertEquals(queue.lenght(), i + 6);
         }
 		
@@ -47,7 +47,7 @@ public class QueueTest {
 		
 		for (int i = 22; 0 < i; i--) {
           assertEquals(queue.lenght(), i);
-          assertEquals(queue.dequeue(), 1);
+          assertEquals(queue.dequeue().intValue(), 1);
           assertEquals(queue.lenght(), i - 1 );
         }
 

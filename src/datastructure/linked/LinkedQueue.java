@@ -2,15 +2,16 @@ package datastructure.linked;
 
 import java.util.NoSuchElementException;
 
-public class LinkedQueue {
+import datastructure.Queue;
 
-	private Node _back = null;
-	private Node _front = null;
+public class LinkedQueue<T> implements Queue<T> {
 
-	public void enqueue(int value) {
-		Node node = new Node(value);
+	private Node<T> _back = null;
+	private Node<T> _front = null;
+
+	public void enqueue(T value) {
+		Node<T> node = new Node<T>(value);
 		if (_back != null) {
-			node.setPrev(_back);
 			_back.setNext(node);
 			_back = node;
 		} else {
@@ -20,51 +21,56 @@ public class LinkedQueue {
 
 	}
 
-	public int dequeue() throws NoSuchElementException {
+	public T dequeue() throws NoSuchElementException {
 
 		if (_front == null) {
 			throw new NoSuchElementException();
 		}
 		
-		Node oldFront = _front;
+		Node<T> oldFront = _front;
 		_front = _front.getNext();
 		
 		return oldFront.getValue();
 
 	}
 
-	private static class Node {
+	private static class Node<T> {
 
-		private int _value;
+		private T _value;
 
-		private Node _next;
+		private Node<T> _next;
 
-		private Node _prev;
-
-		public Node(int value) {
+		public Node(T value) {
 			_value = value;
 		}
 
-		public int getValue() {
+		public T getValue() {
 			return _value;
 		}
 
-		public Node getNext() {
+		public Node<T> getNext() {
 			return _next;
 		}
 
-		public void setNext(Node _next) {
+		public void setNext(Node<T> _next) {
 			this._next = _next;
 		}
 
-		public Node getPrev() {
-			return _prev;
-		}
-
-		public void setPrev(Node _prev) {
-			this._prev = _prev;
-		}
-
 	}
+
+  @Override
+  public boolean isFull() {
+    return false;
+  }
+
+  @Override
+  public boolean isEmpty() {
+    return false;
+  }
+
+  @Override
+  public int lenght() {
+    return 0;
+  }
 
 }

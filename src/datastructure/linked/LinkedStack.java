@@ -2,12 +2,14 @@ package datastructure.linked;
 
 import java.util.EmptyStackException;
 
-public class LinkedStack {
+import datastructure.Stack;
 
-	private Node _topNode = null;
+public class LinkedStack<T> implements Stack<T> {
 
-	public void push(int value) {
-		Node node = new Node(value);
+	private Node<T> _topNode = null;
+
+	public void push(T value) {
+		Node<T> node = new Node<T>(value);
 		if (_topNode != null) {
 			node.setPrevious(_topNode);
 		}
@@ -15,41 +17,59 @@ public class LinkedStack {
 		_topNode = node;
 	}
 
-	public int pop() throws EmptyStackException {
+	public T pop() throws EmptyStackException {
 
 		if (_topNode == null) {
 			throw new EmptyStackException();
 		}
 
-		Node topNode = _topNode;
+		Node<T> topNode = _topNode;
 		_topNode = _topNode.getPrevious();
 
 		return topNode.getValue();
 
 	}
 
-	private static class Node {
+	private static class Node<T> {
 
-		private int _value;
+		private T _value;
 
-		private Node _prev;
+		private Node<T> _prev;
 
-		public Node(int value) {
+		public Node(T value) {
 			_value = value;
 		}
 
-		public int getValue() {
+		public T getValue() {
 			return _value;
 		}
 
-		public void setPrevious(Node prev) {
+		public void setPrevious(Node<T> prev) {
 			_prev = prev;
 		}
 
-		public Node getPrevious() {
+		public Node<T> getPrevious() {
 			return _prev;
 		}
 
 	}
+
+  @Override
+  public boolean isFull() {
+    // TODO Auto-generated method stub
+    return false;
+  }
+
+  @Override
+  public boolean isEmpty() {
+    // TODO Auto-generated method stub
+    return false;
+  }
+
+  @Override
+  public int lenght() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
 
 }

@@ -2,36 +2,36 @@ package datastructure;
 
 import java.util.NoSuchElementException;
 
-public final class ArrayQueue implements Queue {
+public final class ArrayQueue<T> implements Queue<T> {
   
   private static final int MIN_SIZE = 5;
 
-  private SizedCycledQueue innerSizedQueue = new SizedCycledQueue(MIN_SIZE);
+  private SizedCycledQueue<T> innerSizedQueue = new SizedCycledQueue<T>(MIN_SIZE);
 
-  public void enqueue(int value) {
+  public void enqueue(T value) {
     
     if (innerSizedQueue.isFull()) {
       int doubleSize = innerSizedQueue._size * 2;
-      SizedCycledQueue innerSizedQueueNew = new SizedCycledQueue(doubleSize);
+      SizedCycledQueue<T> innerSizedQueueNew = new SizedCycledQueue<T>(doubleSize);
       transferQueue(innerSizedQueue, innerSizedQueueNew);
     }
     
     innerSizedQueue.enqueue(value);
   }
 
-  public int dequeue() {
-    int value = innerSizedQueue.dequeue();
+  public T dequeue() {
+    T value = innerSizedQueue.dequeue();
     
     if (innerSizedQueue._size > MIN_SIZE && innerSizedQueue.lenght() == innerSizedQueue._size / 4) {
       int halfSize = innerSizedQueue._size / 2;
-      SizedCycledQueue innerSizedQueueNew = new SizedCycledQueue(halfSize);
+      SizedCycledQueue<T> innerSizedQueueNew = new SizedCycledQueue<T>(halfSize);
       transferQueue(innerSizedQueue, innerSizedQueueNew);
 
     }
     return value;
   }
   
-  private void transferQueue (SizedCycledQueue q1, SizedCycledQueue q2) {
+  private void transferQueue (SizedCycledQueue<T> q1, SizedCycledQueue<T> q2) {
     while (!q1.isEmpty()) {
       q2.enqueue(q1.dequeue());
     }
@@ -53,21 +53,21 @@ public final class ArrayQueue implements Queue {
 
   
   
-  private static final class SizedCycledQueue implements Queue {
+  private static final class SizedCycledQueue<T> implements Queue<T> {
 
     private final int   _size;
 
-    private final int[] _data;
+    private final Object[] _data;
 
     private int         _back  = -1;
     private int         _front = -1;
 
     public SizedCycledQueue(int size) {
       _size = size;
-      _data = new int[_size];
+      _data = new Object[_size];
     }
 
-    public void enqueue(int value) throws IndexOutOfBoundsException {
+    public void enqueue(T value) throws IndexOutOfBoundsException {
       int newBack = (_back + 1) % _size;
 
       if (isFull()) { throw new IndexOutOfBoundsException(); }
@@ -80,7 +80,7 @@ public final class ArrayQueue implements Queue {
       _data[_back] = value;
     }
 
-    public int dequeue() throws NoSuchElementException {
+    public T dequeue() throws NoSuchElementException {
       if (isEmpty()) { throw new NoSuchElementException(); }
 
       int newFront = (_front + 1) % _size;
@@ -89,7 +89,7 @@ public final class ArrayQueue implements Queue {
         _back = -1;
       }
 
-      int oldFront = _data[_front];
+      T oldFront = (T) _data[_front];
       _data[_front] = 0;
       _front = newFront;
       return oldFront;

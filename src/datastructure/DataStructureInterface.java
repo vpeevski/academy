@@ -1,6 +1,6 @@
 package datastructure;
 
-public interface DataStructureInterface {
+public interface DataStructureInterface <T> {
   
   boolean isFull();
 

@@ -11,20 +11,8 @@ import org.junit.Test;
 public class StackTest {
 	
 	@Test
-	public void pushInFullStackTest () {
-		Stack<Integer> stack = new ArrayStack<Integer>(1);
-		stack.push(5);
-		try {
-			stack.push(5);
-			fail("StackOverflowError expexted !");
-		} catch (StackOverflowError stackOverFlow) {
-			assertTrue(true);
-		}
-	}
-	
-	@Test
 	public void popEmptyStackTest () {
-		Stack<String> stack = new ArrayStack<String>(1);
+		Stack<String> stack = new ArrayStack<String>();
 		stack.push("a");
 		stack.pop();
 		try {
@@ -37,19 +25,12 @@ public class StackTest {
 	
 	@Test
 	public void pushPopStackTest () {
-		Stack<Integer> stack = new ArrayStack<Integer>(5);
+		Stack<Integer> stack = new ArrayStack<Integer>();
 		stack.push(1);
 		stack.push(2);
 		stack.push(3);
 		stack.push(4);
 		stack.push(5);
-		
-		try {
-			stack.push(6);
-			fail("StackOverflowError expexted !");
-		} catch (StackOverflowError stackOverFlow) {
-			assertTrue(true);
-		}
 		
 		assertEquals(stack.pop().intValue(), 5);
 		assertEquals(stack.pop().intValue(), 4);

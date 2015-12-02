@@ -50,7 +50,8 @@ public abstract class AbstractTest {
     try {
     	assertArrayEquals(randomArrayClone1, randomArray);
     } catch (AssertionError assertError ){
-    	AssertionError notSortedAssertError = new AssertionError("Input array: " + Arrays.toString(randomArrayClone2) + "\n" +"Sorted array:" + Arrays.toString(randomArray), assertError);
+    	AssertionError notSortedAssertError = new AssertionError("Input array: " + Arrays.toString(randomArrayClone2) + "\n" +"Sorted array:" + Arrays.toString(randomArray));
+    	notSortedAssertError.initCause(assertError);
     	throw notSortedAssertError;
     }
   }

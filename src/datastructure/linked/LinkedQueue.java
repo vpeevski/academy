@@ -11,7 +11,7 @@ public class LinkedQueue<T> implements Queue<T> {
 
   public void enqueue(T value) {
     Node<T> node = new Node<T>(value);
-    if (_back != null) {
+    if (!isEmpty()) {
       _back.setNext(node);
       _back = node;
     } else {
@@ -23,7 +23,7 @@ public class LinkedQueue<T> implements Queue<T> {
 
   public T dequeue() throws NoSuchElementException {
 
-    if (_front == null) { throw new NoSuchElementException(); }
+    if (isEmpty()) { throw new NoSuchElementException(); }
 
     Node<T> oldFront = _front;
     _front = _front.next();

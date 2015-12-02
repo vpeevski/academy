@@ -10,7 +10,8 @@ public class LinkedStack<T> implements Stack<T> {
 
   public void push(T value) {
     Node<T> node = new Node<T>(value);
-    if (_topNode != null) {
+    
+    if (!isEmpty()) {
       node.setNext(_topNode);
     }
 

@@ -4,7 +4,7 @@ import java.util.EmptyStackException;
 
 public class ArrayStack<T> implements Stack<T> {
 
-  private static final int MIN_SIZE = 5;
+  private static final int   MIN_SIZE         = 5;
 
   private ArrayStackSized<T> _innerSizedStack = new ArrayStackSized<T>(MIN_SIZE);
 
@@ -21,9 +21,8 @@ public class ArrayStack<T> implements Stack<T> {
   @Override
   public void push(T value) {
     if (_innerSizedStack.isFull()) {
-      int doubleSize = _innerSizedStack._size * 2;
-      ArrayStackSized<T> innerSizedStackNew = new ArrayStackSized<T>(doubleSize);
-      transferStack(_innerSizedStack, innerSizedStackNew);
+      int doubleSize = _innerSizedStack.size() * 2;
+      _innerSizedStack = _innerSizedStack.copy(doubleSize);
     }
 
     _innerSizedStack.push(value);
@@ -33,26 +32,12 @@ public class ArrayStack<T> implements Stack<T> {
   public T pop() throws EmptyStackException {
     T value = _innerSizedStack.pop();
 
-    if (_innerSizedStack._size > MIN_SIZE && _innerSizedStack.lenght() == _innerSizedStack._size / 4) {
-      int halfSize = _innerSizedStack._size / 2;
-      ArrayStackSized<T> innerSizedStackNew = new ArrayStackSized<T>(halfSize);
-      transferStack(_innerSizedStack, innerSizedStackNew);
+    if (_innerSizedStack.size() > MIN_SIZE && _innerSizedStack.lenght() == _innerSizedStack.size() / 4) {
+      int halfSize = _innerSizedStack.size() / 2;
+      _innerSizedStack = _innerSizedStack.copy(halfSize);
 
     }
     return value;
-  }
-
-  private void transferStack(ArrayStackSized<T> s1, ArrayStackSized<T> s2) {
-    Queue<T> helpQueue = new ArrayQueue<T>();
-    while (!s1.isEmpty()) {
-      helpQueue.enqueue(s1.pop());
-    }
-
-    while (!helpQueue.isEmpty()) {
-      s2.push(helpQueue.dequeue());
-    }
-
-    _innerSizedStack = s2;
   }
 
   private static class ArrayStackSized<T> implements Stack<T>, LimitedSizeInterface {
@@ -100,6 +85,25 @@ public class ArrayStack<T> implements Stack<T> {
     @Override
     public int lenght() {
       return topIndex + 1;
+    }
+
+    @Override
+    public int size() {
+      return _size;
+    }
+
+    public ArrayStackSized<T> copy (int size) {
+      ArrayStackSized<T> sizedStackNew = new ArrayStackSized<T>(size);
+      Queue<T> helpQueue = new ArrayQueue<T>();
+      while (!isEmpty()) {
+        helpQueue.enqueue(pop());
+      }
+
+      while (!helpQueue.isEmpty()) {
+        sizedStackNew.push(helpQueue.dequeue());
+      }
+
+      return sizedStackNew;
     }
 
   }

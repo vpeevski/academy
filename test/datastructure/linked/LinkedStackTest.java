@@ -8,6 +8,8 @@ import java.util.EmptyStackException;
 
 import org.junit.Test;
 
+import datastructure.Stack;
+
 public class LinkedStackTest {
 	
 //	@Test
@@ -24,7 +26,7 @@ public class LinkedStackTest {
 	
 	@Test
 	public void popEmptyStackTest () {
-		LinkedStack<Integer> stack = new LinkedStack<Integer>();
+		Stack<Integer> stack = new LinkedStack<Integer>();
 		stack.push(5);
 		stack.pop();
 		try {
@@ -37,7 +39,7 @@ public class LinkedStackTest {
 	
 	@Test
 	public void pushPopStackTest () {
-		LinkedStack<Integer> stack = new LinkedStack<Integer>();
+		Stack<Integer> stack = new LinkedStack<Integer>();
 		stack.push(1);
 		stack.push(2);
 		stack.push(3);

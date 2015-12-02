@@ -59,18 +59,19 @@ public class LinkedQueue<T> implements Queue<T> {
 	}
 
   @Override
-  public boolean isFull() {
-    return false;
-  }
-
-  @Override
   public boolean isEmpty() {
-    return false;
+    return _front == null;
   }
 
   @Override
   public int lenght() {
-    return 0;
+    Node<T> currentFront =_front;
+    int count = 0;
+    while (currentFront != null) {
+      currentFront = currentFront.getNext();
+      count++;
+    }
+    return count;
   }
 
 }

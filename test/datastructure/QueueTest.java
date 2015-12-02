@@ -12,7 +12,7 @@ public class QueueTest {
 
 	@Test
 	public void dequeueEmptyQueueTest() {
-		ArrayQueue<String> queue = new ArrayQueue<String>();
+		Queue<String> queue = new ArrayQueue<String>();
 		queue.enqueue("five");
 		assertEquals("five", queue.dequeue());
 		try {
@@ -26,7 +26,7 @@ public class QueueTest {
 	@Test
 	public void enqueueDequeueTest() {
 	  
-		ArrayQueue<Integer> queue = new ArrayQueue<Integer>();
+		Queue<Integer> queue = new ArrayQueue<Integer>();
 		for (int i = 0; i < 15; i++) {
 		  assertEquals(queue.lenght(), i);
 		  queue.enqueue(1);

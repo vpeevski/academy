@@ -19,7 +19,7 @@ public class LinkedStack<T> implements Stack<T> {
 
 	public T pop() throws EmptyStackException {
 
-		if (_topNode == null) {
+		if (isEmpty()) {
 			throw new EmptyStackException();
 		}
 
@@ -53,23 +53,22 @@ public class LinkedStack<T> implements Stack<T> {
 		}
 
 	}
-
-  @Override
-  public boolean isFull() {
-    // TODO Auto-generated method stub
-    return false;
-  }
+	
 
   @Override
   public boolean isEmpty() {
-    // TODO Auto-generated method stub
-    return false;
+    return _topNode == null;
   }
 
   @Override
   public int lenght() {
-    // TODO Auto-generated method stub
-    return 0;
+    Node<T> currentNode = _topNode;
+    int count = 0;
+    while (currentNode != null) {
+      currentNode.getPrevious();
+      count++;
+    }
+    return count;
   }
 
 }

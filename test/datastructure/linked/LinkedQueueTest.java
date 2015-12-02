@@ -8,11 +8,13 @@ import java.util.NoSuchElementException;
 
 import org.junit.Test;
 
+import datastructure.Queue;
+
 public class LinkedQueueTest {
 
 	@Test
 	public void dequeueEmptyQueueTest() {
-		LinkedQueue<Integer> queue = new LinkedQueue<Integer>();
+		Queue<Integer> queue = new LinkedQueue<Integer>();
 		queue.enqueue(5);
 		queue.dequeue();
 		try {
@@ -25,7 +27,7 @@ public class LinkedQueueTest {
 
 	@Test
 	public void enqueueDequeueTest() {
-		LinkedQueue<String> queue = new LinkedQueue<String>();
+		Queue<String> queue = new LinkedQueue<String>();
 		queue.enqueue("one");
 		queue.enqueue("two");
 		queue.enqueue("three");

@@ -8,6 +8,7 @@ public final class ArrayQueue<T> implements Queue<T> {
 
   private SizedCycledQueue<T> innerSizedQueue = new SizedCycledQueue<T>(MIN_SIZE);
 
+  @Override
   public void enqueue(T value) {
     
     if (innerSizedQueue.isFull()) {
@@ -19,6 +20,7 @@ public final class ArrayQueue<T> implements Queue<T> {
     innerSizedQueue.enqueue(value);
   }
 
+  @Override
   public T dequeue() {
     T value = innerSizedQueue.dequeue();
     
@@ -38,22 +40,20 @@ public final class ArrayQueue<T> implements Queue<T> {
     
     innerSizedQueue = q2;
   }
-  
-  public boolean isFull() {
-    return innerSizedQueue.isFull();
-  }
 
+  @Override
   public boolean isEmpty() {
     return innerSizedQueue.isEmpty();
   }
   
+  @Override
   public int lenght () {
     return innerSizedQueue.lenght();
   }
 
   
   
-  private static final class SizedCycledQueue<T> implements Queue<T> {
+  private static final class SizedCycledQueue<T> implements Queue<T>, LimitedSizeInterface {
 
     private final int   _size;
 
@@ -67,6 +67,7 @@ public final class ArrayQueue<T> implements Queue<T> {
       _data = new Object[_size];
     }
 
+    @Override
     public void enqueue(T value) throws IndexOutOfBoundsException {
       int newBack = (_back + 1) % _size;
 
@@ -80,6 +81,7 @@ public final class ArrayQueue<T> implements Queue<T> {
       _data[_back] = value;
     }
 
+    @Override
     public T dequeue() throws NoSuchElementException {
       if (isEmpty()) { throw new NoSuchElementException(); }
 
@@ -100,15 +102,18 @@ public final class ArrayQueue<T> implements Queue<T> {
       return _front == _back;
     }
 
+    @Override
     public boolean isFull() {
       int newBack = (_back + 1) % _size;
       return newBack == _front;
     }
 
+    @Override
     public boolean isEmpty() {
       return _back == -1 && _front == -1;
     }
     
+    @Override
     public int lenght () {
       if (isEmpty()) return 0;
       if (isLastElement()) return 1;

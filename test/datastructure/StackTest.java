@@ -12,7 +12,7 @@ public class StackTest {
 	
 	@Test
 	public void pushInFullStackTest () {
-		ArrayStack<Integer> stack = new ArrayStack<Integer>(1);
+		Stack<Integer> stack = new ArrayStack<Integer>(1);
 		stack.push(5);
 		try {
 			stack.push(5);
@@ -24,7 +24,7 @@ public class StackTest {
 	
 	@Test
 	public void popEmptyStackTest () {
-		ArrayStack<String> stack = new ArrayStack<String>(1);
+		Stack<String> stack = new ArrayStack<String>(1);
 		stack.push("a");
 		stack.pop();
 		try {
@@ -37,7 +37,7 @@ public class StackTest {
 	
 	@Test
 	public void pushPopStackTest () {
-		ArrayStack<Integer> stack = new ArrayStack<Integer>(5);
+		Stack<Integer> stack = new ArrayStack<Integer>(5);
 		stack.push(1);
 		stack.push(2);
 		stack.push(3);

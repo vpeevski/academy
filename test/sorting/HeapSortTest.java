@@ -11,7 +11,12 @@ public class HeapSortTest extends AbstractTest {
 		HeapSort heapSort = new HeapSort();
 		int[] sortedArrayExpected = { 1, 2, 3, 4, 5, 6, 6, 7, 8, 9, 10, 10 };
 		heapSort.sortForTime(sortedArray);
-		assertArrayEquals(sortedArrayExpected, sortedArray);
+		try  {
+			assertArrayEquals(sortedArrayExpected, sortedArray);
+		} catch (Throwable throwable) {
+			_logger.error(throwable); 
+			throw new AssertionError(throwable);
+		}
 	}
 
 	@Test
@@ -19,7 +24,12 @@ public class HeapSortTest extends AbstractTest {
 		HeapSort heapSort = new HeapSort();
 		int[] sortedArrayExpected = { 1, 1, 2, 2, 3, 3, 4, 5, 6, 7, 8, 9, 10 };
 		heapSort.sortForTime(reverseSortedArray);
-		assertArrayEquals(sortedArrayExpected, reverseSortedArray);
+		try  {
+			assertArrayEquals(sortedArrayExpected, reverseSortedArray);
+		} catch (Throwable throwable) {
+			_logger.error(throwable); 
+			throw new AssertionError(throwable);
+		}
 	}
 
 	@Override
@@ -33,7 +43,12 @@ public class HeapSortTest extends AbstractTest {
 		HeapSort heapSorter = new HeapSort();
 		heapSorter.sort(array);
 		int[] arraySorted = {1, 2, 3, 3, 4, 5, 9, 9};
-		assertArrayEquals(arraySorted, array);
+		try  {
+			assertArrayEquals(arraySorted, array);
+		} catch (Throwable throwable) {
+			_logger.error(throwable);
+			throw new AssertionError(throwable);
+		}
 	}
 
 }

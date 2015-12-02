@@ -17,7 +17,7 @@ public abstract class AbstractTest {
   
   private final static int ITERATIONS = 1000;
   
-  private final Logger _logger = Logger.getLogger(this.getClass().getName());;
+  protected final Logger _logger = Logger.getLogger(this.getClass().getName());;
   
   protected int[] randomArray;
   

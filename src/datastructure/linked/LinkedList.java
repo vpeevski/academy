@@ -8,6 +8,8 @@ public class LinkedList<T> implements List<T> {
 
 	private Node<T> _last;
 
+	private int _lenght;
+
 	@Override
 	public boolean isEmpty() {
 		return _fisrt == null;
@@ -15,51 +17,74 @@ public class LinkedList<T> implements List<T> {
 
 	@Override
 	public int lenght() {
-		// TODO Auto-generated method stub
-		return 0;
+		return _lenght;
 	}
 
 	@Override
 	public void add(T value) {
-		if (value == null) {
-			throw new NullPointerException("Can not add null to List");
-		}
-		if (isEmpty()) {
-			Node<T> newNode = new Node<T>(null, value, null);
-			_fisrt = _last = newNode;
-		} else {
-			Node<T> newNode = new Node<T>(_last, value, null);
-			_last = newNode;
-		}
-
+		linkLast(value);
 	}
 
 	@Override
 	public void add(int index, T value) {
-		if (0 > index || index > lenght() - 1) {
+		checkIndex(index);
+
+		if (index == _lenght) {
+			linkLast(value);
+		} else {
+			linkBefore(value, node(index));
+		}
+
+	}
+
+	private void checkIndex(int index) {
+		if (0 > index || index > lenght()) {
 			throw new IndexOutOfBoundsException("Index: " + index
 					+ " is out of range for List of lenght: " + lenght());
 		}
+	}
 
-		if (value == null) {
-			throw new NullPointerException("Can not add null to List");
+	private Node<T> node(int index) {
+		Node<T> result = _fisrt;
+		for (int i = 0; i < index; i++) {
+			result = result.next;
 		}
-		
-		if(isEmpty()) {
-			Node<T> newNode = new Node<T>(null, value, null);
-			_fisrt = _last = newNode;
+
+		return result;
+	}
+
+	private void linkBefore(T value, Node<T> nextNode) {
+		Node<T> tempPrevNode = nextNode.prev;
+		Node<T> newNode = new Node<T>(tempPrevNode, value, nextNode);
+		nextNode.prev = newNode;
+		if (tempPrevNode == null) {
+			_fisrt = newNode;
 		} else {
-//			Node<T> newNode = new Node<T>(node(index - 1), value, node(index + 1));
-//			_last = newNode;
+			tempPrevNode.next = newNode;
 		}
-		
+
+		_lenght++;
+
+	}
+
+	private void linkLast(T value) {
+		Node<T> tempLastNode = _last;
+		Node<T> newNode = new Node<T>(tempLastNode, value, null);
+		_last = newNode;
+		if (tempLastNode == null) {
+			_fisrt = newNode;
+		} else {
+			tempLastNode.next = newNode;
+		}
+
+		_lenght++;
 
 	}
 
 	@Override
 	public T get(int index) {
-		T result = _fisrt.value;
-		return null;
+		checkIndex(index);
+		return node(index).value;
 	}
 
 	private static class Node<E> {

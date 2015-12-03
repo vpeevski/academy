@@ -42,15 +42,12 @@ public class ArrayStack<T> implements Stack<T> {
 
   private static class ArrayStackSized<T> implements Stack<T>, LimitedSizeInterface {
 
-    private final int      _size;
-
     private final Object[] _data;
 
     private int            topIndex = -1;
 
     public ArrayStackSized(int size) {
-      _size = size;
-      _data = new Object[_size];
+      _data = new Object[size];
     }
 
     @Override
@@ -74,7 +71,7 @@ public class ArrayStack<T> implements Stack<T> {
 
     @Override
     public boolean isFull() {
-      return topIndex == _size - 1;
+      return topIndex == _data.length - 1;
     }
 
     @Override
@@ -89,7 +86,7 @@ public class ArrayStack<T> implements Stack<T> {
 
     @Override
     public int size() {
-      return _size;
+      return _data.length;
     }
 
     public ArrayStackSized<T> copy (int size) {

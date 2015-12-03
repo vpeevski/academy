@@ -8,7 +8,7 @@ import java.util.NoSuchElementException;
 
 import org.junit.Test;
 
-public class QueueTest {
+public class ArrayQueueTest {
 
   @Test
   public void dequeueEmptyQueueTest() {

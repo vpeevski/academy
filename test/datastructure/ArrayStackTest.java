@@ -8,7 +8,7 @@ import java.util.EmptyStackException;
 
 import org.junit.Test;
 
-public class StackTest {
+public class ArrayStackTest {
 
   @Test
   public void popEmptyStackTest() {

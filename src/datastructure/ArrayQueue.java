@@ -43,21 +43,18 @@ public final class ArrayQueue<T> implements Queue<T> {
 
   private static final class SizedCycledQueue<T> implements Queue<T>, LimitedSizeInterface {
 
-    private final int      _size;
-
     private final Object[] _data;
 
     private int            _back  = -1;
     private int            _front = -1;
 
     public SizedCycledQueue(int size) {
-      _size = size;
-      _data = new Object[_size];
+      _data = new Object[size];
     }
 
     @Override
     public void enqueue(T value) throws IndexOutOfBoundsException {
-      int newBack = (_back + 1) % _size;
+      int newBack = (_back + 1) % _data.length;
 
       if (isFull()) { throw new IndexOutOfBoundsException(); }
 
@@ -73,7 +70,7 @@ public final class ArrayQueue<T> implements Queue<T> {
     public T dequeue() throws NoSuchElementException {
       if (isEmpty()) { throw new NoSuchElementException(); }
 
-      int newFront = (_front + 1) % _size;
+      int newFront = (_front + 1) % _data.length;
       if (isLastElement()) {
         newFront = -1;
         _back = -1;
@@ -92,7 +89,7 @@ public final class ArrayQueue<T> implements Queue<T> {
 
     @Override
     public boolean isFull() {
-      int newBack = (_back + 1) % _size;
+      int newBack = (_back + 1) % _data.length;
       return newBack == _front;
     }
 
@@ -110,13 +107,13 @@ public final class ArrayQueue<T> implements Queue<T> {
       if (_back > _front)
         return _back - _front + 1;
       if (_front > _back)
-        return _size - _front + _back + 1;
+        return _data.length - _front + _back + 1;
       return 0;
     }
 
     @Override
     public int size() {
-      return _size;
+      return _data.length;
     }
     
     public SizedCycledQueue<T> copy (int size) {

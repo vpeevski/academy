@@ -10,14 +10,14 @@ import sorting.InsertionSortTest;
 import sorting.MergeSortTest;
 import sorting.QuickSortTest;
 import sorting.SelectionSortTest;
-import datastructure.QueueTest;
-import datastructure.StackTest;
+import datastructure.ArrayQueueTest;
+import datastructure.ArrayStackTest;
 import datastructure.linked.LinkedQueueTest;
 import datastructure.linked.LinkedStackTest;
 
 @RunWith(Suite.class)
 @SuiteClasses({ InsertionSortTest.class, BulbeSortTest.class, SelectionSortTest.class, MergeSortTest.class, HeapSortTest.class, QuickSortTest.class, 
-	StackTest.class, QueueTest.class, LinkedStackTest.class, LinkedQueueTest.class})
+	ArrayStackTest.class, ArrayQueueTest.class, LinkedStackTest.class, LinkedQueueTest.class})
 public class AllTests {
 
 }

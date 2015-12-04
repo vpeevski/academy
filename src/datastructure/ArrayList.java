@@ -4,9 +4,7 @@ public class ArrayList<T> implements List<T>, LimitedSizeInterface {
 
     private final Object[] _data;
     
-    private int _first;
-    
-    private int _last;
+    private int _lastIndex = -1;
     
     public ArrayList (int size) {
     	_data = new Object[size];
@@ -14,20 +12,17 @@ public class ArrayList<T> implements List<T>, LimitedSizeInterface {
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return _lastIndex == -1;
 	}
 
 	@Override
 	public int lenght() {
-		// TODO Auto-generated method stub
-		return 0;
+		return _lastIndex + 1;
 	}
 
 	@Override
 	public boolean isFull() {
-		// TODO Auto-generated method stub
-		return false;
+		return _lastIndex == _data.length  - 1;
 	}
 
 	@Override
@@ -36,21 +31,29 @@ public class ArrayList<T> implements List<T>, LimitedSizeInterface {
 	}
 
 	@Override
-	public void add(T value) {
-		// TODO Auto-generated method stub
-		
+	public void add(T value) throws IndexOutOfBoundsException {
+		if(isFull()) {throw new IndexOutOfBoundsException();}
+		_lastIndex++;
+		_data[_lastIndex] = value;
 	}
 
 	@Override
-	public void add(int index, T value) {
-		// TODO Auto-generated method stub
+	public void add(int index, T value) throws IndexOutOfBoundsException {
+		checkIndex(index);
 		
 	}
 
 	@Override
 	public T get(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		checkIndex(index);
+		return (T) _data[index];
+	}
+	
+	private void checkIndex(int index) {
+		if (0 > index || index > lenght()) {
+			throw new IndexOutOfBoundsException("Index: " + index
+					+ " is out of range for List of lenght: " + lenght());
+		}
 	}
 
 	

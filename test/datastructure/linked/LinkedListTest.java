@@ -1,8 +1,10 @@
 package datastructure.linked;
 
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import datastructure.List;
 
 public class LinkedListTest {
@@ -26,6 +28,20 @@ public class LinkedListTest {
 			list.add(i, i);
 			assertEquals(i + 1, list.lenght());
 			assertEquals(i/2, list.get(i/2).intValue());
+		}
+		
+		try {
+			list.add(1001, 1001);
+			fail("IndexOutOfBoundsException expected !");
+		} catch (IndexOutOfBoundsException ioobE) {
+			assertTrue(true);
+		}
+		
+		try {
+			list.get(1001);
+			fail("IndexOutOfBoundsException expected !");
+		} catch (IndexOutOfBoundsException ioobE) {
+			assertTrue(true);
 		}
 	}
 	

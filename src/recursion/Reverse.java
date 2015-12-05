@@ -4,6 +4,7 @@ import datastructure.ArrayQueue;
 import datastructure.ArrayStack;
 import datastructure.Queue;
 import datastructure.Stack;
+import datastructure.linked.LinkedQueue;
 
 public class Reverse {
 	
@@ -14,7 +15,7 @@ public class Reverse {
 	}
 	
 	public void reverseArraySelf (int[] inputArray) {
-		reverseSelfRec (inputArray, inputArray[0], 0);
+		reverseSelfRec (inputArray, 0);
 	}
 	
 	public void reverseArraySelfStack (int[] inputArray) {
@@ -39,7 +40,7 @@ public class Reverse {
 		}
 		
 		if (queue.lenght() == 1) {
-			ArrayQueue<Integer> reversed = new ArrayQueue<Integer>();
+			Queue<Integer> reversed = new LinkedQueue<Integer>();
 			reversed.enqueue(queue.dequeue());
 			return reversed;
 		}
@@ -60,14 +61,14 @@ public class Reverse {
 		reversedArray[reversedArray.length - currentIndex] = inputArray[currentIndex - 1];	
 	}
 	
-	private void reverseSelfRec (int[] inputArray, int currentValue, int currentIndex) {
+	private void reverseSelfRec (int[] inputArray, int currentIndex) {
 		if(currentIndex == inputArray.length) {
 			return;
 		}
 		
 		int index = currentIndex + 1;
 		int value = inputArray[currentIndex];
-		reverseSelfRec (inputArray, value, index);
+		reverseSelfRec (inputArray, index);
 		inputArray[inputArray.length - index] = value;	
 	}
 	

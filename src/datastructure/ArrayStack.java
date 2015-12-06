@@ -89,7 +89,7 @@ public class ArrayStack<T> implements Stack<T> {
       return _data.length;
     }
 
-    public ArrayStackSized<T> copy (int size) {
+    private ArrayStackSized<T> copy (int size) {
       ArrayStackSized<T> sizedStackNew = new ArrayStackSized<T>(size);
       Stack<T> helpStack = new ArrayStack<T>();
       while (!isEmpty()) {

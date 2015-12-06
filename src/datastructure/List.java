@@ -6,6 +6,8 @@ public interface List<T> extends DataStructureInterface<T> {
   
   void add (int index, T value);
   
+  T set (int index, T value);
+  
   T get (int index);
 
 }

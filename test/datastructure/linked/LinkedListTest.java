@@ -31,7 +31,7 @@ public class LinkedListTest {
 		}
 		
 		try {
-			list.add(1001, 1001);
+			list.set(1001, 1001);
 			fail("IndexOutOfBoundsException expected !");
 		} catch (IndexOutOfBoundsException ioobE) {
 			assertTrue(true);

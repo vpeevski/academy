@@ -26,14 +26,14 @@ public class LinkedList<T> implements List<T> {
 	}
 
 	@Override
-	public void add(int index, T value) {
+	public T set(int index, T value) {
 		checkIndex(index);
 
-		if (index == _lenght) {
-			linkLast(value);
-		} else {
-			linkBefore(value, node(index));
-		}
+		Node<T> oldNode = node(index);
+		T oldValue = oldNode.value;
+		oldNode.value = value;
+
+		return oldValue;
 
 	}
 
@@ -97,6 +97,19 @@ public class LinkedList<T> implements List<T> {
 			this.next = next;
 			this.prev = prev;
 		}
+	}
+
+	@Override
+	public void add(int index, T value) {
+		checkIndex(index);
+
+		Node<T> oldNode = node(index);
+		if (index == _lenght) {
+			linkLast(value);
+		} else {
+			linkBefore(value, oldNode);
+		}
+		
 	}
 
 }

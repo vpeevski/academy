@@ -116,7 +116,7 @@ public final class ArrayQueue<T> implements Queue<T> {
       return _data.length;
     }
     
-    public SizedCycledQueue<T> copy (int size) {
+    private SizedCycledQueue<T> copy (int size) {
       SizedCycledQueue<T> sizedQueueNew = new SizedCycledQueue<T>(size);
       while (!isEmpty()) {
         sizedQueueNew.enqueue(dequeue());

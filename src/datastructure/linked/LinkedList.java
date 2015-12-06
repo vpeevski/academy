@@ -1,8 +1,8 @@
 package datastructure.linked;
 
-import datastructure.List;
+import datastructure.AbstractList;
 
-public class LinkedList<T> implements List<T> {
+public class LinkedList<T> extends AbstractList<T> {
 
 	private Node<T> _fisrt;
 

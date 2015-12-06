@@ -1,6 +1,6 @@
 package datastructure;
 
-public class ArrayList<T> implements List<T> {
+public class ArrayList<T> extends AbstractList<T> {
 
 	private static final int MIN_SIZE = 5;
 
@@ -132,7 +132,7 @@ public class ArrayList<T> implements List<T> {
 		}
 
 		private void shift(int startIndex) {
-			System.arraycopy(_data, startIndex, _data, startIndex + 1, 1);
+			System.arraycopy(_data, startIndex, _data, startIndex + 1, lenght() - startIndex);
 		}
 
 		private void checkSize() {

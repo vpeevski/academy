@@ -1,5 +1,8 @@
 package datastructure.linked;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 import datastructure.AbstractList;
 
 public class LinkedList<T> extends AbstractList<T> {
@@ -111,5 +114,44 @@ public class LinkedList<T> extends AbstractList<T> {
 		}
 		
 	}
+
+	@Override
+	public Iterator<T> iterator() {
+		return new LinkedListIterator<T>();
+	}
+	
+	private class LinkedListIterator<T> implements Iterator<T> {
+		
+		private Node<T> _current;
+		private T _lastReturned;
+		
+		public LinkedListIterator () {
+			_current = (Node<T>) _fisrt;
+		}
+
+		@Override
+		public boolean hasNext() {
+			return _current != null;
+		}
+
+		@Override
+		public T next() {
+			if(! hasNext()) {
+				throw new NoSuchElementException("List collection do not have next element");
+			}
+			_lastReturned = _current.value;
+			_current = _current.next;
+			return _lastReturned;
+		}
+
+		@Override
+		public void remove() {
+			throw new UnsupportedOperationException("Can not remove from List");
+			
+		}
+		
+	}
+	
+	
 
 }

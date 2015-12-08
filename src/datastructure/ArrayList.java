@@ -1,5 +1,8 @@
 package datastructure;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 public class ArrayList<T> extends AbstractList<T> {
 
 	private static final int MIN_SIZE = 5;
@@ -45,6 +48,11 @@ public class ArrayList<T> extends AbstractList<T> {
 	@Override
 	public T get(int index) {
 		return _innerSizedList.get(index);
+	}
+	
+	@Override
+	public Iterator<T> iterator() {
+		return _innerSizedList.iterator();
 	}
 
 	private static class ArrayListSized<T> implements List<T>,
@@ -122,17 +130,18 @@ public class ArrayList<T> extends AbstractList<T> {
 		public void add(int index, T value) {
 			checkIndex(index);
 			checkSize();
-			
+
 			if (index <= _lastIndex) {
 				shift(index);
 			}
-			
+
 			_data[index] = value;
 			_lastIndex++;
 		}
 
 		private void shift(int startIndex) {
-			System.arraycopy(_data, startIndex, _data, startIndex + 1, lenght() - startIndex);
+			System.arraycopy(_data, startIndex, _data, startIndex + 1, lenght()
+					- startIndex);
 		}
 
 		private void checkSize() {
@@ -140,11 +149,49 @@ public class ArrayList<T> extends AbstractList<T> {
 				throw new IndexOutOfBoundsException();
 			}
 		}
-		
+
 		private void checkNotEmpty() {
 			if (isEmpty()) {
 				throw new IndexOutOfBoundsException();
 			}
+		}
+
+		@Override
+		public Iterator<T> iterator() {
+			return new ArrayListIterator ();
+		}
+		
+		private class ArrayListIterator<T> implements Iterator<T> {
+
+			private int _currentIndex;
+			private int _lastReturned;
+
+			public ArrayListIterator() {
+				_currentIndex = 0;
+			}
+
+			@Override
+			public boolean hasNext() {
+				return _currentIndex < _lastIndex;
+			}
+
+			@Override
+			public T next() {
+				if (!hasNext()) {
+					throw new NoSuchElementException(
+							"List collection do not have next element");
+				}
+				_lastReturned = _currentIndex;
+				_currentIndex++;
+				return (T) _data[_lastReturned];
+			}
+
+			@Override
+			public void remove() {
+				throw new UnsupportedOperationException("Can not remove from List");
+
+			}
+
 		}
 
 	}

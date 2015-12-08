@@ -4,7 +4,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 import org.junit.Test;
+
+import datastructure.linked.LinkedList;
 
 public class ArrayListTest {
 
@@ -133,6 +138,30 @@ public class ArrayListTest {
 		} catch (IndexOutOfBoundsException ioobE) {
 			assertTrue(true);
 		}
+	}
+	
+	@Test
+	public void testIterator() {
+		List<Integer> list = new ArrayList<Integer>();
+		for (int i = 0; i < 1000 ; i++) {
+			list.add(i);
+		}
+		
+		int i = 0;
+		Iterator<Integer> iter = list.iterator();
+		for ( ; iter.hasNext() ; ) {
+			assertEquals(i, iter.next().intValue());
+			i++;
+		}
+		
+		try {
+			iter.next();
+			fail("NoSuchElementException expected");
+		} catch (NoSuchElementException nseE) {
+			assertTrue(true);
+		}
+		
+		assertTrue(!iter.hasNext());
 	}
 
 }

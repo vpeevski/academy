@@ -1,5 +1,6 @@
 package datastructure;
 
+
 public abstract class AbstractList<T> implements List<T> {
 	
 	@Override
@@ -37,5 +38,5 @@ public abstract class AbstractList<T> implements List<T> {
         }
         return hashCode;
 	}
-
+	
 }

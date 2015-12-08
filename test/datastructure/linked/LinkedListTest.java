@@ -1,5 +1,8 @@
 package datastructure.linked;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -18,6 +21,30 @@ public class LinkedListTest {
 			assertEquals(i + 1, list.lenght());
 			assertEquals(i, list.get(i).intValue());
 		}
+	}
+	
+	@Test
+	public void testIterator() {
+		List<Integer> list = new LinkedList<Integer>();
+		for (int i = 0; i < 1000 ; i++) {
+			list.add(i);
+		}
+		
+		int i = 0;
+		Iterator<Integer> iter = list.iterator();
+		for ( ; iter.hasNext() ; ) {
+			assertEquals(i, iter.next().intValue());
+			i++;
+		}
+		
+		try {
+			iter.next();
+			fail("NoSuchElementException expected");
+		} catch (NoSuchElementException nseE) {
+			assertTrue(true);
+		}
+		
+		assertTrue(!iter.hasNext());
 	}
 	
 	@Test

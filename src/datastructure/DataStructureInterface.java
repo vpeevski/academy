@@ -6,8 +6,6 @@ public interface DataStructureInterface <T> {
   
   int lenght ();
   
-  //TODO add void remove(int index)
-  
   //TODO add boolean contains (T value)
   
   //TODO add boolean equals (Object o);

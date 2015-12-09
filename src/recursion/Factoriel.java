@@ -15,7 +15,7 @@ public final class Factoriel {
       return 1;
     }
     
-    return Math.multiplyExact(number, factorielRec(number - 1));
+    return number * factorielRec(number - 1);
   }
 
 }

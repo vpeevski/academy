@@ -40,14 +40,6 @@ public class LinkedList<T> extends AbstractList<T> {
 
   }
 
-  private void checkIndex(int index) {
-    if (0 > index || index > lenght()) { throw new IndexOutOfBoundsException("Index: " + index + " is out of range for List of lenght: " + lenght()); }
-  }
-
-  private void checkExistingIndex(int index) {
-    if (0 > index || index >= lenght()) { throw new IndexOutOfBoundsException("Index: " + index + " is out of range for List of lenght: " + lenght()); }
-  }
-
   private Node<T> node(int index) {
     Node<T> result = _fisrt; //TODO Optimize this to start from front or end depending on which is nearer
     for (int i = 0; i < index; i++) {

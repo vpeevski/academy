@@ -65,7 +65,7 @@ public class ArrayList<T> extends AbstractList<T> {
     return _innerSizedList.remove(value);
   }
 
-  private static class ArrayListSized<T> implements List<T>, LimitedSizeInterface {
+  private static class ArrayListSized<T> extends AbstractList<T> implements LimitedSizeInterface {
 
     private final Object[] _data;
 
@@ -104,8 +104,7 @@ public class ArrayList<T> extends AbstractList<T> {
 
     @Override
     public T set(int index, T value) throws IndexOutOfBoundsException {
-      checkNotEmpty();
-      checkIndex(index);
+      checkExistingIndex(index);
 
       T oldValue = (T) _data[index];
       _data[index] = value;
@@ -114,13 +113,8 @@ public class ArrayList<T> extends AbstractList<T> {
 
     @Override
     public T get(int index) {
-      checkNotEmpty();
-      checkIndex(index);
+      checkExistingIndex(index);
       return (T) _data[index];
-    }
-
-    private void checkIndex(int index) {
-      if (0 > index || index > lenght()) { throw new IndexOutOfBoundsException("Index: " + index + " is out of range for List of lenght: " + lenght()); }
     }
 
     private ArrayListSized<T> copy(int size) {
@@ -151,10 +145,6 @@ public class ArrayList<T> extends AbstractList<T> {
 
     private void checkSize() {
       if (isFull()) { throw new IndexOutOfBoundsException(); }
-    }
-
-    private void checkNotEmpty() {
-      if (isEmpty()) { throw new IndexOutOfBoundsException(); }
     }
     
     @Override

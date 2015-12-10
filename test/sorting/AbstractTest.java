@@ -4,7 +4,8 @@ import static org.junit.Assert.assertArrayEquals;
 
 import java.util.Arrays;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.junit.Test;
 
 import util.RandomGenerator;
@@ -17,7 +18,7 @@ public abstract class AbstractTest {
   
   private final static int ITERATIONS = 1000;
   
-  protected final Logger _logger = Logger.getLogger(this.getClass().getName());;
+  protected final Logger _logger = LoggerFactory.getLogger(this.getClass());
   
   protected int[] randomArray;
   

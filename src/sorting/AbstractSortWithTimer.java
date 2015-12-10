@@ -2,7 +2,8 @@ package sorting;
 
 import java.util.Arrays;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import sorting.time.TimeInterceptor;
 import sorting.time.Timer;
@@ -11,7 +12,7 @@ public abstract class AbstractSortWithTimer extends AbstractSort {
   
   private final TimeInterceptor _timeInterceptor;
   
-  private Logger _logger = Logger.getLogger(this.getClass().getName());
+  private Logger _logger = LoggerFactory.getLogger(this.getClass());
   
   public AbstractSortWithTimer (TimeInterceptor timeInterceptor) {
     _timeInterceptor = timeInterceptor;

@@ -14,7 +14,7 @@ public class HeapSortTest extends AbstractTest {
 		try  {
 			assertArrayEquals(sortedArrayExpected, sortedArray);
 		} catch (Throwable throwable) {
-			_logger.error(throwable); 
+			_logger.error("Arrays not Equal", throwable); 
 			throw new AssertionError(throwable);
 		}
 	}
@@ -27,7 +27,7 @@ public class HeapSortTest extends AbstractTest {
 		try  {
 			assertArrayEquals(sortedArrayExpected, reverseSortedArray);
 		} catch (Throwable throwable) {
-			_logger.error(throwable); 
+			_logger.error("Arrays not Equal", throwable); 
 			throw new AssertionError(throwable);
 		}
 	}
@@ -46,7 +46,7 @@ public class HeapSortTest extends AbstractTest {
 		try  {
 			assertArrayEquals(arraySorted, array);
 		} catch (Throwable throwable) {
-			_logger.error(throwable);
+			_logger.error("Arrays not Equal", throwable);
 			throw new AssertionError(throwable);
 		}
 	}

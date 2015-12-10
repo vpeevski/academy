@@ -5,7 +5,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -17,9 +16,8 @@ public final class DebtReader {
 
 	public Vector<Vector<String>> readDebts(String path) throws IOException {
 		File debtsFile = new File(path);
-		FileReader fileReader = new FileReader(debtsFile);
 		BufferedReader reader = null;
-		String line = new String();
+		String line;
 		Vector<Vector<String>> debts = new Vector<Vector<String>>();
 		try {
 			reader = new BufferedReader(new InputStreamReader(
@@ -31,12 +29,6 @@ public final class DebtReader {
 				debts.add(vectoLine);
 			}
 		} finally {
-			try {
-				fileReader.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
 			try {
 				if (reader != null) {
 					reader.close();

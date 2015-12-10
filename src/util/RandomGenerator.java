@@ -17,7 +17,7 @@ public class RandomGenerator {
 	}
 	
 	private static int randomInt_0_To_10 () {
-		return (int) Math.random() * 10 + 1;
+		return (int) (Math.random() * 10 + 1);
 	}
 
 }

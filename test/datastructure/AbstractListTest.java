@@ -201,6 +201,58 @@ public abstract class AbstractListTest {
       }
   }
   
+  @Test
+  public void testIteratorRemove() {
+    List<Integer> list = provideList(Integer.class);
+    for (int i = 0; i < 10; i++) {
+      list.add(i);
+    }
+    
+    int i = 10;
+    for (Iterator<Integer> iterator = list.iterator(); iterator.hasNext();) {
+      iterator.next();
+      assertEquals(list.lenght(), i);
+      iterator.remove();
+      assertEquals(list.lenght(), --i);
+    }
+
+  }
+  
+  @Test
+  public void testIteratorDoubleRemove() {
+    List<Integer> list = provideList(Integer.class);
+    for (int i = 0; i < 10; i++) {
+      list.add(i);
+    }
+    Iterator<Integer> iterator = list.iterator();
+    iterator.next();
+    iterator.remove();
+    
+    try {
+      iterator.remove();
+      fail("IllegalStateException ecpected on double remove from iterator withou intermediate call to next() method!");
+    } catch (IllegalStateException isE) {
+      assertTrue(true);
+    }
+
+  }
+  
+  @Test
+  public void testIteratorRemoveWithoutNextCall() {
+    List<Integer> list = provideList(Integer.class);
+    for (int i = 0; i < 10; i++) {
+      list.add(i);
+    }
+    Iterator<Integer> iterator = list.iterator();
+    try {
+      iterator.remove();
+      fail("IllegalStateException expected trying to remove from iterator without current element (next() method not called before remove)");
+    } catch (IllegalStateException isE) {
+      assertTrue(true);
+    }
+  }
+
+  
   protected abstract <T> List<T> provideList (Class<T> clazz);
 
 }

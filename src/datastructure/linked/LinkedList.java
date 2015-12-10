@@ -183,13 +183,13 @@ public class LinkedList<T> extends AbstractList<T> {
 
   @Override
   public Iterator<T> iterator() {
-    return new LinkedListIterator<T>();
+    return new LinkedListIterator();
   }
 
-  private class LinkedListIterator<T> implements Iterator<T> {
+  private class LinkedListIterator implements Iterator<T> {
 
     private Node<T> _current;
-    private T       _lastReturned;
+    private Node<T>       _lastReturned;
 
     public LinkedListIterator() {
       _current = (Node<T>) _fisrt;
@@ -203,15 +203,20 @@ public class LinkedList<T> extends AbstractList<T> {
     @Override
     public T next() {
       if (!hasNext()) { throw new NoSuchElementException("List collection do not have next element"); }
-      _lastReturned = _current.value;
+      _lastReturned = _current;
       _current = _current.next;
-      return _lastReturned;
+      return _lastReturned.value;
     }
 
     @Override
     public void remove() {
-      throw new UnsupportedOperationException("Can not remove from List");
-
+      if (_lastReturned == null) {
+        throw new IllegalStateException();
+      }
+      //TODO check for co-modification and throw ConcurentMofificationException to guarantee fail-fast behavior
+      
+      unlink(_lastReturned);
+      _lastReturned = null;
     }
 
   }

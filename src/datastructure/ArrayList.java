@@ -142,7 +142,7 @@ public class ArrayList<T> extends AbstractList<T> {
     private void shift(int startIndex) {
       System.arraycopy(_data, startIndex, _data, startIndex + 1, lenght() - startIndex);
     }
-    
+
     private void shiftBack(int startIndex) {
       System.arraycopy(_data, startIndex + 1, _data, startIndex, lenght() - startIndex - 1);
     }
@@ -150,7 +150,7 @@ public class ArrayList<T> extends AbstractList<T> {
     private void checkSize() {
       if (isFull()) { throw new IndexOutOfBoundsException(); }
     }
-    
+
     @Override
     public T remove(int index) {
       checkExistingIndex(index);
@@ -162,9 +162,9 @@ public class ArrayList<T> extends AbstractList<T> {
 
     @Override
     public boolean remove(T value) {
-      for(int i = 0; i < lenght(); i++) {
+      for (int i = 0; i < lenght(); i++) {
         T currentElem = (T) _data[i];
-        if(currentElem == null ? value == null : currentElem.equals(value)) {
+        if (currentElem == null ? value == null : currentElem.equals(value)) {
           shiftBack(i);
           _data[_lastIndex--] = null;
           return true;
@@ -178,13 +178,14 @@ public class ArrayList<T> extends AbstractList<T> {
       return new ArrayListIterator();
     }
 
-    private class ArrayListIterator<T> implements Iterator<T> {
+    private class ArrayListIterator implements Iterator<T> {
 
       private int _currentIndex;
       private int _lastReturned;
 
       public ArrayListIterator() {
         _currentIndex = -1;
+        _lastReturned = -1;
       }
 
       @Override
@@ -201,7 +202,11 @@ public class ArrayList<T> extends AbstractList<T> {
 
       @Override
       public void remove() {
-        throw new UnsupportedOperationException("Can not remove from List");
+        if (_lastReturned == -1) { throw new IllegalStateException("Trying to remove from iterator without current element - call next() method before Iterator.remove()"); }
+        //TODO check for co-modification and throw ConcurentMofificationException to guarantee fail-fast behavior
+        
+        ArrayListSized.this.remove(_lastReturned);
+        _lastReturned = -1;
 
       }
 

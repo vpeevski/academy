@@ -142,6 +142,10 @@ public class ArrayList<T> extends AbstractList<T> {
     private void shift(int startIndex) {
       System.arraycopy(_data, startIndex, _data, startIndex + 1, lenght() - startIndex);
     }
+    
+    private void shiftBack(int startIndex) {
+      System.arraycopy(_data, startIndex + 1, _data, startIndex, lenght() - startIndex - 1);
+    }
 
     private void checkSize() {
       if (isFull()) { throw new IndexOutOfBoundsException(); }
@@ -149,12 +153,24 @@ public class ArrayList<T> extends AbstractList<T> {
     
     @Override
     public T remove(int index) {
-      return null; // TODO implement this method
+      checkExistingIndex(index);
+      T removedElement = (T) _data[index];
+      shiftBack(index);
+      _data[_lastIndex--] = null;
+      return removedElement;
     }
 
     @Override
     public boolean remove(T value) {
-      return false; // TODO implement this method
+      for(int i = 0; i < lenght(); i++) {
+        T currentElem = (T) _data[i];
+        if(currentElem == null ? value == null : currentElem.equals(value)) {
+          shiftBack(i);
+          _data[_lastIndex--] = null;
+          return true;
+        }
+      }
+      return false;
     }
 
     @Override

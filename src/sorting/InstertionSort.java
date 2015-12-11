@@ -7,11 +7,6 @@ public class InstertionSort extends AbstractSortWithTimer {
     super();
   }
 
-  public static void main(String[] args) {
-    InstertionSort sorter = new InstertionSort();
-    sorter.sortForTime(arr);
-  }
-
   @Override
   public void sort(int[] inputArray) {
     for (int i = 1; i < inputArray.length; i++) {

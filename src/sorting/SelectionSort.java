@@ -12,14 +12,6 @@ public class SelectionSort extends AbstractSortWithTimer {
     super();
   }
 
-  /**
-   * @param args
-   */
-  public static void main(String[] args) {
-    SelectionSort sorter = new SelectionSort();
-    sorter.sortForTime(arr);
-  }
-
   @Override
   public void sort(int[] inputArray) {
     for (int i = 0; i < inputArray.length - 1; i++) {

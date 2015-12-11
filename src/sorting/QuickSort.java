@@ -13,11 +13,6 @@ public class QuickSort extends AbstractSortWithTimer {
     super();
   }
 
-  public static void main(String[] args) {
-    QuickSort sorter = new QuickSort(new Timer());
-    sorter.sortForTime(arr);
-  }
-
   @Override
   public void sort(int[] inputArray) {
     sort(inputArray, 0, inputArray.length - 1);

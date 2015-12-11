@@ -12,12 +12,6 @@ public class MergeSort extends AbstractSortWithTimer {
     super();
   }
 
-  public static void main(String[] args) {
-    MergeSort sorter = new MergeSort();
-    sorter.sortForTime(arr);
-
-  }
-
   @Override
   public void sort(int[] inputArray) {
     mergeSort(inputArray);

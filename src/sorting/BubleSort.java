@@ -12,14 +12,6 @@ public final class BubleSort extends AbstractSortWithTimer {
     super();
   }
 
-  /**
-   * @param args
-   */
-  public static void main(String[] args) {
-    BubleSort bubleSort = new BubleSort();
-    bubleSort.sortForTime(arr);
-  }
-
   @Override
   public void sort(int[] inputArray) {
     for (int i = 0; i < inputArray.length - 1; i++) {

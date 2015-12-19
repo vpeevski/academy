@@ -17,12 +17,11 @@ public final class DebtReader {
 	public Vector<Vector<String>> readDebts(String path) throws IOException {
 		File debtsFile = new File(path);
 		BufferedReader reader = null;
-		String line;
 		Vector<Vector<String>> debts = new Vector<Vector<String>>();
 		try {
 			reader = new BufferedReader(new InputStreamReader(
 					new FileInputStream(debtsFile), "UTF8"));
-			;
+			String line;
 			while ((line = reader.readLine()) != null) {
 				String[] lineStr = line.replace("|", ":").split(":");
 				Vector<String> vectoLine = new Vector<String> (Arrays.asList(lineStr));

@@ -4,9 +4,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import org.junit.Test;
+
+import datastructure.linked.LinkedQueue;
 
 public class ArrayQueueTest {
 
@@ -75,6 +78,59 @@ public class ArrayQueueTest {
     assertEquals(0, queue.lenght());
     queue.enqueue(1);
     assertEquals(1, queue.lenght());
+  }
+  
+  @Test
+  public void testEquals() {
+	  Queue<Integer> queue1 = new ArrayQueue<Integer>();
+	  Queue<Integer> queue2 = new ArrayQueue<Integer>();
+      for (int i = 0; i < 100; i++) {
+    	  queue1.enqueue(i);
+    	  queue2.enqueue(i);
+      }
+      
+      assertEquals(queue2, queue1);
+      
+      Queue<Integer> listOther = queue1;
+      assertEquals(queue1, listOther);
+      assertEquals(queue1, queue2);
+  }
+  
+  @Test
+  public void testHashCode() {
+	  Queue<Integer> queue1 = new ArrayQueue<Integer>();
+	  Queue<Integer> queue2 = new ArrayQueue<Integer>();
+      for (int i = 0; i < 100; i++) {
+    	  queue1.enqueue(i);
+    	  queue2.enqueue(i);
+      }
+      
+      assertEquals(queue1.hashCode(), queue1.hashCode());
+      assertEquals(queue1.hashCode(), queue2.hashCode());
+  }
+  
+  @Test
+  public void testIterator() {
+      Queue<Integer> queue = new ArrayQueue<Integer>();
+      for (int i = 0; i < 1000 ; i++) {
+        queue.enqueue(i);
+      }
+      
+      int i = 0;
+      Iterator<Integer> iter = queue.iterator();
+      for ( ; iter.hasNext() ; ) {
+          assertEquals(i, iter.next().intValue());
+          i++;
+      }
+      
+      try {
+          iter.next();
+          fail("NoSuchElementException expected");
+      } catch (NoSuchElementException nseE) {
+          assertTrue(true);
+      }
+      
+      assertTrue(!iter.hasNext());
   }
 
 }

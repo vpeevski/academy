@@ -5,9 +5,13 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.EmptyStackException;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import org.junit.Test;
 
+import datastructure.ArrayStack;
+import datastructure.Queue;
 import datastructure.Stack;
 
 public class LinkedStackTest {
@@ -64,6 +68,60 @@ public class LinkedStackTest {
 	    assertEquals(0, stack.lenght());
 	    stack.push(1);
 	    assertEquals(1, stack.lenght());
+	  }
+	  
+	  @Test
+	  public void testEquals() {
+		  Stack<Integer> stack1 = new LinkedStack<Integer>();
+		  Stack<Integer> stack2 = new LinkedStack<Integer>();
+	      for (int i = 0; i < 100; i++) {
+	    	  stack1.push(i);
+	    	  stack2.push(i);
+	      }
+	      
+	      assertEquals(stack1, stack1);
+	      
+	      Stack<Integer> stackOther = stack1;
+	      assertEquals(stack1, stackOther);
+	      assertEquals(stack1, stack2);
+	  }
+	  
+	  @Test
+	  public void testHashCode() {
+		  Stack<Integer> stack1 = new LinkedStack<Integer>();
+		  Stack<Integer> stack2 = new LinkedStack<Integer>();
+	      for (int i = 0; i < 100; i++) {
+	    	  stack1.push(i);
+	    	  stack2.push(i);
+	      }
+	      
+	      assertEquals(stack1.hashCode(), stack1.hashCode());
+	      assertEquals(stack1.hashCode(), stack2.hashCode());
+	      assertEquals(stack2.hashCode(), stack1.hashCode());
+	  }
+	  
+	  @Test
+	  public void testIterator() {
+	      Stack<Integer> stack = new LinkedStack<Integer>();
+	      for (int i = 0; i < 1000 ; i++) {
+	        stack.push(i);
+	      }
+	      
+	      int i = 999;
+	      Iterator<Integer> iter = stack.iterator();
+	      for ( ; iter.hasNext() ; ) {
+	          assertEquals(i, iter.next().intValue());
+	          i--;
+	      }
+	      
+	      try {
+	          iter.next();
+	          fail("NoSuchElementException expected");
+	      } catch (NoSuchElementException nseE) {
+	          assertTrue(true);
+	      }
+	      
+	      assertTrue(!iter.hasNext());
 	  }
 	  
 

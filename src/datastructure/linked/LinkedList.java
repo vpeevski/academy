@@ -3,10 +3,10 @@ package datastructure.linked;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import datastructure.AbstractDataStructure;
+import datastructure.AbstractList;
 import datastructure.List;
 
-public class LinkedList<T> extends AbstractDataStructure<T> implements List<T>{
+public class LinkedList<T> extends AbstractList<T> implements List<T>{
 
   private Node<T> _fisrt;
 

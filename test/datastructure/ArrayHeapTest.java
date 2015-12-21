@@ -2,6 +2,7 @@ package datastructure;
 
 import static org.junit.Assert.*;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import org.junit.Test;
@@ -120,6 +121,58 @@ public class ArrayHeapTest {
     } catch (NoSuchElementException nseE) {
       assertTrue(true);
     }
+  }
+  
+  @Test
+  public void testEquals() {
+	  ArrayHeap<Integer> heap1 = new ArrayHeap<Integer>(100);
+	  ArrayHeap<Integer> heap2 = new ArrayHeap<Integer>(100);
+      for (int i = 0; i < 100; i++) {
+    	  heap1.insert(i);
+    	  heap2.insert(i);
+      }
+      
+      assertEquals(heap1, heap2);
+      
+      assertEquals(heap1, heap1);
+      assertEquals(heap1, heap2);
+      assertEquals(heap2, heap1);
+  }
+  
+  @Test
+  public void testHashCode() {
+	  ArrayHeap<Integer> heap1 = new ArrayHeap<Integer>(100);
+	  ArrayHeap<Integer> heap2 = new ArrayHeap<Integer>(100);
+      for (int i = 0; i < 100; i++) {
+    	  heap1.insert(i);
+    	  heap2.insert(i);
+      }
+      
+      assertEquals(heap1.hashCode(), heap1.hashCode());
+      assertEquals(heap1.hashCode(), heap2.hashCode());
+      assertEquals(heap2.hashCode(), heap1.hashCode());
+  }
+  
+  @Test
+  public void testIterator() {
+	  ArrayHeap<Integer> heap = new ArrayHeap<Integer>(3);
+      for (int i = 0; i < 3 ; i++) {
+    	  heap.insert(i);
+      }
+      
+      Iterator<Integer> iter = heap.iterator();
+      assertEquals(2, iter.next().intValue());
+      assertEquals(0, iter.next().intValue());
+      assertEquals(1, iter.next().intValue());
+      
+      try {
+          iter.next();
+          fail("NoSuchElementException expected");
+      } catch (NoSuchElementException nseE) {
+          assertTrue(true);
+      }
+      
+      assertTrue(!iter.hasNext());
   }
 
 }

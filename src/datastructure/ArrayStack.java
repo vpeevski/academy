@@ -2,6 +2,7 @@ package datastructure;
 
 import java.util.EmptyStackException;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class ArrayStack<T> extends AbstractDataStructure<T> implements Stack<T> {
 
@@ -39,6 +40,11 @@ public class ArrayStack<T> extends AbstractDataStructure<T> implements Stack<T> 
 
     }
     return value;
+  }
+  
+  @Override
+  public Iterator<T> iterator() {
+    return _innerSizedStack.iterator();
   }
 
   private static class ArrayStackSized<T> implements Stack<T>, LimitedSizeInterface {
@@ -106,16 +112,35 @@ public class ArrayStack<T> extends AbstractDataStructure<T> implements Stack<T> 
 
     @Override
     public Iterator<T> iterator() {
-      // TODO Auto-generated method stub
-      return null;
+      return new ArrayStackIterator();
     }
+    
+    private class ArrayStackIterator implements Iterator<T> {
 
-  }
+        private int _currentIndex;
+        
+        public ArrayStackIterator() {
+          _currentIndex = topIndex;
+        }
 
-  @Override
-  public Iterator<T> iterator() {
-    // TODO Auto-generated method stub
-    return null;
+        @Override
+        public boolean hasNext() {
+          return _currentIndex > 0;
+        }
+
+        @Override
+        public T next() {
+          if (!hasNext()) { throw new NoSuchElementException("List collection do not have next element"); }
+          return (T) _data[_currentIndex--];
+        }
+
+        @Override
+        public void remove() {
+          throw new IllegalStateException("Iterator remove is not allowed for Stack Object");
+        }
+
+      }
+
   }
 
 }

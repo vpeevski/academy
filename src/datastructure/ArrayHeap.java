@@ -94,10 +94,35 @@ public class ArrayHeap<T extends Comparable<T>> extends AbstractDataStructure<T>
 		return _size;
 	}
 
-  @Override
-  public Iterator<T> iterator() {
-    // TODO Auto-generated method stub
-    return null;
-  }
+	@Override
+    public Iterator<T> iterator() {
+      return new ArrayHeapIterator();
+    }
+
+    private class ArrayHeapIterator implements Iterator<T> {
+
+      private int _currentIndex;
+
+      public ArrayHeapIterator() {
+        _currentIndex = -1;
+      }
+
+      @Override
+      public boolean hasNext() {
+        return _currentIndex + 1 < lenght();
+      }
+
+      @Override
+      public T next() {
+        if (!hasNext()) { throw new NoSuchElementException("List collection do not have next element"); }
+        return (T) _heapData[++_currentIndex]; // TODO clone here
+      }
+
+      @Override
+      public void remove() {
+        throw new IllegalStateException("Trying to remove from iterator is Forbidden for Heap Object");
+      }
+
+    }
 
 }

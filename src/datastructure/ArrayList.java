@@ -65,7 +65,7 @@ public class ArrayList<T> extends AbstractDataStructure<T> implements List<T>{
     return _innerSizedList.remove(value);
   }
 
-  private static class ArrayListSized<T> extends AbstractDataStructure<T> implements List<T>, LimitedSizeInterface {
+  private static class ArrayListSized<T> extends AbstractList<T> implements LimitedSizeInterface {
 
     private final Object[] _data;
 

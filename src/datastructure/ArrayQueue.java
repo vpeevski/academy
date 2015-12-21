@@ -3,7 +3,7 @@ package datastructure;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public final class ArrayQueue<T> implements Queue<T> {
+public final class ArrayQueue<T> extends AbstractDataStructure<T> implements Queue<T> {
 
   private static final int    MIN_SIZE        = 5;
 
@@ -139,11 +139,9 @@ public final class ArrayQueue<T> implements Queue<T> {
     private class ArrayQueueIterator implements Iterator<T> {
 
       private int _currentIndex;
-      private int _lastReturned;
 
       public ArrayQueueIterator() {
         _currentIndex = _front;
-        _lastReturned = -1;
       }
 
       @Override
@@ -154,8 +152,7 @@ public final class ArrayQueue<T> implements Queue<T> {
       @Override
       public T next() {
         if (!hasNext()) { throw new NoSuchElementException("List collection do not have next element"); }
-        _lastReturned = ++_currentIndex;
-        return (T) _data[_lastReturned]; // TODO clone here
+        return (T) _data[_currentIndex++]; // TODO clone here
       }
 
       @Override

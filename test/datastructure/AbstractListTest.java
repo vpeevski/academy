@@ -9,8 +9,6 @@ import java.util.NoSuchElementException;
 
 import org.junit.Test;
 
-import datastructure.linked.LinkedQueue;
-
 public abstract class AbstractListTest {
   
   @Test

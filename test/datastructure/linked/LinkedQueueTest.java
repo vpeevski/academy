@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
 
 import org.junit.Test;
 
-import datastructure.List;
+import datastructure.ArrayQueue;
 import datastructure.Queue;
 
 public class LinkedQueueTest {
@@ -88,6 +88,35 @@ public class LinkedQueueTest {
 	      }
 	      
 	      assertTrue(!iter.hasNext());
+	  }
+	  
+	  @Test
+	  public void testEquals() {
+		  Queue<Integer> queue1 = new LinkedQueue<Integer>();
+		  Queue<Integer> queue2 = new LinkedQueue<Integer>();
+	      for (int i = 0; i < 100; i++) {
+	    	  queue1.enqueue(i);
+	    	  queue2.enqueue(i);
+	      }
+	      
+	      assertEquals(queue2, queue1);
+	      
+	      Queue<Integer> listOther = queue1;
+	      assertEquals(queue1, listOther);
+	      assertEquals(queue1, queue2);
+	  }
+	  
+	  @Test
+	  public void testHashCode() {
+		  Queue<Integer> queue1 = new LinkedQueue<Integer>();
+		  Queue<Integer> queue2 = new LinkedQueue<Integer>();
+	      for (int i = 0; i < 100; i++) {
+	    	  queue1.enqueue(i);
+	    	  queue2.enqueue(i);
+	      }
+	      
+	      assertEquals(queue1.hashCode(), queue1.hashCode());
+	      assertEquals(queue1.hashCode(), queue2.hashCode());
 	  }
 
 

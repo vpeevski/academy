@@ -3,14 +3,13 @@ package datastructure;
 import java.util.NoSuchElementException;
 
 import util.HeapUtil;
-import util.SwapUtil;
 
 public class ArrayHeap<T extends Comparable<T>> implements DataStructureInterface<T>, LimitedSizeInterface {
 	
 	public static final int HEAP_TYPE_MAX = 1;
 	public static final int HEAP_TYPE_MIN = 2;
 	
-	private Comparable[] _heapData;
+	private T[] _heapData;
 	private int _heapType = HEAP_TYPE_MAX;
 	
 	private final int _size;	private int _lenght;
@@ -47,7 +46,7 @@ public class ArrayHeap<T extends Comparable<T>> implements DataStructureInterfac
 	
 	public ArrayHeap (int size, int heapType) { //TODO add test for this method
 		_size = size;
-		_heapData = new Comparable[_size];
+		_heapData = (T[]) new Object[_size];
 		_lenght = 0;
 		_heapType = HEAP_TYPE_MAX;
 		if(heapType == HEAP_TYPE_MIN) {
@@ -70,7 +69,7 @@ public class ArrayHeap<T extends Comparable<T>> implements DataStructureInterfac
 		
 		_size = arr.length;
 		_lenght = arr.length;
-		_heapData = arr;
+		_heapData = arr.clone();
 	}
 	
 

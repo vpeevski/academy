@@ -1,7 +1,6 @@
 package sorting;
 
 import sorting.time.TimeInterceptor;
-import sorting.time.Timer;
 
 public class QuickSort extends AbstractSortWithTimer {
 
@@ -14,20 +13,20 @@ public class QuickSort extends AbstractSortWithTimer {
   }
 
   @Override
-  public void sort(int[] inputArray) {
+  public <T extends Comparable<T>> void sort(T[] inputArray) {
     sort(inputArray, 0, inputArray.length - 1);
   }
 
-  private void sort(int[] input, int startIndex, int endIndex) {
+  private <T extends Comparable<T>> void sort(T[] input, int startIndex, int endIndex) {
     if (startIndex >= endIndex) { return; }
 
     //System.out.println(Arrays.toString(input));
 
-    int pivot = input[startIndex];
+    T pivot = input[startIndex];
     int i = startIndex, j = endIndex;
     while (i < j) {
 
-      while (input[j] >= pivot && i < j) {
+      while (input[j].compareTo(pivot) >= 0  && i < j) {
         j--;
       }
       
@@ -36,7 +35,7 @@ public class QuickSort extends AbstractSortWithTimer {
         i++;
       }
 
-      while (input[i] <= pivot && i < j) {
+      while (input[i].compareTo(pivot) <= 0 && i < j) {
         i++;
       }
       

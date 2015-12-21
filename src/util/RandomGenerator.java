@@ -1,10 +1,12 @@
 package util;
 
-public class RandomGenerator {
+public final class RandomGenerator {
 	
-	public static int[] genRandomArray () {
+	private RandomGenerator () {};
+	
+	public static Integer[] genRandomArray () {
 		int len =  randomInt_0_To_1000();
-		int[] resultArr = new int[len];
+		Integer[] resultArr = new Integer[len];
 		for (int i = 0; i < len; i++) {
 			resultArr[i] = randomInt_0_To_1000();
 		}

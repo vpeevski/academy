@@ -9,7 +9,7 @@ public class HeapSortTest extends AbstractTest {
 	@Test
 	public void testSortedArray() {
 		HeapSort heapSort = new HeapSort();
-		int[] sortedArrayExpected = { 1, 2, 3, 4, 5, 6, 6, 7, 8, 9, 10, 10 };
+		Integer[] sortedArrayExpected = { 1, 2, 3, 4, 5, 6, 6, 7, 8, 9, 10, 10 };
 		heapSort.sortForTime(sortedArray);
 		try  {
 			assertArrayEquals(sortedArrayExpected, sortedArray);
@@ -22,7 +22,7 @@ public class HeapSortTest extends AbstractTest {
 	@Test
 	public void testResersedSortedArray() {
 		HeapSort heapSort = new HeapSort();
-		int[] sortedArrayExpected = { 1, 1, 2, 2, 3, 3, 4, 5, 6, 7, 8, 9, 10 };
+		Integer[] sortedArrayExpected = { 1, 1, 2, 2, 3, 3, 4, 5, 6, 7, 8, 9, 10 };
 		heapSort.sortForTime(reverseSortedArray);
 		try  {
 			assertArrayEquals(sortedArrayExpected, reverseSortedArray);
@@ -39,10 +39,10 @@ public class HeapSortTest extends AbstractTest {
 	
 	@Test
 	public void testConcreteArray () {
-		int[] array = {9, 3, 3, 5, 9, 1, 2, 4};
+		Integer[] array = {9, 3, 3, 5, 9, 1, 2, 4};
 		HeapSort heapSorter = new HeapSort();
 		heapSorter.sort(array);
-		int[] arraySorted = {1, 2, 3, 3, 4, 5, 9, 9};
+		Integer[] arraySorted = {1, 2, 3, 3, 4, 5, 9, 9};
 		try  {
 			assertArrayEquals(arraySorted, array);
 		} catch (Throwable throwable) {

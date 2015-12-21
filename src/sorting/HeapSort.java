@@ -1,43 +1,23 @@
 package sorting;
 
+import util.HeapUtil;
+import util.SwapUtil;
+
 public class HeapSort extends AbstractSortWithTimer {
 
 	@Override
-	public void sort(int[] inputArray) {
+	public <T extends Comparable<T>> void sort(T[] inputArray) {
 		heapSort(inputArray);
 
 	}
 
-	private void heapSort(int numbers[]) {
-		buildMaxHeap(numbers);
+	private <T extends Comparable<T>> void heapSort(T numbers[]) {
+		HeapUtil.buildMaxHeap(numbers);
 		
 		for (int i = numbers.length - 1; i >= 0; i--) {
-			swap(numbers, 0, i);
-			maxHeapify(numbers, 0, i);
+			SwapUtil.swap(numbers, 0, i);
+			HeapUtil.maxHeapify(numbers, 0, i);
 		}
-	}
-	
-	private void buildMaxHeap(int[] arr )
-	{
-		for( int i = arr.length / 2; i >= 0; i-- )
-	        maxHeapify( arr, i, arr.length);
-	}
-	
-	private void maxHeapify( int[ ] arr, int rootIndex, int effectiveLenght)
-	{
-	    int leftChildIndex = 2 * rootIndex + 1;
-	    int rightChildIndex = 2 * rootIndex + 2;
-	    int largest = rootIndex;
-
-	    if( leftChildIndex < effectiveLenght && arr[ leftChildIndex ] > arr[ largest ] )
-	        largest = leftChildIndex;
-	    if( rightChildIndex < effectiveLenght && arr[ rightChildIndex ] > arr[ largest ] )
-	        largest = rightChildIndex;
-	    if( largest != rootIndex )
-	    {
-	        swap(arr, rootIndex, largest);
-	        maxHeapify(arr, largest, effectiveLenght);
-	    }
 	}
 
 }

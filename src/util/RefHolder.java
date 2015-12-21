@@ -1,6 +1,6 @@
 package util;
 
-public class RefHolder<T> {
+public final class RefHolder<T> {
 	
 	private T _ref;
 	

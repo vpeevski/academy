@@ -22,8 +22,8 @@ public abstract class AbstractSortWithTimer extends AbstractSort {
     _timeInterceptor = new Timer();
   }
 
-  public long sortForTime (int[] inputArray) {
-	 int[] clonedInput = inputArray.clone();
+  public <T extends Comparable>long sortForTime (T[] inputArray) {
+	 T[] clonedInput = inputArray.clone();
     _timeInterceptor.startTime();
     sort(inputArray);
     _timeInterceptor.endTime();

@@ -1,8 +1,9 @@
 package datastructure;
 
 import java.util.EmptyStackException;
+import java.util.Iterator;
 
-public class ArrayStack<T> implements Stack<T> {
+public class ArrayStack<T> extends AbstractDataStructure<T> implements Stack<T> {
 
   private static final int   MIN_SIZE         = 5;
 
@@ -103,6 +104,18 @@ public class ArrayStack<T> implements Stack<T> {
       return sizedStackNew;
     }
 
+    @Override
+    public Iterator<T> iterator() {
+      // TODO Auto-generated method stub
+      return null;
+    }
+
+  }
+
+  @Override
+  public Iterator<T> iterator() {
+    // TODO Auto-generated method stub
+    return null;
   }
 
 }

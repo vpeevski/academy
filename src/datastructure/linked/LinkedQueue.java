@@ -1,10 +1,12 @@
 package datastructure.linked;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import datastructure.AbstractDataStructure;
 import datastructure.Queue;
 
-public class LinkedQueue<T> implements Queue<T> {
+public class LinkedQueue<T> extends AbstractDataStructure<T> implements Queue<T> {
 
   private Node<T> _back  = null;
   private Node<T> _front = null;
@@ -46,6 +48,39 @@ public class LinkedQueue<T> implements Queue<T> {
       count++;
     }
     return count;
+  }
+
+  @Override
+  public Iterator<T> iterator() {
+    return new LinkedQueueIterator();
+  }
+  
+  private class LinkedQueueIterator implements Iterator<T> {
+
+    private Node<T> _currentNode;
+
+    public LinkedQueueIterator() {
+      _currentNode = _front;
+    }
+
+    @Override
+    public boolean hasNext() {
+      return _currentNode != null;
+    }
+
+    @Override
+    public T next() {
+      if (!hasNext()) { throw new NoSuchElementException("List collection do not have next element"); }
+      T currentValue = _currentNode.getValue();
+      _currentNode = _currentNode.next();
+      return currentValue; // TODO clone here
+    }
+
+    @Override
+    public void remove() {
+      throw new IllegalStateException("Trying to remove from iterator is Forbidden for Queue Object");
+    }
+
   }
 
 }

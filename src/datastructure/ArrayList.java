@@ -3,7 +3,7 @@ package datastructure;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class ArrayList<T> extends AbstractList<T> {
+public class ArrayList<T> extends AbstractDataStructure<T> implements List<T>{
 
   private static final int  MIN_SIZE        = 5;
 
@@ -65,7 +65,7 @@ public class ArrayList<T> extends AbstractList<T> {
     return _innerSizedList.remove(value);
   }
 
-  private static class ArrayListSized<T> extends AbstractList<T> implements LimitedSizeInterface {
+  private static class ArrayListSized<T> extends AbstractDataStructure<T> implements List<T>, LimitedSizeInterface {
 
     private final Object[] _data;
 

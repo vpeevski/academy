@@ -1,10 +1,12 @@
 package datastructure.linked;
 
 import java.util.EmptyStackException;
+import java.util.Iterator;
 
+import datastructure.AbstractDataStructure;
 import datastructure.Stack;
 
-public class LinkedStack<T> implements Stack<T> {
+public class LinkedStack<T> extends AbstractDataStructure<T> implements Stack<T> {
 
   private Node<T> _topNode = null;
 
@@ -43,6 +45,12 @@ public class LinkedStack<T> implements Stack<T> {
       count++;
     }
     return count;
+  }
+
+  @Override
+  public Iterator<T> iterator() {
+    // TODO Auto-generated method stub
+    return null;
   }
 
 }

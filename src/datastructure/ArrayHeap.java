@@ -1,10 +1,11 @@
 package datastructure;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import util.HeapUtil;
 
-public class ArrayHeap<T extends Comparable<T>> implements DataStructureInterface<T>, LimitedSizeInterface {
+public class ArrayHeap<T extends Comparable<T>> extends AbstractDataStructure<T> implements LimitedSizeInterface {
 	
 	public static final int HEAP_TYPE_MAX = 1;
 	public static final int HEAP_TYPE_MIN = 2;
@@ -92,5 +93,11 @@ public class ArrayHeap<T extends Comparable<T>> implements DataStructureInterfac
 	public int size() {
 		return _size;
 	}
+
+  @Override
+  public Iterator<T> iterator() {
+    // TODO Auto-generated method stub
+    return null;
+  }
 
 }

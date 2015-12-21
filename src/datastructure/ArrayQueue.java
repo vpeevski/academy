@@ -1,5 +1,6 @@
 package datastructure;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public final class ArrayQueue<T> implements Queue<T> {
@@ -39,6 +40,11 @@ public final class ArrayQueue<T> implements Queue<T> {
   @Override
   public int lenght() {
     return innerSizedQueue.lenght();
+  }
+  
+  @Override
+  public Iterator<T> iterator() {
+    return innerSizedQueue.iterator();
   }
 
   private static final class SizedCycledQueue<T> implements Queue<T>, LimitedSizeInterface {
@@ -125,8 +131,41 @@ public final class ArrayQueue<T> implements Queue<T> {
       return sizedQueueNew;
     }
     
+    @Override
+    public Iterator<T> iterator() {
+      return new ArrayQueueIterator();
+    }
+
+    private class ArrayQueueIterator implements Iterator<T> {
+
+      private int _currentIndex;
+      private int _lastReturned;
+
+      public ArrayQueueIterator() {
+        _currentIndex = _front;
+        _lastReturned = -1;
+      }
+
+      @Override
+      public boolean hasNext() {
+        return _currentIndex + 1 < _back;
+      }
+
+      @Override
+      public T next() {
+        if (!hasNext()) { throw new NoSuchElementException("List collection do not have next element"); }
+        _lastReturned = ++_currentIndex;
+        return (T) _data[_lastReturned]; // TODO clone here
+      }
+
+      @Override
+      public void remove() {
+        throw new IllegalStateException("Trying to remove from iterator is Forbidden for Queue Object");
+      }
+
+    }
+    
   }
-  
   
 
 }

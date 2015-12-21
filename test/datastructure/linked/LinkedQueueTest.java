@@ -4,10 +4,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import org.junit.Test;
 
+import datastructure.List;
 import datastructure.Queue;
 
 public class LinkedQueueTest {
@@ -63,5 +65,30 @@ public class LinkedQueueTest {
 	    queue.enqueue(1);
 	    assertEquals(1, queue.lenght());
 	  }
+	  
+	  @Test
+	  public void testIterator() {
+	      Queue<Integer> queue = new LinkedQueue<Integer>();
+	      for (int i = 0; i < 1000 ; i++) {
+	        queue.enqueue(i);
+	      }
+	      
+	      int i = 0;
+	      Iterator<Integer> iter = queue.iterator();
+	      for ( ; iter.hasNext() ; ) {
+	          assertEquals(i, iter.next().intValue());
+	          i++;
+	      }
+	      
+	      try {
+	          iter.next();
+	          fail("NoSuchElementException expected");
+	      } catch (NoSuchElementException nseE) {
+	          assertTrue(true);
+	      }
+	      
+	      assertTrue(!iter.hasNext());
+	  }
+
 
 }

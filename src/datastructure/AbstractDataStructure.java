@@ -1,6 +1,8 @@
 package datastructure;
 
-public abstract class AbstractList<T> implements List<T> {
+import java.util.Iterator;
+
+public abstract class AbstractDataStructure<T> implements DataStructureInterface<T> {
 
   protected void checkIndex(int index) {
     if (0 > index || index > lenght()) { throw new IndexOutOfBoundsException("Index: " + index + " is out of range for List of lenght: " + lenght()); }
@@ -15,13 +17,13 @@ public abstract class AbstractList<T> implements List<T> {
     if (obj == this) { return true; }
 
     if (!this.getClass().isInstance(obj)) { return false; }
-    List<T> that = (List<T>) obj;
+    AbstractDataStructure<T> that = (AbstractDataStructure<T>) obj;
 
     if (this.lenght() != that.lenght()) { return false; }
 
-    for (int i = 0, j = 0; i < this.lenght() && j < that.lenght(); i++, j++) {
-      T thisIValue = this.get(i);
-      T thatIValue = that.get(i);
+    for (Iterator<T> iteratorThis = iterator(), iteratorThat = that.iterator(); iteratorThis.hasNext() && iteratorThat.hasNext();) {
+      T thisIValue = iteratorThis.next();
+      T thatIValue = iteratorThat.next();
       if (!(thisIValue == null ? thatIValue == null : thisIValue.equals(thatIValue))) { return false; }
     }
 
@@ -31,11 +33,28 @@ public abstract class AbstractList<T> implements List<T> {
   @Override
   public int hashCode() {
     int hashCode = 1;
-    for (int i = 0; i < this.lenght(); i++) {
-      T t = this.get(i);
+    for (Iterator<T> iterator = iterator(); iterator.hasNext();) {
+      T t = iterator.next();
       hashCode = 31 * hashCode + (t == null ? 0 : t.hashCode());
     }
     return hashCode;
+  }
+  
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("[");
+    boolean isFirst = true;
+    for (Iterator<T> iterator = iterator(); iterator.hasNext();) {
+      if(isFirst) {
+        isFirst = false;
+      } else {
+        builder.append(", ");
+      }
+      builder.append(iterator.next().toString());
+    }
+    builder.append("]");
+    return builder.toString();
   }
 
 }

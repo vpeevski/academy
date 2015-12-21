@@ -15,14 +15,14 @@ public class ArrayHeap<T extends Comparable<T>> implements DataStructureInterfac
 	private final int _size;	private int _lenght;
 	
 	
-	public void insert (T value) { //TODO add test for this method
+	public void insert (T value) {
 		if (isFull()) { throw new IndexOutOfBoundsException(); }
 		_lenght++;
 		_heapData[_lenght - 1] = value;
 		if(_heapType == HEAP_TYPE_MAX) {
-			HeapUtil.maxHeapify(_heapData, 0, _lenght - 1);
+			HeapUtil.maxHeapifyLastLeaf(_heapData, _lenght - 1);
 		} else if (_heapType == HEAP_TYPE_MIN) {
-			HeapUtil.minHeapify(_heapData, 0, _lenght - 1);
+			HeapUtil.minHeapifyLastLeaf(_heapData, _lenght - 1);
 		}
 	}
 	
@@ -32,9 +32,9 @@ public class ArrayHeap<T extends Comparable<T>> implements DataStructureInterfac
 		_heapData[0] = _heapData[_lenght - 1];
 		_heapData[_lenght - 1] = null;
 		if(_heapType == HEAP_TYPE_MAX) {
-			HeapUtil.maxHeapify(_heapData, 0, _lenght - 1);
+			HeapUtil.maxHeapifyRoot(_heapData, 0, _lenght - 1);
 		} else if (_heapType == HEAP_TYPE_MIN) {
-			HeapUtil.minHeapify(_heapData, 0, _lenght - 1);
+			HeapUtil.minHeapifyRoot(_heapData, 0, _lenght - 1);
 		}
 		_lenght--;
 		return rootValue;
@@ -44,9 +44,9 @@ public class ArrayHeap<T extends Comparable<T>> implements DataStructureInterfac
 		this(size, HEAP_TYPE_MAX);
 	}
 	
-	public ArrayHeap (int size, int heapType) { //TODO add test for this method
+	public ArrayHeap (int size, int heapType) {
 		_size = size;
-		_heapData = (T[]) new Object[_size];
+		_heapData = (T[]) new Comparable[_size];
 		_lenght = 0;
 		_heapType = HEAP_TYPE_MAX;
 		if(heapType == HEAP_TYPE_MIN) {
@@ -85,7 +85,7 @@ public class ArrayHeap<T extends Comparable<T>> implements DataStructureInterfac
 
 	@Override
 	public boolean isFull() {
-		return _heapData.length == _size;
+		return _lenght == _size;
 	}
 
 	@Override

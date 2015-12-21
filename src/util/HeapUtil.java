@@ -7,11 +7,10 @@ public final class HeapUtil {
 	public static <T extends Comparable<T>> void buildMaxHeap(T[] arr )
 	{
 		for( int i = arr.length / 2; i >= 0; i-- )
-	        maxHeapify( arr, i, arr.length);
+	        maxHeapifyRoot( arr, i, arr.length);
 	}
 	
-	public static <T extends Comparable<T>> void maxHeapify( T[] heapData, int rootIndex, int effectiveLenght)
-	{
+	public static <T extends Comparable<T>> void maxHeapifyRoot( T[] heapData, int rootIndex, int effectiveLenght) {
 	    int leftChildIndex = 2 * rootIndex + 1;
 	    int rightChildIndex = 2 * rootIndex + 2;
 	    int largest = rootIndex;
@@ -23,18 +22,44 @@ public final class HeapUtil {
 	    if( largest != rootIndex )
 	    {
 	        SwapUtil.swap(heapData, rootIndex, largest);
-	        maxHeapify(heapData, largest, effectiveLenght);
+	        maxHeapifyRoot(heapData, largest, effectiveLenght);
 	    }
 	}
 	
-	public static <T extends Comparable<T>> void buildMinHeap(T[] arr )
-	{
+	public static <T extends Comparable<T>> void maxHeapifyLastLeaf( T[] heapData, int leafIndex) {
+	    if (leafIndex == 0) {
+	      return;
+	    }
+	    
+	    int rootIndex = (leafIndex - 1) / 2;
+
+        if( heapData[leafIndex].compareTo(heapData[rootIndex]) >  0) {
+            SwapUtil.swap(heapData, rootIndex, leafIndex);
+            maxHeapifyLastLeaf(heapData, rootIndex);
+        }
+        
+    }
+	
+	public static <T extends Comparable<T>> void minHeapifyLastLeaf( T[] heapData, int leafIndex) {
+      if (leafIndex == 0) {
+        return;
+      }
+      
+      int rootIndex = (leafIndex - 1) / 2;
+
+      if( heapData[leafIndex].compareTo(heapData[rootIndex]) <  0) {
+          SwapUtil.swap(heapData, rootIndex, leafIndex);
+          minHeapifyLastLeaf(heapData, rootIndex);
+      }
+      
+  }
+	
+	public static <T extends Comparable<T>> void buildMinHeap(T[] arr ) {
 		for( int i = arr.length / 2; i >= 0; i-- )
-	        minHeapify(arr, i, arr.length);
+	        minHeapifyRoot(arr, i, arr.length);
 	}
 	
-	public static <T extends Comparable<T>> void minHeapify(T[] heapData, int rootIndex, int effectiveLenght)
-	{
+	public static <T extends Comparable<T>> void minHeapifyRoot(T[] heapData, int rootIndex, int effectiveLenght) {
 	    int leftChildIndex = 2 * rootIndex + 1;
 	    int rightChildIndex = 2 * rootIndex + 2;
 	    int minimal = rootIndex;
@@ -46,7 +71,7 @@ public final class HeapUtil {
 	    if( minimal != rootIndex )
 	    {
 	        SwapUtil.swap(heapData, rootIndex, minimal);
-	        minHeapify(heapData, minimal, effectiveLenght);
+	        minHeapifyRoot(heapData, minimal, effectiveLenght);
 	    }
 	}
 	

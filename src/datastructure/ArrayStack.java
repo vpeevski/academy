@@ -47,7 +47,7 @@ public class ArrayStack<T> extends AbstractDataStructure<T> implements Stack<T> 
     return _innerSizedStack.iterator();
   }
 
-  private static class ArrayStackSized<T> implements Stack<T>, LimitedSizeInterface {
+  private static class ArrayStackSized<T> extends AbstractDataStructure<T> implements Stack<T>, LimitedSizeInterface {
 
     private final Object[] _data;
 
@@ -125,7 +125,7 @@ public class ArrayStack<T> extends AbstractDataStructure<T> implements Stack<T> 
 
         @Override
         public boolean hasNext() {
-          return _currentIndex > 0;
+          return _currentIndex >= 0;
         }
 
         @Override

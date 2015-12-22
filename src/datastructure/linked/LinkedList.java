@@ -94,6 +94,11 @@ public class LinkedList<T> extends AbstractList<T> implements List<T>{
       this.next = next;
       this.prev = prev;
     }
+    
+    @Override
+    public String toString() {
+    	return value == null ? "null" : value.toString();
+    }
   }
 
   @Override

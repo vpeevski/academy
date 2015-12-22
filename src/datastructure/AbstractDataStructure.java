@@ -48,5 +48,17 @@ public abstract class AbstractDataStructure<T> implements DataStructureInterface
     builder.append("]");
     return builder.toString();
   }
+  
+  @Override
+  public boolean contains(T value) {
+	  for (Iterator<T> iterator = iterator(); iterator.hasNext();) {
+	      T t = iterator.next();
+	      if (t == null ? value == null : t.equals(value)) {
+	    	  return true;
+	      }
+	  }
+	  
+	  return false;
+  }
 
 }

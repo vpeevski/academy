@@ -9,7 +9,6 @@ import java.util.NoSuchElementException;
 
 import org.junit.Test;
 
-import datastructure.ArrayQueue;
 import datastructure.Queue;
 
 public class LinkedQueueTest {
@@ -118,6 +117,59 @@ public class LinkedQueueTest {
 	      assertEquals(queue1.hashCode(), queue1.hashCode());
 	      assertEquals(queue1.hashCode(), queue2.hashCode());
 	  }
+	  
+	  @Test
+		public void testContains() {
+			Queue<String> queue = new LinkedQueue<String>();
+			for (int i = 0; i < 10; i++) {
+				queue.enqueue(String.valueOf(i));
+			}
+
+			assertTrue(queue.contains("0"));
+			assertTrue(queue.contains("1"));
+			assertTrue(queue.contains("2"));
+			assertTrue(queue.contains("3"));
+			assertTrue(queue.contains("4"));
+			assertTrue(queue.contains("5"));
+			assertTrue(queue.contains("6"));
+			assertTrue(queue.contains("7"));
+			assertTrue(queue.contains("8"));
+			assertTrue(queue.contains("9"));
+			assertTrue(queue.contains("3"));
+			assertTrue(queue.contains("4"));
+			assertTrue(queue.contains("5"));
+			assertTrue(queue.contains("6"));
+			assertTrue(queue.contains("7"));
+			assertTrue(!queue.contains("10"));
+			assertTrue(queue.contains("3"));
+			assertTrue(queue.contains("4"));
+			assertTrue(queue.contains("5"));
+			assertTrue(queue.contains("6"));
+			assertTrue(queue.contains("7"));
+
+		}
+
+		@Test
+		public void testIteratorGoesToTheEnd() {
+			final int numberOfElements = 400;
+			Queue<String> queue = new LinkedQueue<String>();
+			for (int i = 0; i < numberOfElements; i++) {
+				queue.enqueue(String.valueOf(i));
+			}
+			Iterator<String> iter = queue.iterator();
+			for (int i = 0; i < numberOfElements; i++) {
+				assertEquals(String.valueOf(i), iter.next());
+			}
+
+			try {
+				iter.next();
+				fail("NoSuchElementException expected");
+			} catch (NoSuchElementException nseE) {
+				assertTrue(true);
+			}
+
+			assertTrue(!iter.hasNext());
+		}
 
 
 }

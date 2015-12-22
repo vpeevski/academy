@@ -174,5 +174,36 @@ public class ArrayHeapTest {
       
       assertTrue(!iter.hasNext());
   }
+  
+  @Test
+  public void testContains() {
+	  ArrayHeap<String> heap = new ArrayHeap<String> (10);
+	    for (int i = 0; i < 10; i++) {
+	      heap.insert(String.valueOf(i));
+	    }
+	    
+	    assertTrue(heap.contains("0"));
+	    assertTrue(heap.contains("1"));
+	    assertTrue(heap.contains("2"));
+	    assertTrue(heap.contains("3"));
+	    assertTrue(heap.contains("4"));
+	    assertTrue(heap.contains("5"));
+	    assertTrue(heap.contains("6"));
+	    assertTrue(heap.contains("7"));
+	    assertTrue(heap.contains("8"));
+	    assertTrue(heap.contains("9"));
+	    assertTrue(heap.contains("3"));
+	    assertTrue(heap.contains("4"));
+	    assertTrue(heap.contains("5"));
+	    assertTrue(heap.contains("6"));
+	    assertTrue(heap.contains("7"));
+	    assertTrue(!heap.contains("10"));
+	    assertTrue(heap.contains("3"));
+	    assertTrue(heap.contains("4"));
+	    assertTrue(heap.contains("5"));
+	    assertTrue(heap.contains("6"));
+	    assertTrue(heap.contains("7"));
+
+	  }
 
 }

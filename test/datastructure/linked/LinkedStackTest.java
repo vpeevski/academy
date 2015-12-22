@@ -10,8 +10,6 @@ import java.util.NoSuchElementException;
 
 import org.junit.Test;
 
-import datastructure.ArrayStack;
-import datastructure.Queue;
 import datastructure.Stack;
 
 public class LinkedStackTest {
@@ -123,6 +121,59 @@ public class LinkedStackTest {
 	      
 	      assertTrue(!iter.hasNext());
 	  }
+	  
+	  @Test
+		public void testContains() {
+			Stack<String> stack = new LinkedStack<String>();
+			for (int i = 0; i < 10; i++) {
+				stack.push(String.valueOf(i));
+			}
+
+			assertTrue(stack.contains("0"));
+			assertTrue(stack.contains("1"));
+			assertTrue(stack.contains("2"));
+			assertTrue(stack.contains("3"));
+			assertTrue(stack.contains("4"));
+			assertTrue(stack.contains("5"));
+			assertTrue(stack.contains("6"));
+			assertTrue(stack.contains("7"));
+			assertTrue(stack.contains("8"));
+			assertTrue(stack.contains("9"));
+			assertTrue(stack.contains("3"));
+			assertTrue(stack.contains("4"));
+			assertTrue(stack.contains("5"));
+			assertTrue(stack.contains("6"));
+			assertTrue(stack.contains("7"));
+			assertTrue(!stack.contains("10"));
+			assertTrue(stack.contains("3"));
+			assertTrue(stack.contains("4"));
+			assertTrue(stack.contains("5"));
+			assertTrue(stack.contains("6"));
+			assertTrue(stack.contains("7"));
+
+		}
+
+		@Test
+		public void testIteratorGoesToTheEnd() {
+			final int numberOfElements = 400;
+			Stack<String> stack = new LinkedStack<String>();
+			for (int i = 0; i < numberOfElements; i++) {
+				stack.push(String.valueOf(i));
+			}
+			Iterator<String> iter = stack.iterator();
+			for (int i = 399; i >= 0; i--) {
+				assertEquals(String.valueOf(i), iter.next());
+			}
+
+			try {
+				iter.next();
+				fail("NoSuchElementException expected");
+			} catch (NoSuchElementException nseE) {
+				assertTrue(true);
+			}
+
+			assertTrue(!iter.hasNext());
+		}
 	  
 
 }

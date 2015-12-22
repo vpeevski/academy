@@ -47,7 +47,7 @@ public final class ArrayQueue<T> extends AbstractDataStructure<T> implements Que
     return innerSizedQueue.iterator();
   }
 
-  private static final class SizedCycledQueue<T> implements Queue<T>, LimitedSizeInterface {
+  private static final class SizedCycledQueue<T> extends AbstractDataStructure<T> implements Queue<T>, LimitedSizeInterface {
 
     private final Object[] _data;
 
@@ -146,7 +146,7 @@ public final class ArrayQueue<T> extends AbstractDataStructure<T> implements Que
 
       @Override
       public boolean hasNext() {
-        return _currentIndex + 1 < _back;
+        return _currentIndex <= _back;
       }
 
       @Override

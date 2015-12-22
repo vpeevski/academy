@@ -21,5 +21,10 @@ public final class Node<T> {
   public void setNext(Node<T> _next) {
     this._next = _next;
   }
+  
+  @Override
+  public String toString() {
+  	return _value == null ? "null" : _value.toString();
+  }
 
 }

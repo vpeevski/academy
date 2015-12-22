@@ -251,6 +251,59 @@ public abstract class AbstractListTest {
       assertTrue(true);
     }
   }
+  
+  @Test
+  public void testContains() {
+	  List<String> list = provideList (String.class);
+	    for (int i = 0; i < 10; i++) {
+	      list.add(String.valueOf(i));
+	    }
+	    
+	    assertTrue(list.contains("0"));
+	    assertTrue(list.contains("1"));
+	    assertTrue(list.contains("2"));
+	    assertTrue(list.contains("3"));
+	    assertTrue(list.contains("4"));
+	    assertTrue(list.contains("5"));
+	    assertTrue(list.contains("6"));
+	    assertTrue(list.contains("7"));
+	    assertTrue(list.contains("8"));
+	    assertTrue(list.contains("9"));
+	    assertTrue(list.contains("3"));
+	    assertTrue(list.contains("4"));
+	    assertTrue(list.contains("5"));
+	    assertTrue(list.contains("6"));
+	    assertTrue(list.contains("7"));
+	    assertTrue(!list.contains("10"));
+	    assertTrue(list.contains("3"));
+	    assertTrue(list.contains("4"));
+	    assertTrue(list.contains("5"));
+	    assertTrue(list.contains("6"));
+	    assertTrue(list.contains("7"));
+
+	  }
+	  
+	  @Test
+	  public void testIteratorGoesToTheEnd () {
+		  final int numberOfElements = 400; 
+	      List<String> list = provideList (String.class);
+	      for (int i = 0; i < numberOfElements; i++) {
+		      list.add(String.valueOf(i));
+		    }
+	      Iterator<String> iter = list.iterator();
+	      for (int i = 0; i < numberOfElements; i++) {
+	          assertEquals(String.valueOf(i), iter.next());
+	      }
+	      
+	      try {
+	          iter.next();
+	          fail("NoSuchElementException expected");
+	      } catch (NoSuchElementException nseE) {
+	          assertTrue(true);
+	      }
+	      
+	      assertTrue(!iter.hasNext());
+	  }
 
   
   protected abstract <T> List<T> provideList (Class<T> clazz);

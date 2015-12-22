@@ -6,6 +6,6 @@ public interface DataStructureInterface <T> extends Iterable<T>{
   
   int lenght ();
   
-  //TODO add boolean contains (T value)
+  boolean contains (T value);
 
 }

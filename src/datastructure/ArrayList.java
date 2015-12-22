@@ -3,7 +3,7 @@ package datastructure;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class ArrayList<T> extends AbstractDataStructure<T> implements List<T>{
+public class ArrayList<T> extends AbstractList<T> implements List<T>{
 
   private static final int  MIN_SIZE        = 5;
 
@@ -190,7 +190,7 @@ public class ArrayList<T> extends AbstractDataStructure<T> implements List<T>{
 
       @Override
       public boolean hasNext() {
-        return _currentIndex + 1 < _lastIndex;
+        return _currentIndex < _lastIndex;
       }
 
       @Override

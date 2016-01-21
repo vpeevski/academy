@@ -14,19 +14,12 @@ public final class GraphStaticFactory {
 		graph.addVertex("Stara Zagora");
 		graph.addVertex("Varna");
 		graph.addVertex("Pleven");
-		graph.addVertex("Haskovo");
-		graph.addVertex("Veliko Turnovo");
-		graph.addVertex("Ruse");
-		graph.addVertex("Vidin");
-		graph.addVertex("Shumen");
-		graph.addVertex("Hisar");
-		graph.addVertex("Burgas");
 		
 		graph.addEdge("Plovdiv", "Sofia", 130);
 		graph.addEdge("Plovdiv", "Stara Zagora", 80);
 		
 		//graph.addEdge("Sofia", 130);
-		graph.addEdge("Sofia", "Stara Zagora", 210);
+		graph.addEdge("Sofia", "Stara Zagora", 190);
 		graph.addEdge("Sofia", "Pleven", 120);
 		
 		graph.addEdge("Stara Zagora", "Varna", 300);

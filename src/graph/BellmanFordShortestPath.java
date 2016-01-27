@@ -8,13 +8,18 @@ import org.jgrapht.Graph;
 
 public class BellmanFordShortestPath {
  
-  public static int[] shortestPath(Graph<String, Integer> graph, String fromVertex) {
+  public static int[] shortestPath(Graph<String, Integer> graph, String startVertex) {
     
     Object[] vertices = graph.vertexSet().toArray();
     Map<Object, Long> dist = new HashMap<>();
-    dist.put(vertices[0], 0L);
-    for (int i = 1; i < vertices.length; i++) {
-      dist.put(vertices[i], Long.valueOf(Integer.MAX_VALUE));
+    
+    for (int i = 0; i < vertices.length; i++) {
+      Long initialWeight = Long.valueOf(Integer.MAX_VALUE);
+      if (vertices[i].equals(startVertex)) {
+        initialWeight = 0L;
+      }
+      
+      dist.put(vertices[i], initialWeight);
     }
     
 //    graph.e
@@ -24,13 +29,8 @@ public class BellmanFordShortestPath {
         Integer edgeWeight = (Integer) edges[e];
         String targetVertex = graph.getEdgeTarget(edgeWeight);
         String sourceVertex = graph.getEdgeSource(edgeWeight);
-        Long oldDistance = dist.get(targetVertex);
-        Long distToSourceVertex = dist.get(sourceVertex);
-        Long newDist = distToSourceVertex + edgeWeight;
-        if (newDist < oldDistance) {
-          dist.put(targetVertex, newDist);
-        }
-        
+        relaxEdge(sourceVertex, targetVertex, edgeWeight, dist);
+        relaxEdge(targetVertex, sourceVertex, edgeWeight, dist);
       }
     }
     
@@ -43,8 +43,20 @@ public class BellmanFordShortestPath {
     
   }
   
+  private static void relaxEdge(String sourceVertex, String targetVertex, Integer edgeWeight, Map<Object, Long> dist) {
+    Long oldDistance = dist.get(targetVertex);
+    Long distToSourceVertex = dist.get(sourceVertex);
+    Long newDist = distToSourceVertex + edgeWeight;
+    if (newDist < oldDistance) {
+      dist.put(targetVertex, newDist);
+    }
+  }
+
   public static void main(String[] args) {
-    BellmanFordShortestPath.shortestPath(GraphStaticFactory.createBgMapGraph(), "Plodvid");
+    GraphViewApp gViewApp = new GraphViewApp();
+    Graph bgMapGraph = GraphStaticFactory.createBgMapGraph();
+    gViewApp.showGraph(bgMapGraph);
+    BellmanFordShortestPath.shortestPath(bgMapGraph, "Pleven");
   }
 
 }

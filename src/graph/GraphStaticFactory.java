@@ -19,8 +19,9 @@ public final class GraphStaticFactory {
 		graph.addEdge("Plovdiv", "Stara Zagora", 80);
 		
 		//graph.addEdge("Sofia", 130);
-		graph.addEdge("Sofia", "Stara Zagora", 190);
+		graph.addEdge("Sofia", "Stara Zagora", 30);
 		graph.addEdge("Sofia", "Pleven", 120);
+		graph.addEdge("Stara Zagora", "Sofia", 30);
 		
 		graph.addEdge("Stara Zagora", "Varna", 300);
 		graph.addEdge("Pleven", "Varna", 250);

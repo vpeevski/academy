@@ -11,7 +11,7 @@ public class BellmanFordShortestPath {
   public static int[] shortestPath(Graph<String, Integer> graph, String startVertex) {
     
     Object[] vertices = graph.vertexSet().toArray();
-    Map<Object, Long> dist = new HashMap<>();
+    Map<Object, Long> dist = new HashMap<Object, Long>();
     
     for (int i = 0; i < vertices.length; i++) {
       Long initialWeight = Long.valueOf(Integer.MAX_VALUE);

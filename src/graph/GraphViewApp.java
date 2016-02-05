@@ -10,6 +10,7 @@ import java.util.Set;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
 
 import org.jgraph.JGraph;
 import org.jgraph.graph.DefaultGraphCell;
@@ -55,6 +56,7 @@ public class GraphViewApp {
 	
 		_frame.setVisible(true);
 		_frame.setSize(new Dimension(600, 800));
+		_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
 	private void putVertexToPosition (Object vertex, int x, int y) {

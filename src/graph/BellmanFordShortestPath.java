@@ -49,7 +49,7 @@ public class BellmanFordShortestPath {
     Long newDist = distToSourceVertex + edgeWeight;
     if (newDist < oldDistance) {
       dist.put(targetVertex, newDist);
-    }
+    } 
   }
 
   public static void main(String[] args) {

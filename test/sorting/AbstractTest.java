@@ -6,6 +6,9 @@ import java.util.Arrays;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import sorting.time.Timer;
+
 import org.junit.Test;
 
 import util.RandomGenerator;
@@ -30,6 +33,8 @@ public abstract class AbstractTest {
 
   @Test
   public void testRandomArrayMultipleTimes () {
+     Timer timer = new Timer(); 
+     timer.startTime();
 	 for (int i = 0; i < ITERATIONS; i++) {
 		 randomArray = RandomGenerator.genRandomArray();
 		 randomArrayClone1 = randomArray.clone();
@@ -41,6 +46,9 @@ public abstract class AbstractTest {
 			 throw asserError;
 		 }
 	 }
+	 
+	 timer.endTime();
+	 System.out.println("Sorting " + ITERATIONS +" arrays " + "with " + this.getClass().getName() + " for : " + timer.executingTime() + " msec.");
   }
   
   private void testRandomArraySort() {

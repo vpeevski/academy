@@ -1,7 +1,5 @@
 package numeric.system;
 
-import java.math.BigDecimal;
-
 /**
  * @author vpeevski
  * 
@@ -10,25 +8,6 @@ import java.math.BigDecimal;
  *
  */
 public class Converter {
-
-	private int d;
-
-	public static final String decToBin(int decNum) {
-		StringBuilder binNumBuffer = new StringBuilder();
-
-		char sign = ' ';
-
-		if (decNum < 0) {
-			sign = '-';
-		}
-
-		while (Math.abs(decNum) > 0) {
-			int rest = Math.abs(decNum) % 2;
-			decNum = decNum / 2;
-			binNumBuffer.append(rest);
-		}
-		return sign + binNumBuffer.reverse().toString();
-	}
 
 	public static final String decToBin(double decNum, double accuracy) {
 		char sign = ' ';
@@ -67,31 +46,49 @@ public class Converter {
 	}
 
 	public static final int binToDec(String bin) {
-		int dec = 0;
-		char[] chars = bin.toCharArray();
-		for (int i = 0; i < chars.length; i++) {
-			if ('1' == chars[chars.length - i - 1]) {
-				dec = dec + (int) Math.pow(2.0, i);
-			}
-		}
-		return dec;
+		return toDec(bin, 2);
 	}
 
-	public static String decToHex(int decNum) {
+	public static final int hexToDec(String hex) {
+		return toDec(hex, 16);
+	}
+
+	public static final String decToHex(int decNum) {
+		return decTo (decNum, 16);
+	}
+	
+	public static final String decToBin(int decNum) {
+		return decTo (decNum, 2);
+	}
+	
+	private static final String decTo (int decNum, int radix) {
 		StringBuilder binNumBuffer = new StringBuilder();
 
-		char sign = ' ';
+		String sign = "";
 
 		if (decNum < 0) {
-			sign = '-';
+			sign = "-";
 		}
 
 		while (Math.abs(decNum) > 0) {
-			int rest = Math.abs(decNum) % 16;
-			decNum = decNum / 16;
-			binNumBuffer.append(Character.forDigit(rest, 16));
+			int rest = Math.abs(decNum) % radix;
+			decNum = decNum / radix;
+			binNumBuffer.append(Character.forDigit(rest, radix));
 		}
 		return sign + binNumBuffer.reverse().toString();
+	}
+
+	private static int toDec(String number, int radix) {
+		int dec = 0;
+		char[] chars = number.toCharArray();
+		for (int i = 0; i < chars.length; i++) {
+			char currentChar = chars[chars.length - i - 1];
+			if (currentChar != '0') {
+				int currentCharAsInt = Integer.parseInt(String.valueOf(currentChar), radix);
+				dec = dec + currentCharAsInt * (int) Math.pow(radix, i);
+			}
+		}
+		return dec;
 	}
 
 	public static void main(String[] args) {

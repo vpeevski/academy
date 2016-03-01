@@ -35,9 +35,7 @@ public class DijkstraShortestPath {
         relaxEdge(targetVertex, sourceVertex, edgeWeight, dist);
       }
       
-      currentVertex = (String) iter.next();
-      
-      
+      currentVertex = (String) iter.next();      
     }
 
     printPaths(dist);
@@ -65,7 +63,15 @@ public class DijkstraShortestPath {
     GraphViewApp gViewApp = new GraphViewApp();
     Graph bgMapGraph = GraphStaticFactory.createBgMapGraph();
     gViewApp.showGraph(bgMapGraph);
-    DijkstraShortestPath.shortestPath(bgMapGraph, "Varna");
+    Set<String> vertexes = bgMapGraph.vertexSet();
+    for (String vertex : vertexes) {
+      System.out.println();
+      System.out.println("***********    Paths from " + vertex + "   **************");
+      System.out.println();
+      DijkstraShortestPath.shortestPath(bgMapGraph, vertex);
+      
+    }
+    
   }
 
 }

@@ -53,7 +53,7 @@ public class ArrayHeapTest {
 
   @Test
   public void testMaxInsertion() {
-    ArrayHeap<Integer> heap = new ArrayHeap<Integer>(8, ArrayHeap.HEAP_TYPE_MAX);
+    ArrayHeap<Integer> heap = new ArrayHeap<Integer>(ArrayHeap.HEAP_TYPE_MAX);
     heap.insert(1);
     heap.insert(3);
     heap.insert(7);
@@ -63,12 +63,12 @@ public class ArrayHeapTest {
     heap.insert(6);
     heap.insert(4);
 
-    try {
-      heap.insert(20);
-      fail("IndexOutOfBoundsException expected !");
-    } catch (IndexOutOfBoundsException iobE) {
-      assertTrue(true);
-    }
+//    try {
+//      heap.insert(20);
+//      fail("IndexOutOfBoundsException expected !");
+//    } catch (IndexOutOfBoundsException iobE) {
+//      assertTrue(true);
+//    }
 
     assertEquals(10, heap.pull().intValue());
     assertEquals(8, heap.pull().intValue());
@@ -89,7 +89,7 @@ public class ArrayHeapTest {
 
   @Test
   public void testMinInsertion() {
-    ArrayHeap<Integer> heap = new ArrayHeap<Integer>(8, ArrayHeap.HEAP_TYPE_MIN);
+    ArrayHeap<Integer> heap = new ArrayHeap<Integer>(ArrayHeap.HEAP_TYPE_MIN);
     heap.insert(1);
     heap.insert(7);
     heap.insert(8);
@@ -99,12 +99,12 @@ public class ArrayHeapTest {
     heap.insert(6);
     heap.insert(4);
 
-    try {
-      heap.insert(20);
-      fail("IndexOutOfBoundsException expected !");
-    } catch (IndexOutOfBoundsException iobE) {
-      assertTrue(true);
-    }
+//    try {
+//      heap.insert(20);
+//      fail("IndexOutOfBoundsException expected !");
+//    } catch (IndexOutOfBoundsException iobE) {
+//      assertTrue(true);
+//    }
 
     assertEquals(1, heap.pull().intValue());
     assertEquals(2, heap.pull().intValue());

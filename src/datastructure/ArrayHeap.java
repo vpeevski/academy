@@ -7,13 +7,41 @@ import util.HeapUtil;
 
 public class ArrayHeap<T extends Comparable<T>> extends
 		AbstractDataStructure<T> implements Heap<T> {
+  
+    public static final int HEAP_TYPE_MAX = 1;
+    public static final int HEAP_TYPE_MIN = 2;
 	
 	private static final int    MIN_SIZE        = 5;
 
 	private SizedArrayHeap<T> _innerSizedArrayHeap = new SizedArrayHeap<T>(MIN_SIZE);
 	
+	public ArrayHeap() {
+      _innerSizedArrayHeap = new SizedArrayHeap<T>(MIN_SIZE, HEAP_TYPE_MAX);
+    }
+	
+	public ArrayHeap(final int heapType) {
+	  _innerSizedArrayHeap = new SizedArrayHeap<T>(MIN_SIZE, heapType);
+	}
+	
+	public ArrayHeap(T[] arr, int heapType) {
+	  _innerSizedArrayHeap = new SizedArrayHeap<T>(arr, heapType);
+	}
+	
+	public ArrayHeap(T[] arr) {
+      _innerSizedArrayHeap = new SizedArrayHeap<T>(arr, HEAP_TYPE_MAX);
+    }
+	
 	@Override
 	public T pull() {
+	  
+	    T value = _innerSizedArrayHeap.pull();
+
+	    if (_innerSizedArrayHeap.lenght() > MIN_SIZE && _innerSizedArrayHeap.lenght() == _innerSizedArrayHeap.size() / 4) {
+	      int halfSize = _innerSizedArrayHeap.size() / 2;
+	      _innerSizedArrayHeap.enlarge(halfSize);
+
+	    }
+	    return value;
 		
 	}
 
@@ -21,7 +49,7 @@ public class ArrayHeap<T extends Comparable<T>> extends
 	public void insert(T value) {
 		if (_innerSizedArrayHeap.isFull()) {
 		      int doubleSize = _innerSizedArrayHeap.size() * 2;
-		      _innerSizedArrayHeap = _innerSizedArrayHeap.copy(doubleSize);
+		      _innerSizedArrayHeap.enlarge(doubleSize);
 		    }
 		_innerSizedArrayHeap.insert(value);
 	}
@@ -44,13 +72,10 @@ public class ArrayHeap<T extends Comparable<T>> extends
 	public class SizedArrayHeap<T extends Comparable<T>> extends
 			AbstractDataStructure<T> implements LimitedSizeInterface, Heap<T> {
 
-		public static final int HEAP_TYPE_MAX = 1;
-		public static final int HEAP_TYPE_MIN = 2;
-
 		private T[] _heapData;
 		private int _heapType = HEAP_TYPE_MAX;
 
-		private final int _size;
+		private int _size;
 		private int _lenght;
 
 		@Override
@@ -140,6 +165,13 @@ public class ArrayHeap<T extends Comparable<T>> extends
 		public Iterator<T> iterator() {
 			return new ArrayHeapIterator();
 		}
+		
+		private void enlarge(int doubleSize) {
+		  Comparable[] sizedListCopy = new Comparable[doubleSize];
+	      System.arraycopy(_heapData, 0, sizedListCopy, 0, _heapData.length);
+	      _size = doubleSize;
+	      _heapData = (T[]) sizedListCopy;
+	    }
 
 		private class ArrayHeapIterator implements Iterator<T> {
 

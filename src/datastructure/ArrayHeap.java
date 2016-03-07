@@ -100,9 +100,9 @@ public class ArrayHeap<T extends Comparable<T>> extends
 			T rootValue = (T) _heapData[0];
 			_heapData[0] = _heapData[_lenght - 1];
 			_heapData[_lenght - 1] = null;
-			if (_heapType == HEAP_TYPE_MAX) {
+			if (_lenght > 1 &&_heapType == HEAP_TYPE_MAX) {
 				HeapUtil.maxHeapifyRoot(_heapData, 0, _lenght - 1);
-			} else if (_heapType == HEAP_TYPE_MIN) {
+			} else if (_lenght > 1 && _heapType == HEAP_TYPE_MIN) {
 				HeapUtil.minHeapifyRoot(_heapData, 0, _lenght - 1);
 			}
 			_lenght--;

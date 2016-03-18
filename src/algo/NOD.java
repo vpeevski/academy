@@ -36,12 +36,6 @@ public class NOD {
 
   public int nodDiv(int a, int b) {
     System.out.print("NOD of " + a + " and " + b + " is: "); // mention this output is in the beginning
-    
-    if(a > b) {
-      a = a - b;
-    } else if (b > a) { // if forget this check while falls in never ending cycle
-      b = b - a;
-    }
 
     while (a != b) {
       if (a > b) {
@@ -58,8 +52,8 @@ public class NOD {
 
   public static void main(String[] args) {
     NOD nod = new NOD();
-    nod.nod(36, 345);
-    nod.nodDiv(36, 346);
+    nod.nod(36, 84);
+    nod.nodDiv(36, 36);
   }
 
 }

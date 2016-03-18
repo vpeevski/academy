@@ -21,17 +21,16 @@ public class NOD {
     }
 
     int rest = bigger % less;
-    int nod = less;
+    
     while (rest > 0) {
       bigger = less;
       less = rest;
       rest = bigger % less;
-      nod = less;
     }
 
-    System.out.println("NOD of " + a + " and " + b + " is: " + nod);
+    System.out.println("NOD of " + a + " and " + b + " is: " + less);
 
-    return nod;
+    return less;
   }
 
   public int nodDiv(int a, int b) {
@@ -53,7 +52,7 @@ public class NOD {
   public static void main(String[] args) {
     NOD nod = new NOD();
     nod.nod(36, 84);
-    nod.nodDiv(36, 36);
+    nod.nodDiv(12, 8);
   }
 
 }

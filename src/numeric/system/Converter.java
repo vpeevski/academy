@@ -92,7 +92,7 @@ public class Converter {
 	}
 
 	public static void main(String[] args) {
-		Converter.decToBin(21.34);
+		System.out.println(Converter.decToBin(21.34));
 	}
 
 }

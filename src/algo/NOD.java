@@ -1,5 +1,7 @@
 package algo;
 
+import util.MathUtil;
+
 /**
  * 
  * Uses Evklid algorithm to find GCD
@@ -9,50 +11,59 @@ package algo;
  */
 public class NOD {
 
-  public int nod(int a, int b) {
+	public int nod(int a, int b) {
 
-    int bigger = a;
-    int less = a;
+		int bigger = MathUtil.max(a, b);
+		int less = MathUtil.min(a, b);
 
-    if (b > bigger) {
-      bigger = b;
-    } else {
-      less = b;
-    }
+		int rest = bigger % less;
 
-    int rest = bigger % less;
-    
-    while (rest > 0) {
-      bigger = less;
-      less = rest;
-      rest = bigger % less;
-    }
+		while (rest > 0) {
+			bigger = less;
+			less = rest;
+			rest = bigger % less;
+		}
 
-    System.out.println("NOD of " + a + " and " + b + " is: " + less);
+		System.out.println("NOD of " + a + " and " + b + " is: " + less);
 
-    return less;
-  }
+		return less;
+	}
 
-  public int nodDiv(int a, int b) {
-    System.out.print("NOD of " + a + " and " + b + " is: "); // mention this output is in the beginning
+	public int nodr(int a, int b) {
 
-    while (a != b) {
-      if (a > b) {
-        a = a - b;
-      } else {
-        b = b - a;
-      }
-    }
+		if (a == 0) {
+			return b;
+		}
+		return nodr(b % a, a);
+	}
+	
+	public int nodDiv(int a, int b) {
+		System.out.print("NOD of " + a + " and " + b + " is: "); // mention this output is in the beginning
 
-    System.out.print(a);
+		while (a != b) {
+			if (a > b) {
+				a = a - b;
+			} else {
+				b = b - a;
+			}
+		}
 
-    return a;
-  }
+		System.out.print(a);
 
-  public static void main(String[] args) {
-    NOD nod = new NOD();
-    nod.nod(36, 84);
-    nod.nodDiv(12, 8);
-  }
+		return a;
+	}
+	
+	public int nodNaive (int a, int b) {
+		int less = MathUtil.min(a, b);
+		while (less >= 1) {
+			if (a % less == 0 && b % less == 0) {
+				return less;
+			}
+			
+			less--;
+		}
+		
+		return 1;
+	}
 
 }

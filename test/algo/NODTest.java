@@ -41,5 +41,24 @@ public class NODTest {
 		assertEquals(6, nod1);
 		assertEquals(12, nod2);
 	}
+	
+	@Test
+	public void testNodMany() {
+		NOD nodFinder = new NOD();
+		int nod1 = nodFinder.nodMany(18, 12, 36, 84);
+		//int nod2 = nodFinder.nodNaive(36, 84);
+		assertEquals(6, nod1);
+		//assertEquals(12, nod2);
+	}
+	
+	@Test
+	public void testNodManyR() {
+		NOD nodFinder = new NOD();
+		int[] array = {18, 12, 36, 84};
+		int nod1 = nodFinder.nodManyR(0, array);
+		//int nod2 = nodFinder.nodNaive(36, 84);
+		assertEquals(6, nod1);
+		//assertEquals(12, nod2);
+	}
 
 }

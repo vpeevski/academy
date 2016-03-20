@@ -65,5 +65,29 @@ public class NOD {
 		
 		return 1;
 	}
+	
+	public int nodMany (int ... numbers) {
+		if (numbers.length == 0) throw new IllegalArgumentException("NOD operation is not definet for empty value : " + numbers); 
+		if (numbers.length == 1) return numbers[0]; 
+		
+		int result = 0;
+		for (int i = 0; i < numbers.length - 1; i++) {
+			if (result == 0) {
+				result = nod (numbers[0], numbers[1]);
+			} else {
+				result = nod(result, numbers[i + 1]);
+			}
+		}
+		
+		return result;
+	}
+	
+	public int nodManyR (int current, int[] numbers) {
+		if (numbers.length == 0) throw new IllegalArgumentException("NOD operation is not definet for empty value : " + numbers); 
+		if (numbers.length == 1) return numbers[0];
+		if (current == numbers.length - 2) return nod (numbers[current], numbers[current + 1]);
+		
+		return nodManyR(++current, numbers);
+	}
 
 }

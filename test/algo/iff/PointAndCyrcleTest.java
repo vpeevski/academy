@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import algo.PointAndCyrcle;
+
 public class PointAndCyrcleTest {
   
   int rx = 5;

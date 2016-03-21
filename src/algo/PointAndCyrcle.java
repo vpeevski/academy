@@ -1,4 +1,4 @@
-package algo.iff;
+package algo;
 
 public class PointAndCyrcle {
 

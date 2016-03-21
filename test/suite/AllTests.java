@@ -4,6 +4,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import algo.NODTest;
+import algo.NOKTest;
 import datastructure.ArrayHeapTest;
 import datastructure.ArrayListTest;
 import datastructure.ArrayQueueTest;
@@ -26,7 +28,7 @@ import sorting.SelectionSortTest;
 @RunWith(Suite.class)
 @SuiteClasses({ InsertionSortTest.class, BulbeSortTest.class, SelectionSortTest.class, MergeSortTest.class, HeapSortTest.class, QuickSortTest.class, 
 	ArrayStackTest.class, ArrayQueueTest.class, LinkedStackTest.class, LinkedQueueTest.class, LinkedListTest.class, ArrayListTest.class, FactorielTest.class, ReverseTest.class, 
-	DebtReaderTest.class, FibonachiTest.class, ArrayHeapTest.class, PriorityQueueTest.class})
+	DebtReaderTest.class, FibonachiTest.class, ArrayHeapTest.class, PriorityQueueTest.class, NODTest.class, NOKTest.class})
 public class AllTests {
 
 }

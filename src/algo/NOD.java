@@ -11,7 +11,7 @@ import util.MathUtil;
  */
 public class NOD {
 
-	public int nod(int a, int b) {
+	public static int nod(int a, int b) {
 
 		int bigger = MathUtil.max(a, b);
 		int less = MathUtil.min(a, b);
@@ -29,7 +29,7 @@ public class NOD {
 		return less;
 	}
 
-	public int nodr(int a, int b) {
+	public static int nodr(int a, int b) {
 
 		if (a == 0) {
 			return b;
@@ -37,7 +37,7 @@ public class NOD {
 		return nodr(b % a, a);
 	}
 	
-	public int nodDiv(int a, int b) {
+	public static int nodDiv(int a, int b) {
 		System.out.print("NOD of " + a + " and " + b + " is: "); // mention this output is in the beginning
 
 		while (a != b) {
@@ -53,7 +53,7 @@ public class NOD {
 		return a;
 	}
 	
-	public int nodNaive (int a, int b) {
+	public static int nodNaive (int a, int b) {
 		int less = MathUtil.min(a, b);
 		while (less >= 1) {
 			if (a % less == 0 && b % less == 0) {
@@ -66,7 +66,7 @@ public class NOD {
 		return 1;
 	}
 	
-	public int nodMany (int ... numbers) {
+	public static int nodMany (int ... numbers) {
 		if (numbers.length == 0) throw new IllegalArgumentException("NOD operation is not definet for empty value : " + numbers); 
 		if (numbers.length == 1) return numbers[0]; 
 		
@@ -82,12 +82,30 @@ public class NOD {
 		return result;
 	}
 	
-	public int nodManyR (int current, int[] numbers) {
+	public static int nodManyR (int current, int[] numbers) {
 		if (numbers.length == 0) throw new IllegalArgumentException("NOD operation is not definet for empty value : " + numbers); 
 		if (numbers.length == 1) return numbers[0];
 		if (current == numbers.length - 2) return nod (numbers[current], numbers[current + 1]);
 		
 		return nodManyR(++current, numbers);
 	}
+	
+	public static long nod(long a, int b) {
+
+      long bigger = MathUtil.max(a, b);
+      long less = MathUtil.min(a, b);
+
+      long rest = bigger % less;
+
+      while (rest > 0) {
+          bigger = less;
+          less = rest;
+          rest = bigger % less;
+      }
+
+      System.out.println("NOD of " + a + " and " + b + " is: " + less);
+
+      return less;
+  }
 
 }

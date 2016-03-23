@@ -1,10 +1,10 @@
-package oop;
+package oop.overridable.method.in.constructor;
 
-public abstract class OverridableMethodInConstructor {
+public abstract class Base {
   
   protected int a;
   
-  public OverridableMethodInConstructor () {
+  public Base () {
     System.out.println("Constructing OverridableMethodInConstructor");
     initA();
   }

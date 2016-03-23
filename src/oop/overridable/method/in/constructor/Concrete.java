@@ -1,6 +1,6 @@
-package oop;
+package oop.overridable.method.in.constructor;
 
-public class Concrete extends OverridableMethodInConstructor {
+public class Concrete extends Base {
   
   private int c;
   
@@ -16,7 +16,7 @@ public class Concrete extends OverridableMethodInConstructor {
   }
   
   public static void main(String[] args) {
-    Concrete c = new Concrete(10);
+    new Concrete(10);
   }
 
 }

@@ -2,7 +2,7 @@ package algo.matrix;
 
 import java.util.Scanner;
 
-import util.MatrixUtil;
+import util.IOUtil;
 
 public class BuildMatrixByRows {
 	
@@ -22,7 +22,7 @@ public class BuildMatrixByRows {
 			}
 		}
 		
-		MatrixUtil.print(matrix);
+		IOUtil.print(matrix);
 	}
 
 }

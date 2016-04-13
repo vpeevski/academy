@@ -1,6 +1,6 @@
 package algo.matrix;
 
-import util.MatrixUtil;
+import util.IOUtil;
 import util.SwapUtil;
 
 public class TransponeMatrix {
@@ -18,10 +18,10 @@ public class TransponeMatrix {
   }
   
   public static void main(String[] args) {
-    MatrixUtil.print(inputMatrix);
+    IOUtil.print(inputMatrix);
     TransponeMatrix.transpone(inputMatrix);
     System.out.println("###############");
-    MatrixUtil.print(inputMatrix);
+    IOUtil.print(inputMatrix);
   }
 
 }

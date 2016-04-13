@@ -1,6 +1,6 @@
 package algo.matrix;
 
-import util.MatrixUtil;
+import util.IOUtil;
 import util.SwapUtil;
 
 public class RotateMatrix {
@@ -28,14 +28,14 @@ public class RotateMatrix {
   }
 
   public static void main(String[] args) {
-    MatrixUtil.print(inputMatrix);
+    IOUtil.print(inputMatrix);
     int[][] rotatedMatrix = RotateMatrix.rotateCW(inputMatrix);
     System.out.println("############################################");
-    MatrixUtil.print(rotatedMatrix);
+    IOUtil.print(rotatedMatrix);
     
     RotateMatrix.rotateWithTransponation(inputMatrix);
     System.out.println("############################################");
-    MatrixUtil.print(inputMatrix);
+    IOUtil.print(inputMatrix);
   }
 
 }

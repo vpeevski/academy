@@ -2,7 +2,7 @@ package algo.matrix;
 
 import java.util.Scanner;
 
-import util.MatrixUtil;
+import util.IOUtil;
 
 public class BuildMatrixByDiagonal {
 	
@@ -40,7 +40,7 @@ public class BuildMatrixByDiagonal {
 			
 		}
 		
-		MatrixUtil.print(matrix);
+		IOUtil.print(matrix);
 	}
 
 }

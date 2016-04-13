@@ -2,7 +2,7 @@ package algo.matrix;
 
 import java.util.Scanner;
 
-import util.MatrixUtil;
+import util.IOUtil;
 
 public class BuildMatrixSpiral {
 
@@ -43,7 +43,7 @@ public class BuildMatrixSpiral {
 			endRow--;
 		}
 		
-		MatrixUtil.print(matrix);
+		IOUtil.print(matrix);
 		
 		
 	}

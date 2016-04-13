@@ -2,7 +2,7 @@ package algo.matrix;
 
 import java.util.Scanner;
 
-import util.MatrixUtil;
+import util.IOUtil;
 
 public class BuildMatrixAsSnake {
 
@@ -30,7 +30,7 @@ public class BuildMatrixAsSnake {
 			isDirectionDown = !isDirectionDown;
 		}
 
-		MatrixUtil.print(matrix);
+		IOUtil.print(matrix);
 	}
 
 }

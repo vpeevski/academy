@@ -23,5 +23,18 @@ public class SimetricCheckTest {
     isSimetric = SimetricCheck.isSimetric(_inputNotSimetricArray);
     assertTrue(!isSimetric);
   }
+  
+  @Test
+  public void testIsSimetricWithBreak () {
+    boolean isSimetric = SimetricCheck.isSimetricWithBreak(_inputSimetricArrayOdd);
+    assertTrue(isSimetric);
+    
+    isSimetric = SimetricCheck.isSimetricWithBreak(_inputSimetricArrayEven);
+    assertTrue(isSimetric);
+    
+    isSimetric = SimetricCheck.isSimetricWithBreak(_inputNotSimetricArray);
+    assertTrue(!isSimetric);
+  }
+
 
 }

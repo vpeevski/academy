@@ -15,19 +15,23 @@ public final class FieldPanel {
 
 	private final JPanel _panel;
 
-	private boolean isMarked = false; // needed to avoid multiple marks on single field
+	private boolean isMarked = false; // needed to avoid multiple marks on
+										// single field
 
 	private int row;
 
 	private int column;
 
-	public FieldPanel(int row, int column) {
+	private GameController gameController;
+
+	public FieldPanel(GameController gameController, int row, int column) {
 		_panel = new JPanel();
 		_panel.setPreferredSize(new Dimension(60, 60));
 		_panel.setBorder(BorderFactory.createLineBorder(Color.black));
 		_panel.addMouseListener(new MarkListener());
 		this.row = row;
 		this.column = column;
+		this.gameController = gameController;
 	}
 
 	private void mark(Player player) {
@@ -44,17 +48,19 @@ public final class FieldPanel {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			super.mouseClicked(e);
-			if (!isMarked && !Configuration.getConfiguration().gameOver) {
-				Player player = Configuration.getConfiguration()._playerInTurn;
-				mark(player);
-				Configuration.getConfiguration().switchPlayers(row, column);
+			if (!isMarked && !gameController.gameOver) {
+				mark(gameController._playerInTurn);
+				gameController.move(row, column);					
+				isMarked = true;
+			} else if (gameController.gameOver) {
+				int answer = JOptionPane.showConfirmDialog(null, "Do you want to start a new game ?");
+				if(answer == 0) {
+					gameController.startNewGame(3);
+				}
 			} else if (isMarked) {
 				JOptionPane.showMessageDialog(null, "The field is marked !");
-			} else if (Configuration.getConfiguration().gameOver) {
-				JOptionPane.showMessageDialog(null, "Game Over: the winner is " + Configuration.getConfiguration()._playerInTurn.getName());
-			}
+			} 
 
-			isMarked = true;
 		}
 	}
 

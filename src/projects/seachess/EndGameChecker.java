@@ -1,36 +1,36 @@
 package projects.seachess;
 
-import javax.swing.JOptionPane;
 
 public class EndGameChecker implements PlayerMoveListener {
 	
 	private int[][] _model;
 	
-	public EndGameChecker () {
-		Configuration config = Configuration.getConfiguration();
-		_model = new int[config._boardSize][config._boardSize];
+	private GameController _gameController;
+	
+	public EndGameChecker (GameController gameController) {
+		_model = new int[gameController._boardSize][gameController._boardSize];
+		_gameController = gameController;
 	}
 
 	@Override
-	public boolean firePlayerMove(PlayerMoveEvent moveEvent) {
+	public void firePlayerMove(PlayerMoveEvent moveEvent) {
 		int playerId = moveEvent.getPlayer().getId();
 		int row = moveEvent.getRow();
 		int column = moveEvent.getColumn();
 		_model[row][column] = playerId;
 		
-		boolean gameOver = false;
+		
 		if (isBoardFilled()) {
-			JOptionPane.showMessageDialog(null, "Game Over: No winner");
-			gameOver = true;
+			_gameController.gameOver(false);
 		} else {
 			int winnerId = chechForWinner(row, column);
 			if (winnerId != 0) {
-				JOptionPane.showMessageDialog(null, "Game Over: Winner is " + moveEvent.getPlayer().getName());
-				gameOver = true;
+				_gameController.gameOver(true);
+			} else {
+				_gameController.switchPlayers();
 			}
 		}
 		
-		return gameOver;
 	}
 	
 	public boolean isBoardFilled () {

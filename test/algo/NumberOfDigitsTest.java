@@ -17,6 +17,9 @@ public class NumberOfDigitsTest {
     
     digitsCount = NumberOfDigits.calculate(789123456);
     assertEquals(9, digitsCount);
+    
+    digitsCount = NumberOfDigits.calculate(-14);
+    assertEquals(2, digitsCount);
   }
 
 }

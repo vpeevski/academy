@@ -1,5 +1,7 @@
 package suite;
 
+import ood.ptterns.proxy.ProxyTest;
+
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -28,7 +30,7 @@ import sorting.SelectionSortTest;
 @RunWith(Suite.class)
 @SuiteClasses({ InsertionSortTest.class, BulbeSortTest.class, SelectionSortTest.class, MergeSortTest.class, HeapSortTest.class, QuickSortTest.class, 
 	ArrayStackTest.class, ArrayQueueTest.class, LinkedStackTest.class, LinkedQueueTest.class, LinkedListTest.class, ArrayListTest.class, FactorielTest.class, ReverseTest.class, 
-	DebtReaderTest.class, FibonachiTest.class, ArrayHeapTest.class, PriorityQueueTest.class, NODTest.class, NOKTest.class})
+	DebtReaderTest.class, FibonachiTest.class, ArrayHeapTest.class, PriorityQueueTest.class, NODTest.class, NOKTest.class, ProxyTest.class})
 public class AllTests {
 
 }

@@ -1,4 +1,4 @@
-package ood.ptterns.proxy;
+package ood.patterns.proxy;
 
 import static org.junit.Assert.*;
 import ood.patterns.proxy.Work;

@@ -24,8 +24,10 @@ public final class FieldButton {
 	private int _col;
 	
 	private boolean hasFlag = false;
+	
+	private GameController _gameController;
 
-	public FieldButton(int row, int col, BoardPanel boardPanel) {
+	public FieldButton(int row, int col, BoardPanel boardPanel, GameController gameController) {
 		_button = new JButton();
 		_button.setPreferredSize(new Dimension(40, 40));
 		_button.addActionListener(new ButtonPressedListener());
@@ -33,6 +35,7 @@ public final class FieldButton {
 		_row = row;
 		_col = col;
 		_boardPanel = boardPanel;
+		_gameController = gameController;
 	}
 
 	
@@ -58,7 +61,7 @@ public final class FieldButton {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(_boardPanel.isFirstClick()) {
-				MineSweeperModel model = new MineSweeperModel(_row, _col, _boardPanel);
+				MineSweeperModel model = new MineSweeperModel(_row, _col, _boardPanel, _gameController);
 				_boardPanel.populateGridItems(model);
 			} 
 				

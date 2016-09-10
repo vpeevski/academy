@@ -8,9 +8,18 @@ import javax.swing.JPanel;
 public final class MineSweeper {
 	
 	private BoardPanel _boardPanel;
+	
+	private JFrame _mainFrame;
+	
+	private GameController _gameController;
+	
+	public MineSweeper (GameController gameController) {
+		_gameController = gameController;
+	}
 
 	public static void main(String[] args) {
-		new MineSweeper().buildFrame(8, 8, 10);
+		GameController gameController = new GameController();
+		gameController.startNewGame(8, 8, 10);
 	}
 
 	public JFrame buildFrame(int rows, int cols, int minesCount) {
@@ -19,7 +28,7 @@ public final class MineSweeper {
 		
 		for (int i = 0; i < rows; i++) {
 			for(int j = 0 ; j < cols; j++) {
-				FieldButton fieldButton = new FieldButton(i, j, _boardPanel);
+				FieldButton fieldButton = new FieldButton(i, j, _boardPanel, _gameController);
 				_boardPanel.addField(i, j, fieldButton);
 			}
 			
@@ -28,15 +37,21 @@ public final class MineSweeper {
 		
 		
 
-		JFrame mainFrame = new JFrame("MineSweeper");
-		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainFrame.add(mainPanel);
+		_mainFrame = new JFrame("MineSweeper");
+		_mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		_mainFrame.add(mainPanel);
 
-		mainFrame.setSize(cols*40, rows*40);
-		mainFrame.setLocationRelativeTo(null);
-		mainFrame.setResizable(false);
-		mainFrame.setVisible(true);
-		return mainFrame;
+		_mainFrame.setSize(cols*40, rows*40);
+		_mainFrame.setLocationRelativeTo(null);
+		_mainFrame.setResizable(false);
+		_mainFrame.setVisible(true);
+		return _mainFrame;
+	}
+	
+	public void closeFrame() {
+		_mainFrame.setVisible(false);
+		_mainFrame = null;
+		_gameController = null;
 	}
 
 	

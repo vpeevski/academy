@@ -10,8 +10,11 @@ import javax.swing.JPanel;
 
 public final class Mine extends AbstractItem {
 	
-	public Mine(int row, int col, MineSweeperModel model, BoardPanel boardPanel) {
+	private GameController _gameController;
+	
+	public Mine(int row, int col, MineSweeperModel model, BoardPanel boardPanel, GameController gameController) {
 		super(row, col, model, boardPanel);
+		_gameController = gameController;
 	}
 
 	@Override
@@ -25,6 +28,7 @@ public final class Mine extends AbstractItem {
 	public void open() {
 		simpleOpenField();
 		JOptionPane.showMessageDialog(null, "GAME OVER !");
+		_gameController.startNewGame(3, 4, 3);
 	}
 	
 	@Override

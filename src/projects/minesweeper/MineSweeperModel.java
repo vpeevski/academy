@@ -6,10 +6,10 @@ public class MineSweeperModel {
 	
 	private final int _minesCount;
 	
-	public MineSweeperModel (int rowExcl, int colExcl, BoardPanel boardPanel) {
+	public MineSweeperModel (int rowExcl, int colExcl, BoardPanel boardPanel, GameController gameController) {
 		_model = new Item [boardPanel.get_rows()][boardPanel.get_cols()];
 		MinePosRandomGen minesGenerator = new MinePosRandomGen(boardPanel.get_rows(), boardPanel.get_cols(), boardPanel.get_minesCount());
-		Mine[] mines = minesGenerator.generateRandom(rowExcl, colExcl, boardPanel);
+		Mine[] mines = minesGenerator.generateRandom(rowExcl, colExcl, boardPanel, gameController);
 		putMinesInModel(mines);
 		calculateFullModel(boardPanel);
 		_minesCount = boardPanel.get_minesCount();

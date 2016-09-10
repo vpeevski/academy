@@ -1,6 +1,7 @@
 package projects.minesweeper;
 
 import java.awt.Color;
+import java.util.List;
 
 import javax.swing.JLabel;
 
@@ -8,15 +9,20 @@ public final class NumericItem extends AbstractItem {
 	
 	private final int _minesNeigboursCount;
 
-	public NumericItem(int row, int col, int minesNeigboursCount, MineSweeperModel model) {
-		super(row, col, model);
-		_minesNeigboursCount = minesNeigboursCount;
+	public NumericItem(int row, int col, MineSweeperModel model, BoardPanel boardPanel) {
+		super(row, col, model, boardPanel);
+		List<Item> neighbours = neighbours();
+		_minesNeigboursCount = countMinesNeighbours(neighbours);
 	}
 
 	@Override
 	public JLabel label() {
 		JLabel label = new JLabel(_minesNeigboursCount + "");
 		switch (_minesNeigboursCount) {
+		case 0 : {
+			label = new JLabel();
+			break;
+		}
 		case 1 : {
 			label.setForeground(Color.blue);
 			break;
@@ -59,6 +65,41 @@ public final class NumericItem extends AbstractItem {
 		}
 		
 		return label;
+	}
+	
+	@Override
+	public void open() {
+		if (_minesNeigboursCount == 0) {
+			openField();
+		} else {
+			simpleOpenField();
+		}
+		
+	}
+	
+	private void openField () {
+		if (! isOpen()) {
+			simpleOpenField();
+		
+			List<Item> neighbours = neighbours();
+			for (Item neighbour : neighbours) {
+				if(!neighbour.isOpen() && ! (neighbour instanceof Mine)) {
+					neighbour.open();
+					_isOpen = true;
+				}
+			}
+		}
+	}
+	
+	private int countMinesNeighbours(List<Item> neighbours) {
+		int minesCount = 0;
+		for (Item item : neighbours) {
+			if (item instanceof Mine) {
+				minesCount++;
+			}
+		}
+		
+		return minesCount;
 	}
 
 	

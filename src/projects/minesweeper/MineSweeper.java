@@ -6,27 +6,25 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public final class MineSweeper {
-
-	public MineSweeper() {
-	}
+	
+	private BoardPanel _boardPanel;
 
 	public static void main(String[] args) {
-		MineSweeperModel  model = new MineSweeperModel(8, 16, 35);
-		new MineSweeper().buildFrame(model);
+		new MineSweeper().buildFrame(8, 8, 10);
 	}
 
-	public JFrame buildFrame(MineSweeperModel model) {
+	public JFrame buildFrame(int rows, int cols, int minesCount) {
 		JPanel mainPanel = new JPanel(new BorderLayout());
-		BoardPanel boardPanel = new BoardPanel(model);
+		_boardPanel = new BoardPanel(rows, cols, minesCount);
 		
-		for (int i = 0; i < model.rows(); i++) {
-			for(int j = 0 ; j < model.cols(); j++) {
-				FieldButton fieldButton = new FieldButton(model.getItem(i, j), boardPanel);
-				boardPanel.asPanel().add(fieldButton.asComponent());
+		for (int i = 0; i < rows; i++) {
+			for(int j = 0 ; j < cols; j++) {
+				FieldButton fieldButton = new FieldButton(i, j, _boardPanel);
+				_boardPanel.addField(i, j, fieldButton);
 			}
 			
 		}
-		mainPanel.add(boardPanel.asPanel(), BorderLayout.CENTER);
+		mainPanel.add(_boardPanel.asPanel(), BorderLayout.CENTER);
 		
 		
 
@@ -34,9 +32,9 @@ public final class MineSweeper {
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.add(mainPanel);
 
-		mainFrame.setSize(model.cols()*40, model.rows()*40);
+		mainFrame.setSize(cols*40, rows*40);
 		mainFrame.setLocationRelativeTo(null);
-		mainFrame.setResizable(true);
+		mainFrame.setResizable(false);
 		mainFrame.setVisible(true);
 		return mainFrame;
 	}

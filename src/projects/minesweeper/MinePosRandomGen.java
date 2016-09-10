@@ -16,14 +16,20 @@ public final  class MinePosRandomGen {
 		_minesCount = minesCount;
 	}
 	
-	public Mine[] generateRandom () {
+	public Mine[] generateRandom (int rowExcl, int colExcl, BoardPanel boardPanel) {
 		Mine[] mines = new Mine[_minesCount];
 		for (int i = 0; i < mines.length; i++) {
 			
 			Mine mine;
+			int randRow;
+			int randCol;
 			do {
-				mine = new Mine(randomRow(), randomCol(), null);
-			} while (allreadyExists(mine, mines)); 
+				randRow = randomRow();
+				randCol = randomCol();
+				
+				mine = new Mine(randRow, randCol, null, boardPanel);
+				
+			} while ((rowExcl == randRow && colExcl == randCol) || allreadyExists(mine, mines)); 
 			
 			
 			mines[i] = mine;

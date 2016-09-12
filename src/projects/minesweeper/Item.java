@@ -23,8 +23,10 @@ public interface Item {
 	
 	boolean isFlagged ();
 	
-	void select (JPanel panel);
+	void setPanel (JPanel panel);
 	
-	void unselect (JPanel panel);
+	void select ();
+	
+	void unselect ();
 
 }

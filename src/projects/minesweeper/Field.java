@@ -46,8 +46,8 @@ public final class Field {
 
 
 	public void setItem(Item _item) {
-	  _item.unselect(_initialPanel);
-		this._item = _item;
+	  _item.setPanel(_initialPanel);
+	  this._item = _item;
 	}
 
 

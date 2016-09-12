@@ -119,13 +119,18 @@ public abstract class AbstractItem implements Item {
 	}
 	
 	@Override
-	public void select(JPanel panel) {
-	  panel.setBorder(BorderFactory.createEtchedBorder());
+	public void setPanel(JPanel panel) {
+	  _currentPanel = panel;
 	}
 	
 	@Override
-    public void unselect(JPanel panel) {
-	  panel.setBorder(BorderFactory.createRaisedBevelBorder());
+	public void select() {
+		_currentPanel.setBorder(BorderFactory.createEtchedBorder());
+	}
+	
+	@Override
+    public void unselect() {
+		_currentPanel.setBorder(BorderFactory.createRaisedBevelBorder());
     }
 	
 	protected final void simpleOpenField() {

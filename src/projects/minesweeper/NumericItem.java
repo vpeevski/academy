@@ -152,7 +152,10 @@ public final class NumericItem extends AbstractItem {
         if (_minesNeigboursCount <= countFlaggedNeighbours(neighbours()) && isIn && isLeftPressed && isRightPressed)
         {
           for (Item item : neighbours()) {
-            item.select(_currentPanel);
+        	  if(!item.isFlagged() && ! item.isOpen()) {
+        		  item.select();
+        	  }
+            
           }
         }
       }
@@ -171,17 +174,38 @@ public final class NumericItem extends AbstractItem {
           if (_minesNeigboursCount <= countFlaggedNeighbours(neighbours()) && isIn && isLeftPressed && isRightPressed)
           {
             revealFlaggedField();
+            for (Item item : neighbours()) {
+          	  if(!item.isFlagged() && ! item.isOpen()) {
+          		  item.unselect();
+          	  }
+              
+            }
           }
       }
       
       @Override
       public void mouseExited(MouseEvent e) {
+    	  for (Item item : neighbours()) {
+          	  if(!item.isFlagged() && ! item.isOpen()) {
+          		  item.unselect();
+          	  }
+              
+            }
         isIn = false;
       }
       
       @Override
       public void mouseEntered(MouseEvent e) {
         isIn = true;
+        if (_minesNeigboursCount <= countFlaggedNeighbours(neighbours()) && isIn && isLeftPressed && isRightPressed)
+        {
+          for (Item item : neighbours()) {
+        	  if(!item.isFlagged() && ! item.isOpen()) {
+        		  item.select();
+        	  }
+            
+          }
+        }
       }
     
   }

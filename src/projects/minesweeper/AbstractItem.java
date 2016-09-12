@@ -3,6 +3,7 @@ package projects.minesweeper;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 public abstract class AbstractItem implements Item {
@@ -16,6 +17,10 @@ public abstract class AbstractItem implements Item {
 	protected boolean _isOpen;
 	
 	private BoardPanel _boardPanel;
+	
+	private boolean _isFlagged;
+	
+	protected JPanel _currentPanel;
 
 	public AbstractItem (int row, int col, MineSweeperModel model, BoardPanel boardPanel) {
 		_row = row;
@@ -103,17 +108,38 @@ public abstract class AbstractItem implements Item {
 		return _isOpen;
 	}
 	
+	@Override
+	public void putFlag(boolean flagged) {
+	  _isFlagged  = flagged;
+	}
+	
+	@Override
+	public boolean isFlagged() {
+	  return _isFlagged;
+	}
+	
+	@Override
+	public void select(JPanel panel) {
+	  panel.setBorder(BorderFactory.createEtchedBorder());
+	}
+	
+	@Override
+    public void unselect(JPanel panel) {
+	  panel.setBorder(BorderFactory.createRaisedBevelBorder());
+    }
+	
 	protected final void simpleOpenField() {
 		_boardPanel.asPanel().remove(row()*_boardPanel.get_cols() + col());
-		JPanel panel = new JPanel ();
-		setBackGround(panel);
-		panel.add(label());
-		_boardPanel.asPanel().add(panel, row()*_boardPanel.get_cols() + col());
+		_currentPanel = new JPanel ();
+		_currentPanel.setBorder(BorderFactory.createEtchedBorder());
+		setBackGround(_currentPanel);
+		_currentPanel.add(label());
+		_boardPanel.asPanel().add(_currentPanel, row()*_boardPanel.get_cols() + col());
 		_boardPanel.asPanel().revalidate();
 		_boardPanel.asPanel().repaint();
 		_isOpen = true;
 	}
 	
 	protected void setBackGround (JPanel panel) {}
-
+ 
 }

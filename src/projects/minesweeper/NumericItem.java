@@ -1,9 +1,12 @@
 package projects.minesweeper;
 
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.JLabel;
+import javax.swing.SwingUtilities;
 
 public final class NumericItem extends AbstractItem {
 	
@@ -73,6 +76,7 @@ public final class NumericItem extends AbstractItem {
 			openField();
 		} else {
 			simpleOpenField();
+			_currentPanel.addMouseListener(new FlaggedNumberRevealListener());
 		}
 		
 	}
@@ -101,6 +105,89 @@ public final class NumericItem extends AbstractItem {
 		
 		return minesCount;
 	}
+	
+	private int countFlaggedNeighbours(List<Item> neighbours) {
+      int minesCount = 0;
+      for (Item item : neighbours) {
+          if (!item.isOpen() && item.isFlagged()) {
+              minesCount++;
+          }
+      }
+      
+      return minesCount;
+  }
+	
+	private void revealFlaggedField () {
+      if (! isOpen() && !isFlagged()) {
+          simpleOpenField();
+      }
+          
+      List<Item> neighbours = neighbours();
+        for (Item neighbour : neighbours) {
+          if(!neighbour.isOpen() && !neighbour.isFlagged()) {
+            neighbour.open();
+            _isOpen = true;
+          }
+        }  
+    }
+	
+	public class FlaggedNumberRevealListener extends MouseAdapter {
+      
+      private boolean isLeftPressed;
+      private boolean isRightPressed;
+      
+      private boolean isIn; 
+      
+      @Override
+      public void mousePressed (MouseEvent e) {
+        if (SwingUtilities.isLeftMouseButton (e))
+        {
+            isLeftPressed = true;
+        }
+        else if (SwingUtilities.isRightMouseButton (e))
+        {
+            isRightPressed = true;
+        }
+
+        if (_minesNeigboursCount <= countFlaggedNeighbours(neighbours()) && isIn && isLeftPressed && isRightPressed)
+        {
+          for (Item item : neighbours()) {
+            item.select(_currentPanel);
+          }
+        }
+      }
+      
+      @Override
+      public void mouseReleased (MouseEvent e) {
+        if (SwingUtilities.isLeftMouseButton (e))
+          {
+              isLeftPressed = true;
+          }
+          else if (SwingUtilities.isRightMouseButton (e))
+          {
+              isRightPressed = true;
+          }
+
+          if (_minesNeigboursCount <= countFlaggedNeighbours(neighbours()) && isIn && isLeftPressed && isRightPressed)
+          {
+            revealFlaggedField();
+          }
+      }
+      
+      @Override
+      public void mouseExited(MouseEvent e) {
+        isIn = false;
+      }
+      
+      @Override
+      public void mouseEntered(MouseEvent e) {
+        isIn = true;
+      }
+    
+  }
+	
+	
+	
 
 	
 

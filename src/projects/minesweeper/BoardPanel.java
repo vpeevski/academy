@@ -10,7 +10,7 @@ public class BoardPanel {
 
 	private JPanel _innerBoardPanel;
 	
-	private FieldButton[][] _fieldsGrid;
+	private Field[][] _fieldsGrid;
 	
 	private int _rows;
 	
@@ -20,7 +20,7 @@ public class BoardPanel {
 
 	public BoardPanel(int rows, int cols, int minesCount) {
 		_innerBoardPanel = new JPanel(new GridLayout(rows, cols));
-		_fieldsGrid = new FieldButton[rows][cols];
+		_fieldsGrid = new Field[rows][cols];
 		_rows = rows;
 		_cols = cols;
 		_minesCount = minesCount;
@@ -57,12 +57,12 @@ public class BoardPanel {
 		
 	}
 
-	public void addField(int row, int col, FieldButton fieldButton) {
+	public void addField(int row, int col, Field fieldButton) {
 		_innerBoardPanel.add(fieldButton.asComponent());
 		_fieldsGrid[row][col] = fieldButton;
 	}
 	
-	public FieldButton getField (int row, int col) {
+	public Field getField (int row, int col) {
 		return _fieldsGrid[row][col];
 	}
 

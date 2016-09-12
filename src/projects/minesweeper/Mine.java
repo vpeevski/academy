@@ -26,10 +26,13 @@ public final class Mine extends AbstractItem {
 	
 	@Override
 	public void open() {
-		simpleOpenField();
-		JOptionPane.showMessageDialog(null, "GAME OVER !");
-		_gameController.startNewGame(3, 4, 3);
-	}
+	  //if(!isFlagged()) {
+	    simpleOpenField();
+        JOptionPane.showMessageDialog(null, "GAME OVER !");
+        _gameController.startNewGame(8, 8, 10);
+	  }
+		
+	//}
 	
 	@Override
 	protected void setBackGround(JPanel panel) {

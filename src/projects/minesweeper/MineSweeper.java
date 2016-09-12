@@ -28,7 +28,7 @@ public final class MineSweeper {
 		
 		for (int i = 0; i < rows; i++) {
 			for(int j = 0 ; j < cols; j++) {
-				FieldButton fieldButton = new FieldButton(i, j, _boardPanel, _gameController);
+				Field fieldButton = new Field(i, j, _boardPanel, _gameController);
 				_boardPanel.addField(i, j, fieldButton);
 			}
 			

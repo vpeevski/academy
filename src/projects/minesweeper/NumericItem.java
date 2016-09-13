@@ -193,10 +193,7 @@ public final class NumericItem extends AbstractItem {
 					}
 
 				}
-			} else {
-				isLeftPressed = false;
-				isRightPressed = false;
-			}
+			} 
 		}
 
 	}

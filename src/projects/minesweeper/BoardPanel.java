@@ -68,10 +68,6 @@ public class BoardPanel {
 		_fieldsGrid[row][col] = fieldButton;
 	}
 	
-	public Field getField (int row, int col) {
-		return _fieldsGrid[row][col];
-	}
-	
 	public void markMine () {
 		_minesLeft--;
 	}

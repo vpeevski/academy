@@ -41,9 +41,7 @@ public final class Field {
 
 	
 
-	public Item getItem() {
-		return _item;
-	}
+	
 
 
 

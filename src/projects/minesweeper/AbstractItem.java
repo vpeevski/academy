@@ -146,10 +146,10 @@ public abstract class AbstractItem implements Item {
 		setBackGround(_currentPanel);
 		_currentPanel.add(label());
 		_boardPanel.asPanel().add(_currentPanel, row()*_boardPanel.get_cols() + col());
-		_boardPanel.asPanel().revalidate();
-		_boardPanel.asPanel().repaint();
 		_isOpen = true;
 		_boardPanel.openField(_row, _col);
+		_boardPanel.asPanel().revalidate();
+        _boardPanel.asPanel().repaint();
 	}
 	
 	protected void setBackGround (JPanel panel) {}

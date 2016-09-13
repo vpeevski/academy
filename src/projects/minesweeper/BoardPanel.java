@@ -1,6 +1,8 @@
 package projects.minesweeper;
 
 import java.awt.GridLayout;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JPanel;
 
@@ -21,6 +23,8 @@ public class BoardPanel {
 	private int _minesLeft;
 	
 	private GameController _gameController;
+	
+	private List<MineMarkListener> _markListeners;
 
 	public BoardPanel(int rows, int cols, int minesCount, GameController gameController) {
 		_innerBoardPanel = new JPanel(new GridLayout(rows, cols));
@@ -30,6 +34,7 @@ public class BoardPanel {
 		_minesCount = minesCount;
 		_minesLeft = minesCount;
 		_gameController = gameController;
+		_markListeners = new ArrayList<MineMarkListener>();
 	}
 
 	public int get_rows() {
@@ -70,10 +75,19 @@ public class BoardPanel {
 	
 	public void markMine () {
 		_minesLeft--;
+		fireMineMarkChange();
 	}
 	
+	private void fireMineMarkChange() {
+		for (MineMarkListener listener : _markListeners) {
+			listener.mineMarkeChange();;
+		}
+		
+	}
+
 	public void unMarkMine () {
 		_minesLeft++;
+		fireMineMarkChange();
 	}
 	
 	public int getMinesLeft () {
@@ -99,6 +113,14 @@ public class BoardPanel {
 		}
 		
 		return count;
+	}
+	
+	public void addMineMarkListener (MineMarkListener markListener) {
+		_markListeners.add(markListener);
+	}
+	
+	public void removeMineMarkListener (MineMarkListener markListener) {
+		_markListeners.remove(markListener);
 	}
 
 }

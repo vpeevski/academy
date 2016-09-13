@@ -1,9 +1,13 @@
 package projects.minesweeper;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 public final class MineSweeper {
 	
@@ -33,6 +37,27 @@ public final class MineSweeper {
 			}
 			
 		}
+		
+		JPanel topPanel = new JPanel(new FlowLayout());
+		final JLabel minesLeftCount = new JLabel(_boardPanel.getMinesLeft() + "");
+		final JLabel minesLeftText = new JLabel("Mines left : ");
+		minesLeftText.setHorizontalAlignment(SwingConstants.CENTER);
+		minesLeftText.setForeground(Color.RED);
+		minesLeftCount.setHorizontalAlignment(SwingConstants.CENTER);
+		minesLeftCount.setForeground(Color.RED);
+		
+		topPanel.add(minesLeftText);
+		topPanel.add(minesLeftCount);
+		mainPanel.add(topPanel, BorderLayout.NORTH);
+		_boardPanel.addMineMarkListener(new MineMarkListener() {
+			
+			@Override
+			public void mineMarkeChange() {
+				minesLeftCount.setText(_boardPanel.getMinesLeft() + "");
+				
+			}
+		});
+		
 		mainPanel.add(_boardPanel.asPanel(), BorderLayout.CENTER);
 		
 		

@@ -24,7 +24,7 @@ public final class MineSweeper {
 
 	public JFrame buildFrame(int rows, int cols, int minesCount) {
 		JPanel mainPanel = new JPanel(new BorderLayout());
-		_boardPanel = new BoardPanel(rows, cols, minesCount);
+		_boardPanel = new BoardPanel(rows, cols, minesCount, _gameController);
 		
 		for (int i = 0; i < rows; i++) {
 			for(int j = 0 ; j < cols; j++) {

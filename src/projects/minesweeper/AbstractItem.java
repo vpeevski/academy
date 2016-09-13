@@ -111,6 +111,12 @@ public abstract class AbstractItem implements Item {
 	@Override
 	public void putFlag(boolean flagged) {
 	  _isFlagged  = flagged;
+	  if (flagged) {
+		  _boardPanel.markMine();
+	  } else {
+		  _boardPanel.unMarkMine();
+	  }
+	  
 	}
 	
 	@Override
@@ -143,6 +149,7 @@ public abstract class AbstractItem implements Item {
 		_boardPanel.asPanel().revalidate();
 		_boardPanel.asPanel().repaint();
 		_isOpen = true;
+		_boardPanel.openField(_row, _col);
 	}
 	
 	protected void setBackGround (JPanel panel) {}

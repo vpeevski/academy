@@ -17,13 +17,19 @@ public class BoardPanel {
 	private int _cols;
 	
 	private int _minesCount;
+	
+	private int _minesLeft;
+	
+	private GameController _gameController;
 
-	public BoardPanel(int rows, int cols, int minesCount) {
+	public BoardPanel(int rows, int cols, int minesCount, GameController gameController) {
 		_innerBoardPanel = new JPanel(new GridLayout(rows, cols));
 		_fieldsGrid = new Field[rows][cols];
 		_rows = rows;
 		_cols = cols;
 		_minesCount = minesCount;
+		_minesLeft = minesCount;
+		_gameController = gameController;
 	}
 
 	public int get_rows() {
@@ -64,6 +70,39 @@ public class BoardPanel {
 	
 	public Field getField (int row, int col) {
 		return _fieldsGrid[row][col];
+	}
+	
+	public void markMine () {
+		_minesLeft--;
+	}
+	
+	public void unMarkMine () {
+		_minesLeft++;
+	}
+	
+	public int getMinesLeft () {
+		return _minesLeft;
+	}
+	
+	public void openField (int row, int col) {
+		_fieldsGrid[row][col].open();
+		if (getUnOpenedFieldsCount() == _minesCount) {
+			_gameController.endGame();
+		}
+	}
+	
+	
+	private int getUnOpenedFieldsCount () {
+		int count = 0;
+		for (int i = 0; i <_rows; i++) {
+			for (int j = 0; j < _cols; j++) {
+				if (!_fieldsGrid[i][j].isOpened()) {
+					count ++;
+				}
+			}
+		}
+		
+		return count;
 	}
 
 }

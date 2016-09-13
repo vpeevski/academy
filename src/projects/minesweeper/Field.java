@@ -24,6 +24,8 @@ public final class Field {
 	private int _col;
 	
 	private GameController _gameController;
+	
+	private boolean _isOpened = false;
 
 	public Field(int row, int col, BoardPanel boardPanel, GameController gameController) {
 		_initialPanel = new JPanel();
@@ -75,6 +77,14 @@ public final class Field {
 		
 	}
 	
+	public void open () {
+		_isOpened = true;
+	}
+	
+	public boolean isOpened () {
+		return _isOpened;
+	}
+	
 	private class MouseRightClickListener extends MouseAdapter {
 
 		@Override
@@ -83,18 +93,17 @@ public final class Field {
 			    if (_item == null) {
 			      return;
 			    }
+			    
 				if(_item.isFlagged()){
-					_initialPanel.removeAll();
-					_initialPanel.revalidate();
-                    _initialPanel.repaint();
-					_item.putFlag(false);
+					_initialPanel.removeAll();			
 				} else {
 					URL imageURL = getClass().getClassLoader().getResource("projects/minesweeper/flag.png");
 					_initialPanel.add(new JLabel(new ImageIcon(imageURL)));
-					_initialPanel.revalidate();
-					_initialPanel.repaint();
-					_item.putFlag(true);
 				}
+				
+				_item.putFlag(!_item.isFlagged());
+				_initialPanel.revalidate();
+				_initialPanel.repaint();
 				
 			}
 			

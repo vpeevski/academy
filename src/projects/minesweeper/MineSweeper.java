@@ -14,25 +14,18 @@ public final class MineSweeper {
 	private BoardPanel _boardPanel;
 	
 	private JFrame _mainFrame;
-	
-	private GameController _gameController;
-	
-	public MineSweeper (GameController gameController) {
-		_gameController = gameController;
-	}
 
 	public static void main(String[] args) {
-		GameController gameController = new GameController();
-		gameController.startNewGame(8, 8, 10);
+		GameController.instance().startNewGame(8, 8, 10);
 	}
 
 	public JFrame buildFrame(int rows, int cols, int minesCount) {
 		JPanel mainPanel = new JPanel(new BorderLayout());
-		_boardPanel = new BoardPanel(rows, cols, minesCount, _gameController);
+		_boardPanel = new BoardPanel(rows, cols, minesCount);
 		
 		for (int i = 0; i < rows; i++) {
 			for(int j = 0 ; j < cols; j++) {
-				Field fieldButton = new Field(i, j, _boardPanel, _gameController);
+				Field fieldButton = new Field(i, j, _boardPanel);
 				_boardPanel.addField(i, j, fieldButton);
 			}
 			
@@ -76,7 +69,6 @@ public final class MineSweeper {
 	public void closeFrame() {
 		_mainFrame.setVisible(false);
 		_mainFrame = null;
-		_gameController = null;
 	}
 
 	

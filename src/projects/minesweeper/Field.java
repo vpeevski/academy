@@ -23,11 +23,9 @@ public final class Field {
 	
 	private int _col;
 	
-	private GameController _gameController;
-	
 	private boolean _isOpened = false;
 
-	public Field(int row, int col, BoardPanel boardPanel, GameController gameController) {
+	public Field(int row, int col, BoardPanel boardPanel) {
 		_initialPanel = new JPanel();
 		_initialPanel.setBorder(BorderFactory.createRaisedBevelBorder());
 		_initialPanel.setPreferredSize(new Dimension(40, 40));
@@ -36,7 +34,6 @@ public final class Field {
 		_row = row;
 		_col = col;
 		_boardPanel = boardPanel;
-		_gameController = gameController;
 	}
 
 	
@@ -62,7 +59,7 @@ public final class Field {
 		public void mousePressed (MouseEvent e) {
 		  if(SwingUtilities.isLeftMouseButton(e)) {
 			if(_boardPanel.isFirstClick()) {
-				MineSweeperModel model = new MineSweeperModel(_row, _col, _boardPanel, _gameController);
+				MineSweeperModel model = new MineSweeperModel(_row, _col, _boardPanel);
 				_boardPanel.populateGridItems(model);
 			} 
 				

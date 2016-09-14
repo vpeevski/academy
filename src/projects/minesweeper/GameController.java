@@ -2,7 +2,19 @@ package projects.minesweeper;
 
 import javax.swing.JOptionPane;
 
-public class GameController {
+public final class GameController {
+	
+	private static GameController _instance;
+	
+	private GameController () {}
+	
+	public static final GameController instance () {
+		if (_instance == null) {
+			_instance = new GameController();
+		}
+		
+		return _instance;
+	}
 	
 	private MineSweeper mineSweeperGui;
 
@@ -10,7 +22,7 @@ public class GameController {
 		if (mineSweeperGui != null) {
 			mineSweeperGui.closeFrame();
 		}
-		mineSweeperGui = new MineSweeper(this);
+		mineSweeperGui = new MineSweeper();
 		mineSweeperGui.buildFrame(rows, cols, minesCount);
 		
 	}

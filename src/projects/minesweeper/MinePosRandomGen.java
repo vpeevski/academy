@@ -16,7 +16,7 @@ public final  class MinePosRandomGen {
 		_minesCount = minesCount;
 	}
 	
-	public Mine[] generateRandom (int rowExcl, int colExcl, BoardPanel boardPanel, GameController gameController) {
+	public Mine[] generateRandom (int rowExcl, int colExcl, BoardPanel boardPanel) {
 		Mine[] mines = new Mine[_minesCount];
 		for (int i = 0; i < mines.length; i++) {
 			
@@ -27,7 +27,7 @@ public final  class MinePosRandomGen {
 				randRow = randomRow();
 				randCol = randomCol();
 				
-				mine = new Mine(randRow, randCol, null, boardPanel, gameController);
+				mine = new Mine(randRow, randCol, null, boardPanel);
 				
 			} while ((rowExcl == randRow && colExcl == randCol) || allreadyExists(mine, mines)); 
 			

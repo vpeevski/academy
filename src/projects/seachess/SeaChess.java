@@ -46,7 +46,9 @@ public final class SeaChess {
 		mainFrame.setSize(size * 100, size * 100);
 		mainFrame.setResizable(false);
 		mainFrame.setVisible(true);
+		
 		_mainFrame = mainFrame;
+		_mainFrame.setLocationRelativeTo(null);
 		return mainFrame;
 	}
 

@@ -19,10 +19,6 @@ public interface Item {
 	
 	void open ();
 	
-	void putFlag (boolean flagged);
-	
-	boolean isFlagged ();
-	
 	void setPanel (JPanel panel);
 	
 	void select ();

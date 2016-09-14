@@ -119,5 +119,11 @@ public class BoardPanel {
 	public void removeMineMarkListener (MineMarkListener markListener) {
 		_markListeners.remove(markListener);
 	}
+	
+	public Field getField (int row, int col) {
+      return _fieldsGrid[row][col];
+    }
+	
+	
 
 }

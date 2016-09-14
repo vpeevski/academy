@@ -8,17 +8,15 @@ import javax.swing.JPanel;
 
 public abstract class AbstractItem implements Item {
 	
-	private final int _row;
+	protected final int _row;
 	
-	private final int _col;
+	protected final int _col;
 	
 	private MineSweeperModel _model;
 	
 	protected boolean _isOpen;
 	
-	private BoardPanel _boardPanel;
-	
-	private boolean _isFlagged;
+	protected BoardPanel _boardPanel;
 	
 	protected JPanel _currentPanel;
 
@@ -106,22 +104,6 @@ public abstract class AbstractItem implements Item {
 	@Override
 	public boolean isOpen() {
 		return _isOpen;
-	}
-	
-	@Override
-	public void putFlag(boolean flagged) {
-	  _isFlagged  = flagged;
-	  if (flagged) {
-		  _boardPanel.markMine();
-	  } else {
-		  _boardPanel.unMarkMine();
-	  }
-	  
-	}
-	
-	@Override
-	public boolean isFlagged() {
-	  return _isFlagged;
 	}
 	
 	@Override

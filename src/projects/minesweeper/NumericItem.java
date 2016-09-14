@@ -73,7 +73,7 @@ public final class NumericItem extends AbstractItem {
 	@Override
 	public void open() {
 		if (_minesNeigboursCount == 0) {
-			openField();
+			openSectorRec();
 		} else {
 			simpleOpenField();
 			_boardPanel.getField(_row, _col).addMouseListener(new FlaggedNumberRevealListener());
@@ -81,7 +81,7 @@ public final class NumericItem extends AbstractItem {
 
 	}
 
-	private void openField() {
+	private void openSectorRec() {
 		if (!isOpen()) {
 			simpleOpenField();
 

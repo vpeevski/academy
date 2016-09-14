@@ -3,7 +3,6 @@ package projects.minesweeper;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 public abstract class AbstractItem implements Item {

@@ -76,7 +76,7 @@ public final class NumericItem extends AbstractItem {
 			openField();
 		} else {
 			simpleOpenField();
-			_currentPanel.addMouseListener(new FlaggedNumberRevealListener());
+			_boardPanel.getField(_row, _col).addMouseListener(new FlaggedNumberRevealListener());
 		}
 
 	}
@@ -110,7 +110,7 @@ public final class NumericItem extends AbstractItem {
 	private int countFlaggedNeighbours(List<Item> neighbours) {
 		int minesCount = 0;
 		for (Item item : neighbours) {
-			if (!item.isOpen() && _boardPanel.getField(_row, _col).isFlagged()) {
+			if (!item.isOpen() && _boardPanel.getField(item.row(), item.col()).isFlagged()) {
 				minesCount++;
 			}
 		}
@@ -148,7 +148,7 @@ public final class NumericItem extends AbstractItem {
 			if (_minesNeigboursCount <= countFlaggedNeighbours(neighbours()) && isIn && isLeftPressed && isRightPressed) {
 				for (Item item : neighbours()) {
 					if (!_boardPanel.getField(item.row(), item.col()).isFlagged() && !item.isOpen()) {
-						item.select();
+						_boardPanel.getField(item.row(), item.col()).select();
 					}
 
 				}
@@ -176,7 +176,7 @@ public final class NumericItem extends AbstractItem {
 		public void mouseExited(MouseEvent e) {
 			for (Item item : neighbours()) {
 				if (!_boardPanel.getField(item.row(), item.col()).isFlagged() && !item.isOpen()) {
-					item.unselect();
+					_boardPanel.getField(item.row(), item.col()).unselect();
 				}
 
 			}
@@ -186,10 +186,10 @@ public final class NumericItem extends AbstractItem {
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			isIn = true;
-			if (_minesNeigboursCount <= countFlaggedNeighbours(neighbours()) && isIn && isLeftPressed && isRightPressed) {
+			if (isLeftPressed && isRightPressed &&_minesNeigboursCount <= countFlaggedNeighbours(neighbours()) && isIn) {
 				for (Item item : neighbours()) {
 					if (!_boardPanel.getField(item.row(), item.col()).isFlagged() && !item.isOpen()) {
-						item.select();
+						_boardPanel.getField(item.row(), item.col()).select();
 					}
 
 				}

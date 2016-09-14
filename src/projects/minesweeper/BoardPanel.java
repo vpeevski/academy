@@ -91,15 +91,8 @@ public class BoardPanel {
 		return _minesLeft;
 	}
 	
-	public void openField (int row, int col) {
-		_fieldsGrid[row][col].open();
-		if (getUnOpenedFieldsCount() == _minesCount) {
-			GameController.instance().endGame();
-		}
-	}
 	
-	
-	private int getUnOpenedFieldsCount () {
+	public int getUnOpenedFieldsCount () {
 		int count = 0;
 		for (int i = 0; i <_rows; i++) {
 			for (int j = 0; j < _cols; j++) {

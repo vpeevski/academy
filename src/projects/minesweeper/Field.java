@@ -3,6 +3,7 @@ package projects.minesweeper;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.net.URL;
 
 import javax.swing.BorderFactory;
@@ -11,9 +12,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-public final class Field implements Flaggable{
+public final class Field implements Flaggable, Selectable {
 
-	private final JPanel _initialPanel;
+	private JPanel _currentPanel;
 	
 	private Item _item;
 	
@@ -28,11 +29,11 @@ public final class Field implements Flaggable{
 	private boolean _isFlagged;
 
 	public Field(int row, int col, BoardPanel boardPanel) {
-		_initialPanel = new JPanel();
-		_initialPanel.setBorder(BorderFactory.createRaisedBevelBorder());
-		_initialPanel.setPreferredSize(new Dimension(40, 40));
-		_initialPanel.addMouseListener(new ButtonPressedListener());
-		_initialPanel.addMouseListener(new MouseRightClickListener());
+		_currentPanel = new JPanel();
+		_currentPanel.setBorder(BorderFactory.createRaisedBevelBorder());
+		_currentPanel.setPreferredSize(new Dimension(40, 40));
+		_currentPanel.addMouseListener(new ButtonPressedListener());
+		_currentPanel.addMouseListener(new MouseRightClickListener());
 		_row = row;
 		_col = col;
 		_boardPanel = boardPanel;
@@ -45,14 +46,13 @@ public final class Field implements Flaggable{
 
 
 	public void setItem(Item _item) {
-	  _item.setPanel(_initialPanel);
 	  this._item = _item;
 	}
 
 
 
 	public JPanel asComponent() {
-		return _initialPanel;
+		return _currentPanel;
 	}
 	
 	private class ButtonPressedListener extends MouseAdapter {
@@ -76,6 +76,23 @@ public final class Field implements Flaggable{
 	
 	public void open () {
 		_isOpened = true;
+		_boardPanel.asPanel().remove(_row*_boardPanel.get_cols() + _col);
+		_currentPanel = new JPanel ();
+		_currentPanel.setBorder(BorderFactory.createEtchedBorder());
+		//setBackGround(_currentPanel);
+		_currentPanel.add(_item.label());
+		_boardPanel.asPanel().add(_currentPanel, _row*_boardPanel.get_cols() + _col);
+		
+		
+		_currentPanel.revalidate();
+		_currentPanel.repaint();
+		checkEndGame();
+	}
+	
+	private void checkEndGame () {
+		if (_boardPanel.getUnOpenedFieldsCount() == _boardPanel.get_minesCount()) {
+			GameController.instance().endGame();
+		}
 	}
 	
 	public boolean isOpened () {
@@ -97,6 +114,20 @@ public final class Field implements Flaggable{
     public boolean isFlagged() {
       return _isFlagged;
     }
+    
+    @Override
+	public void select() {
+		_currentPanel.setBorder(BorderFactory.createEtchedBorder());
+	}
+	
+	@Override
+    public void unselect() {
+		_currentPanel.setBorder(BorderFactory.createRaisedBevelBorder());
+    }
+	
+	public void addMouseListener (MouseListener mouseListener) {
+		_currentPanel.addMouseListener(mouseListener);
+	}
 	
 	private class MouseRightClickListener extends MouseAdapter {
 
@@ -105,15 +136,15 @@ public final class Field implements Flaggable{
 			if(SwingUtilities.isRightMouseButton(e)) {
 			    
 				if(isFlagged()){
-					_initialPanel.removeAll();			
+					_currentPanel.removeAll();			
 				} else {
 					URL imageURL = getClass().getClassLoader().getResource("projects/minesweeper/flag.png");
-					_initialPanel.add(new JLabel(new ImageIcon(imageURL)));
+					_currentPanel.add(new JLabel(new ImageIcon(imageURL)));
 				}
 				
 				putFlag(!isFlagged());
-				_initialPanel.revalidate();
-				_initialPanel.repaint();
+				_currentPanel.revalidate();
+				_currentPanel.repaint();
 				
 			}
 			

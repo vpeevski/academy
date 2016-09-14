@@ -17,8 +17,6 @@ public abstract class AbstractItem implements Item {
 	protected boolean _isOpen;
 	
 	protected BoardPanel _boardPanel;
-	
-	protected JPanel _currentPanel;
 
 	public AbstractItem (int row, int col, MineSweeperModel model, BoardPanel boardPanel) {
 		_row = row;
@@ -106,32 +104,9 @@ public abstract class AbstractItem implements Item {
 		return _isOpen;
 	}
 	
-	@Override
-	public void setPanel(JPanel panel) {
-	  _currentPanel = panel;
-	}
-	
-	@Override
-	public void select() {
-		_currentPanel.setBorder(BorderFactory.createEtchedBorder());
-	}
-	
-	@Override
-    public void unselect() {
-		_currentPanel.setBorder(BorderFactory.createRaisedBevelBorder());
-    }
-	
 	protected final void simpleOpenField() {
-		_boardPanel.asPanel().remove(row()*_boardPanel.get_cols() + col());
-		_currentPanel = new JPanel ();
-		_currentPanel.setBorder(BorderFactory.createEtchedBorder());
-		setBackGround(_currentPanel);
-		_currentPanel.add(label());
-		_boardPanel.asPanel().add(_currentPanel, row()*_boardPanel.get_cols() + col());
 		_isOpen = true;
-		_boardPanel.openField(_row, _col);
-		_boardPanel.asPanel().revalidate();
-        _boardPanel.asPanel().repaint();
+		_boardPanel.getField(_row, _col).open();
 	}
 	
 	protected void setBackGround (JPanel panel) {}

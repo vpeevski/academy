@@ -27,8 +27,17 @@ public final class GameController {
 		
 	}
 	
-	public void endGame() {
-		int option = JOptionPane.showConfirmDialog(null, "You win ! \n Do you want to play again ?", "Minesweeper WINNER", JOptionPane.YES_NO_OPTION);
+	public void gameOverWin() {
+		int option = JOptionPane.showConfirmDialog(null, "You win ! \n Do you want to play again ?", "Minesweeper", JOptionPane.YES_NO_OPTION);
+		if (option == 0) {
+			startNewGame(8, 8, 10);
+		}
+		
+		
+	}
+	
+	public void gameOverLoose() {
+		int option = JOptionPane.showConfirmDialog(null, "You Loose ! \n Do you want to play again ?", "Minesweeper", JOptionPane.YES_NO_OPTION);
 		if (option == 0) {
 			startNewGame(8, 8, 10);
 		}

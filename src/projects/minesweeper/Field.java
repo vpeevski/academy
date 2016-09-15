@@ -15,17 +15,17 @@ import javax.swing.SwingUtilities;
 public final class Field implements Flaggable, Selectable {
 
 	private JPanel _currentPanel;
-	
+
 	private Item _item;
-	
+
 	private BoardPanel _boardPanel;
-	
+
 	private int _row;
-	
+
 	private int _col;
-	
+
 	private boolean _isOpened = false;
-	
+
 	private boolean _isFlagged;
 
 	public Field(int row, int col, BoardPanel boardPanel) {
@@ -39,120 +39,112 @@ public final class Field implements Flaggable, Selectable {
 		_boardPanel = boardPanel;
 	}
 
-	
-
-	
-
-
-
 	public void setItem(Item _item) {
-	  this._item = _item;
+		this._item = _item;
 	}
-
-
 
 	public JPanel asComponent() {
 		return _currentPanel;
 	}
-	
+
 	private class ButtonPressedListener extends MouseAdapter {
 
 		@Override
-		public void mousePressed (MouseEvent e) {
-		  if(SwingUtilities.isLeftMouseButton(e)) {
-			if(_boardPanel.isFirstClick()) {
-				MineSweeperModel model = new MineSweeperModel(_row, _col, _boardPanel);
-				_boardPanel.populateGridItems(model);
-			} 
-				
-			if (!isFlagged()) {
-			  _item.open();
+		public void mousePressed(MouseEvent e) {
+			if (SwingUtilities.isLeftMouseButton(e)) {
+				if (_boardPanel.isFirstClick()) {
+					MineSweeperModel model = new MineSweeperModel(_row, _col, _boardPanel);
+					_boardPanel.populateGridItems(model);
+				}
+
+				if (!isFlagged()) {
+					_item.open();
+				}
+
 			}
-			 
-		  }			
 		}
-		
+
 	}
-	
-	public void open () {
+
+	public void open() {
 		_isOpened = true;
-		_boardPanel.asPanel().remove(_row*_boardPanel.get_cols() + _col);
-		_currentPanel = new JPanel ();
+		_boardPanel.asPanel().remove(_row * _boardPanel.get_cols() + _col);
+		_currentPanel = new JPanel();
 		_currentPanel.setBorder(BorderFactory.createEtchedBorder());
-		//setBackGround(_currentPanel);
+		// setBackGround(_currentPanel);
 		_currentPanel.add(_item.label());
-		_boardPanel.asPanel().add(_currentPanel, _row*_boardPanel.get_cols() + _col);
-		
-		
+		_boardPanel.asPanel().add(_currentPanel, _row * _boardPanel.get_cols() + _col);
+
 		_currentPanel.revalidate();
 		_currentPanel.repaint();
-		checkEndGame();
 	}
-	
-	private void checkEndGame () {
-		if (_boardPanel.getUnOpenedFieldsCount() == _boardPanel.get_minesCount()) {
-			GameController.instance().endGame();
-		}
-	}
-	
-	public boolean isOpened () {
+
+	public boolean isOpened() {
 		return _isOpened;
 	}
-	
+
 	@Override
-    public void putFlag(boolean flagged) {
-      _isFlagged  = flagged;
-      if (flagged) {
-          _boardPanel.markMine();
-      } else {
-          _boardPanel.unMarkMine();
-      }
-      
-    }
-    
-    @Override
-    public boolean isFlagged() {
-      return _isFlagged;
-    }
-    
-    @Override
+	public void putFlag(boolean flagged) {
+		if (isFlagged()) {
+			_currentPanel.removeAll();
+		} else {
+			URL imageURL = getClass().getClassLoader().getResource("projects/minesweeper/flag.png");
+			_currentPanel.add(new JLabel(new ImageIcon(imageURL)));
+		}
+
+		_isFlagged = flagged;
+		if (flagged) {
+			_boardPanel.markMine();
+		} else {
+			_boardPanel.unMarkMine();
+		}
+
+	}
+
+	public void putMine() {
+
+		URL imageURL = getClass().getClassLoader().getResource("projects/minesweeper/mine.png");
+		_currentPanel.add(new JLabel(new ImageIcon(imageURL)));
+
+	}
+
+	@Override
+	public boolean isFlagged() {
+		return _isFlagged;
+	}
+
+	@Override
 	public void select() {
 		_currentPanel.setBorder(BorderFactory.createEtchedBorder());
 	}
-	
+
 	@Override
-    public void unselect() {
+	public void unselect() {
 		_currentPanel.setBorder(BorderFactory.createRaisedBevelBorder());
-    }
-	
-	public void addMouseListener (MouseListener mouseListener) {
+	}
+
+	public void addMouseListener(MouseListener mouseListener) {
 		_currentPanel.addMouseListener(mouseListener);
 	}
-	
+
+	public boolean isMine() {
+		return _item.isMine();
+	}
+
 	private class MouseRightClickListener extends MouseAdapter {
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			if(SwingUtilities.isRightMouseButton(e)) {
-			    
-				if(isFlagged()){
-					_currentPanel.removeAll();			
-				} else {
-					URL imageURL = getClass().getClassLoader().getResource("projects/minesweeper/flag.png");
-					_currentPanel.add(new JLabel(new ImageIcon(imageURL)));
-				}
-				
+			if (SwingUtilities.isRightMouseButton(e)) {
+
 				putFlag(!isFlagged());
 				_currentPanel.revalidate();
 				_currentPanel.repaint();
-				
+
 			}
-			
+
 		}
 
-		
-		
 	}
-
 
 }

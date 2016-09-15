@@ -76,6 +76,7 @@ public final class NumericItem extends AbstractItem {
 			openSectorRec();
 		} else {
 			simpleOpenField();
+			checkEndGame();
 			_boardPanel.getField(_row, _col).addMouseListener(new FlaggedNumberRevealListener());
 		}
 
@@ -87,7 +88,7 @@ public final class NumericItem extends AbstractItem {
 
 			List<Item> neighbours = neighbours();
 			for (Item neighbour : neighbours) {
-				if (!neighbour.isOpen() && !(neighbour instanceof Mine)) {
+				if (!neighbour.isOpen() && !neighbour.isMine()) {
 					_isOpen = true;
 					neighbour.open();
 					
@@ -95,11 +96,18 @@ public final class NumericItem extends AbstractItem {
 			}
 		}
 	}
+	
+	private void checkEndGame() {
+		if (_boardPanel.getUnOpenedFieldsCount() == _boardPanel.get_minesCount()) {
+			_boardPanel.showAllMines();
+			GameController.instance().gameOverWin();
+		}
+	}
 
 	private int countMinesNeighbours(List<Item> neighbours) {
 		int minesCount = 0;
 		for (Item item : neighbours) {
-			if (item instanceof Mine) {
+			if(item != null && item.isMine()) {
 				minesCount++;
 			}
 		}
@@ -126,6 +134,11 @@ public final class NumericItem extends AbstractItem {
 				neighbour.open();
 			}
 		}
+	}
+	
+	@Override
+	public boolean isMine() {
+		return false;
 	}
 
 	public class FlaggedNumberRevealListener extends MouseAdapter {

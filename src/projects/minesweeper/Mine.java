@@ -5,7 +5,6 @@ import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public final class Mine extends AbstractItem {
@@ -24,13 +23,18 @@ public final class Mine extends AbstractItem {
 	@Override
 	public void open() {
 	    simpleOpenField();
-        JOptionPane.showMessageDialog(null, "GAME OVER !");
-        GameController.instance().startNewGame(8, 8, 10);
+	    _boardPanel.showAllMines();
+        GameController.instance().gameOverLoose();
 	  }
 
 	
 	@Override
 	protected void setBackGround(JPanel panel) {
 		panel.setBackground(Color.RED);
+	}
+	
+	@Override
+	public boolean isMine() {
+		return true;
 	}
 }

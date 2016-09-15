@@ -117,6 +117,20 @@ public class BoardPanel {
       return _fieldsGrid[row][col];
     }
 	
+	public void showAllMines () {
+		for (int i = 0; i < _rows; i++) {
+			for (int j = 0; j < _cols; j++) {
+				Field currentField = _fieldsGrid[i][j];
+				if(!currentField.isFlagged() && !currentField.isOpened() && currentField.isMine()) {
+					currentField.putMine();
+				}
+			}
+		}
+		
+		_innerBoardPanel.revalidate();
+		_innerBoardPanel.repaint();
+	}
+	
 	
 
 }

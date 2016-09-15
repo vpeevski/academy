@@ -17,5 +17,7 @@ public interface Item {
 	boolean isOpen ();
 	
 	void open ();
+	
+	boolean isMine ();
 
 }

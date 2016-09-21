@@ -128,7 +128,7 @@ public final class NumericItem extends AbstractItem {
     List<Field> neighbours = BoardUtil.neighbours(_row, _col, _boardPanel);
     for (Field neighbour : neighbours) {
       if (!neighbour.isOpened() && !neighbour.isFlagged()) {
-        neighbour.openField();
+        neighbour.getItem().open();
       }
     }
   }

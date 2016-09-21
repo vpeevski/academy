@@ -27,7 +27,7 @@ public final  class MinePosRandomGen {
 				randRow = randomRow();
 				randCol = randomCol();
 				
-				mine = new Mine(randRow, randCol, null, boardPanel);
+				mine = new Mine(randRow, randCol, boardPanel);
 				
 			} while ((rowExcl == randRow && colExcl == randCol) || allreadyExists(mine, mines)); 
 			

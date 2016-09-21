@@ -56,15 +56,6 @@ public class BoardPanel {
 		return result;
 	}
 
-	public void populateGridItems(MineSweeperModel model) {
-		for (int i = 0; i < _fieldsGrid.length; i++) {
-			for (int j = 0; j < _fieldsGrid[0].length; j++) {
-				_fieldsGrid[i][j].setItem(model.getItem(i, j));
-			}
-		}
-		
-	}
-
 	public void addField(int row, int col, Field fieldButton) {
 		_innerBoardPanel.add(fieldButton.asComponent());
 		_fieldsGrid[row][col] = fieldButton;

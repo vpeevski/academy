@@ -10,7 +10,7 @@ public class MineSweeperModel {
 		_model = new Item [boardPanel.get_rows()][boardPanel.get_cols()];
 		MinePosRandomGen minesGenerator = new MinePosRandomGen(boardPanel.get_rows(), boardPanel.get_cols(), boardPanel.get_minesCount());
 		Mine[] mines = minesGenerator.generateRandom(rowExcl, colExcl, boardPanel);
-		putMinesInModel(mines);
+		putMinesInModel(mines, boardPanel);
 		calculateFullModel(boardPanel);
 		_minesCount = boardPanel.get_minesCount();
 		
@@ -20,17 +20,20 @@ public class MineSweeperModel {
 		for (int i = 0; i < _model.length; i++) {
 			for (int j = 0; j < _model[0].length; j++) {
 				if(_model[i][j] == null) {
-						_model[i][j] = new NumericItem(i, j, this, boardPanel);	
+				        Item newItem = new NumericItem(i, j, boardPanel);
+						_model[i][j] = newItem;	
+						boardPanel.getField(i, j).setItem(newItem);
 				}
 			}
 		}
 		
 	}
 
-	private void putMinesInModel (Mine[] mines) {
+	private void putMinesInModel (Mine[] mines, BoardPanel boardPanel) {
 		for (int i = 0; i < mines.length; i++) {
 			Mine currentMine = mines[i];
 			_model[currentMine.row()][currentMine.col()] = currentMine;
+			boardPanel.getField(currentMine.row(), currentMine.col()).setItem(currentMine);
 		}
 	}
 	

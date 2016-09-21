@@ -1,7 +1,5 @@
 package projects.minesweeper;
 
-import java.util.List;
-
 import javax.swing.JLabel;
 
 public interface Item {
@@ -11,8 +9,6 @@ public interface Item {
 	int row();
 	
 	JLabel label();
-	
-	List<Item> neighbours();
 	
 	boolean isOpen ();
 	

@@ -42,6 +42,10 @@ public final class Field implements Flaggable, Selectable {
 	public void setItem(Item _item) {
 		this._item = _item;
 	}
+	
+	public Item getItem() {
+      return _item;
+  }
 
 	public JPanel asComponent() {
 		return _currentPanel;
@@ -54,7 +58,6 @@ public final class Field implements Flaggable, Selectable {
 			if (SwingUtilities.isLeftMouseButton(e)) {
 				if (_boardPanel.isFirstClick()) {
 					MineSweeperModel model = new MineSweeperModel(_row, _col, _boardPanel);
-					_boardPanel.populateGridItems(model);
 				}
 
 				if (!isFlagged()) {
@@ -102,7 +105,6 @@ public final class Field implements Flaggable, Selectable {
 	}
 
 	public void putMine() {
-
 		URL imageURL = getClass().getClassLoader().getResource("projects/minesweeper/mine.png");
 		_currentPanel.add(new JLabel(new ImageIcon(imageURL)));
 

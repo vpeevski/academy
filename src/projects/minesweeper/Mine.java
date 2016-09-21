@@ -9,13 +9,14 @@ import javax.swing.JPanel;
 
 public final class Mine extends AbstractItem {
 	
-	public Mine(int row, int col, MineSweeperModel model, BoardPanel boardPanel) {
-		super(row, col, model, boardPanel);
+	public Mine(int row, int col, BoardPanel boardPanel) {
+		super(row, col, boardPanel);
 	}
 
 	@Override
 	public JLabel label() {
 		URL imageURL = getClass().getClassLoader().getResource("projects/minesweeper/mine.png");
+		_boardPanel.getField(_row, _col).asComponent().setBackground(Color.RED);
 		return new JLabel(new ImageIcon(imageURL));
 	}
 	

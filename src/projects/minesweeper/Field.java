@@ -42,10 +42,6 @@ public final class Field implements Flaggable, Selectable {
 	public void setItem(Item _item) {
 		this._item = _item;
 	}
-	
-	public Item getItem() {
-      return _item;
-  }
 
 	public JPanel asComponent() {
 		return _currentPanel;
@@ -60,7 +56,7 @@ public final class Field implements Flaggable, Selectable {
 					BoardUtil.populateBoard(_row, _col, _boardPanel);
 				}
 
-				if (!isFlagged()) {
+				if (_item != null && !isFlagged()) {
 					_item.open();
 				}
 
@@ -69,17 +65,20 @@ public final class Field implements Flaggable, Selectable {
 
 	}
 
-	public void open() {
+	public void openField() {
 		_isOpened = true;
 		_boardPanel.asPanel().remove(_row * _boardPanel.get_cols() + _col);
 		_currentPanel = new JPanel();
 		_currentPanel.setBorder(BorderFactory.createEtchedBorder());
-		// setBackGround(_currentPanel);
 		_currentPanel.add(_item.label());
 		_boardPanel.asPanel().add(_currentPanel, _row * _boardPanel.get_cols() + _col);
 
 		_currentPanel.revalidate();
 		_currentPanel.repaint();
+	}
+	
+	public Item getItem () {
+	  return _item;
 	}
 
 	public boolean isOpened() {
@@ -130,7 +129,7 @@ public final class Field implements Flaggable, Selectable {
 	}
 
 	public boolean isMine() {
-		return _item.isMine();
+		return _item != null && _item.isMine();
 	}
 
 	private class MouseRightClickListener extends MouseAdapter {

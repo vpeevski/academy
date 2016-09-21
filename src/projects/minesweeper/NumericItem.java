@@ -14,7 +14,7 @@ public final class NumericItem extends AbstractItem {
 
   public NumericItem(int row, int col, BoardPanel boardPanel) {
     super(row, col, boardPanel);
-    List<Item> neighbours = BoardUtil.neighbours(row, col, boardPanel);
+    List<Field> neighbours = BoardUtil.neighbours(row, col, boardPanel);
     _minesNeigboursCount = countMinesNeighbours(neighbours);
   }
 
@@ -86,12 +86,10 @@ public final class NumericItem extends AbstractItem {
     if (!_boardPanel.getField(_row, _col).isOpened()) {
       simpleOpenField();
 
-      List<Item> neighbours = BoardUtil.neighbours(_row, _col, _boardPanel);
-      for (Item neighbour : neighbours) {
-        Field field = _boardPanel.getField(neighbour.row(), neighbour.col());
-        if (neighbour != null && !neighbour.isMine() && !field.isOpened()) {
-          neighbour.open();
-
+      List<Field> neighbours = BoardUtil.neighbours(_row, _col, _boardPanel);
+      for (Field field : neighbours) {
+        if (field != null && !field.isMine() && !field.isOpened()) {
+          field.getItem().open();
         }
       }
     }
@@ -104,10 +102,10 @@ public final class NumericItem extends AbstractItem {
     }
   }
 
-  private int countMinesNeighbours(List<Item> neighbours) {
+  private int countMinesNeighbours(List<Field> neighbours) {
     int minesCount = 0;
-    for (Item item : neighbours) {
-      if (item != null && item.isMine()) {
+    for (Field field : neighbours) {
+      if (field != null && field.isMine()) {
         minesCount++;
       }
     }
@@ -115,10 +113,9 @@ public final class NumericItem extends AbstractItem {
     return minesCount;
   }
 
-  private int countFlaggedNeighbours(List<Item> neighbours) {
+  private int countFlaggedNeighbours(List<Field> neighbours) {
     int minesCount = 0;
-    for (Item item : neighbours) {
-      Field field = _boardPanel.getField(item.row(), item.col());
+    for (Field field : neighbours) {
       if (!field.isOpened() && field.isFlagged()) {
         minesCount++;
       }
@@ -128,11 +125,10 @@ public final class NumericItem extends AbstractItem {
   }
 
   private void revealFlaggedField() {
-    List<Item> neighbours = BoardUtil.neighbours(_row, _col, _boardPanel);
-    for (Item neighbour : neighbours) {
-      Field field = _boardPanel.getField(neighbour.row(), neighbour.col());
-      if (!field.isOpened() && !field.isFlagged()) {
-        neighbour.open();
+    List<Field> neighbours = BoardUtil.neighbours(_row, _col, _boardPanel);
+    for (Field neighbour : neighbours) {
+      if (!neighbour.isOpened() && !neighbour.isFlagged()) {
+        neighbour.openField();
       }
     }
   }
@@ -159,12 +155,11 @@ public final class NumericItem extends AbstractItem {
         isRightPressed = true;
       }
 
-      List<Item> neighbours = BoardUtil.neighbours(_row, _col, _boardPanel);
+      List<Field> neighbours = BoardUtil.neighbours(_row, _col, _boardPanel);
       if (_minesNeigboursCount <= countFlaggedNeighbours(neighbours) && isIn && isLeftPressed && isRightPressed) {
-        for (Item item : neighbours) {
-          Field field = _boardPanel.getField(item.row(), item.col());
+        for (Field field : neighbours) {
           if (!field.isFlagged() && !field.isOpened()) {
-            _boardPanel.getField(item.row(), item.col()).select();
+            field.select();
           }
 
         }
@@ -190,10 +185,9 @@ public final class NumericItem extends AbstractItem {
 
     @Override
     public void mouseExited(MouseEvent e) {
-      for (Item item : BoardUtil.neighbours(_row, _col, _boardPanel)) {
-        Field field = _boardPanel.getField(item.row(), item.col());
+      for (Field field : BoardUtil.neighbours(_row, _col, _boardPanel)) {
         if (!field.isFlagged() && !field.isOpened()) {
-          _boardPanel.getField(item.row(), item.col()).unselect();
+          field.unselect();
         }
 
       }
@@ -203,12 +197,11 @@ public final class NumericItem extends AbstractItem {
     @Override
     public void mouseEntered(MouseEvent e) {
       isIn = true;
-      List<Item> neighbours = BoardUtil.neighbours(_row, _col, _boardPanel);
+      List<Field> neighbours = BoardUtil.neighbours(_row, _col, _boardPanel);
       if (isLeftPressed && isRightPressed && _minesNeigboursCount <= countFlaggedNeighbours(neighbours) && isIn) {
-        for (Item item : neighbours) {
-          Field field = _boardPanel.getField(item.row(), item.col());
+        for (Field field : neighbours) {
           if (!field.isFlagged() && !field.isOpened()) {
-            _boardPanel.getField(item.row(), item.col()).select();
+            field.select();
           }
 
         }

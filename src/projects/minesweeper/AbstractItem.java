@@ -46,7 +46,7 @@ public abstract class AbstractItem implements Item {
 	
 	
 	protected final void simpleOpenField() {
-		_boardPanel.getField(_row, _col).open();
+		_boardPanel.getField(_row, _col).openField();
 	}
 	
 	protected void setBackGround (JPanel panel) {}

@@ -10,8 +10,6 @@ public interface Item {
 	
 	JLabel label();
 	
-	boolean isOpen ();
-	
 	void open ();
 	
 	boolean isMine ();

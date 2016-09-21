@@ -57,7 +57,7 @@ public final class Field implements Flaggable, Selectable {
 		public void mousePressed(MouseEvent e) {
 			if (SwingUtilities.isLeftMouseButton(e)) {
 				if (_boardPanel.isFirstClick()) {
-					MineSweeperModel model = new MineSweeperModel(_row, _col, _boardPanel);
+					BoardUtil.populateBoard(_row, _col, _boardPanel);
 				}
 
 				if (!isFlagged()) {

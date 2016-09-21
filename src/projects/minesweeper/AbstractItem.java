@@ -8,14 +8,11 @@ public abstract class AbstractItem implements Item {
 	
 	protected final int _col;
 	
-	protected boolean _isOpen;
-	
 	protected BoardPanel _boardPanel;
 
 	public AbstractItem (int row, int col, BoardPanel boardPanel) {
 		_row = row;
 		_col = col;
-		_isOpen = false;
 		_boardPanel = boardPanel;
 	}
 	@Override
@@ -46,13 +43,9 @@ public abstract class AbstractItem implements Item {
 		return hashCode;
 	}
 
-	@Override
-	public boolean isOpen() {
-		return _isOpen;
-	}
+	
 	
 	protected final void simpleOpenField() {
-		_isOpen = true;
 		_boardPanel.getField(_row, _col).open();
 	}
 	

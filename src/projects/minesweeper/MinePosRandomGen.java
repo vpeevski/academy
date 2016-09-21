@@ -16,9 +16,9 @@ public final  class MinePosRandomGen {
 		_minesCount = minesCount;
 	}
 	
-	public Mine[] generateRandom (int rowExcl, int colExcl, BoardPanel boardPanel) {
-		Mine[] mines = new Mine[_minesCount];
-		for (int i = 0; i < mines.length; i++) {
+	public void generateRandom (int rowExcl, int colExcl, BoardPanel boardPanel) {
+		
+		for (int i = 0; i < _minesCount; i++) {
 			
 			Mine mine;
 			int randRow;
@@ -29,12 +29,11 @@ public final  class MinePosRandomGen {
 				
 				mine = new Mine(randRow, randCol, boardPanel);
 				
-			} while ((rowExcl == randRow && colExcl == randCol) || allreadyExists(mine, mines)); 
+			} while ((rowExcl == randRow && colExcl == randCol) || boardPanel.getField(randRow, randCol).isMine()); 
 			
-			
-			mines[i] = mine;
+			boardPanel.getField(randRow, randCol).setItem(mine);
 		}
-		return mines;
+		
 	}
 	
 	private int randomRow () {
@@ -47,17 +46,4 @@ public final  class MinePosRandomGen {
 		return randomGenerator.nextInt(_cols);
 	}
 	
-	private boolean allreadyExists (Mine mine, Mine[] mines) {
-		boolean exists = false;
-		for (int i = 0; i < mines.length; i++) {
-			if (mine.equals(mines[i])) {
-				exists = true;
-				break;
-			}
-		}
-		return exists;
-	}
-	
-	
-
 }

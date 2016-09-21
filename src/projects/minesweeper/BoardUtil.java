@@ -53,8 +53,7 @@ public final class BoardUtil {
 
   public static void populateBoard(int rowExcl, int colExcl, BoardPanel boardPanel) {
     MinePosRandomGen minesGenerator = new MinePosRandomGen(boardPanel.get_rows(), boardPanel.get_cols(), boardPanel.get_minesCount());
-    Mine[] mines = minesGenerator.generateRandom(rowExcl, colExcl, boardPanel);
-    putMinesOnBoard(mines, boardPanel);
+    minesGenerator.generateRandom(rowExcl, colExcl, boardPanel);
     calculateFieldItems(boardPanel);
   }
 
@@ -68,13 +67,6 @@ public final class BoardUtil {
       }
     }
 
-  }
-
-  private static void putMinesOnBoard(Mine[] mines, BoardPanel boardPanel) {
-    for (int i = 0; i < mines.length; i++) {
-      Mine currentMine = mines[i];
-      boardPanel.getField(currentMine.row(), currentMine.col()).setItem(currentMine);
-    }
   }
 
 }

@@ -1,7 +1,5 @@
 package projects.minesweeper;
 
-import javax.swing.JPanel;
-
 public abstract class AbstractItem implements Item {
 	
 	protected final int _row;
@@ -15,11 +13,5 @@ public abstract class AbstractItem implements Item {
 		_col = col;
 		_boardPanel = boardPanel;
 	}
-	
-	protected final void simpleOpenField() {
-		_boardPanel.getField(_row, _col).openField();
-	}
-	
-	protected void setBackGround (JPanel panel) {}
  
 }

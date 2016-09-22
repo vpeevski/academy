@@ -75,7 +75,7 @@ public final class NumericItem extends AbstractItem {
     if (_minesNeigboursCount == 0) {
       openSectorRec();
     } else {
-      simpleOpenField();
+      _boardPanel.getField(_row, _col).openField(); // simply open gui field
       checkEndGame();
       _boardPanel.getField(_row, _col).addMouseListener(new FlaggedNumberRevealListener());
     }
@@ -84,7 +84,7 @@ public final class NumericItem extends AbstractItem {
 
   private void openSectorRec() {
     if (!_boardPanel.getField(_row, _col).isOpened()) {
-      simpleOpenField();
+      _boardPanel.getField(_row, _col).openField(); // simply open gui field
 
       List<Field> neighbours = BoardUtil.neighbours(_row, _col, _boardPanel);
       for (Field field : neighbours) {

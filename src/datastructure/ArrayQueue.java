@@ -47,7 +47,7 @@ public final class ArrayQueue<T> extends AbstractDataStructure<T> implements Que
     return innerSizedQueue.iterator();
   }
 
-  private static final class SizedCycledQueue<T> extends AbstractDataStructure<T> implements Queue<T>, LimitedSizeInterface {
+  private static final class SizedCycledQueue<T> extends AbstractSizedDataStructure<T> implements Queue<T> {
 
     private final Object[] _data;
 
@@ -91,12 +91,6 @@ public final class ArrayQueue<T> extends AbstractDataStructure<T> implements Que
 
     private boolean isLastElement() {
       return _front == _back;
-    }
-
-    @Override
-    public boolean isFull() {
-      int newBack = (_back + 1) % _data.length;
-      return newBack == _front;
     }
 
     @Override

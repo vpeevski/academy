@@ -47,7 +47,7 @@ public class ArrayStack<T> extends AbstractDataStructure<T> implements Stack<T> 
     return _innerSizedStack.iterator();
   }
 
-  private static class ArrayStackSized<T> extends AbstractDataStructure<T> implements Stack<T>, LimitedSizeInterface {
+  private static class ArrayStackSized<T> extends AbstractSizedDataStructure<T> implements Stack<T> {
 
     private final Object[] _data;
 
@@ -74,11 +74,6 @@ public class ArrayStack<T> extends AbstractDataStructure<T> implements Stack<T> 
       } else {
         throw new EmptyStackException();
       }
-    }
-
-    @Override
-    public boolean isFull() {
-      return topIndex == _data.length - 1;
     }
 
     @Override

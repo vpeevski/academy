@@ -93,6 +93,7 @@ public final class ArrayQueue<T> extends AbstractDataStructure<T> implements Que
       return _front == _back;
     }
 
+    
     @Override
     public boolean isEmpty() {
       return _back == -1 && _front == -1;

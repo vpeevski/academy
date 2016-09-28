@@ -7,7 +7,7 @@ public class HashMapDemo {
 
   public static void main(String[] args) {
     Map personHobies = new HashMap();
-    Person ivan = new Person(34, "Ivan");
+    Person ivan = new Person(35, "Ivan");
     Person dragan = new Person(35, "Dragan");
     personHobies.put(ivan, "Swimming");
     personHobies.put(dragan, "Reading books");
@@ -25,7 +25,7 @@ public class HashMapDemo {
     
     @Override
     public int hashCode() {
-      return 0;
+      return _age;
     }
     
     @Override

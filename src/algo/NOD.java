@@ -13,20 +13,21 @@ public class NOD {
 
 	public static int nod(int a, int b) {
 
-		int bigger = MathUtil.max(a, b);
-		int less = MathUtil.min(a, b);
-
-		int rest = bigger % less;
-
-		while (rest > 0) {
-			bigger = less;
-			less = rest;
-			rest = bigger % less;
+		while (a > 0 && b > 0) {
+			if(a > b) {
+				a = a % b;
+			} else {
+				b = b % a;
+			}
 		}
 
-		System.out.println("NOD of " + a + " and " + b + " is: " + less);
+		int nod = a;
+		if (a == 0) {
+			nod = b;
+		}
+		System.out.println("NOD of " + a + " and " + b + " is: " + nod);
 
-		return less;
+		return nod;
 	}
 
 	public static int nodr(int a, int b) {

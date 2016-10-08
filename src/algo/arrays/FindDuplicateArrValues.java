@@ -18,27 +18,28 @@ public class FindDuplicateArrValues {
 
   public static void main(String[] args) {
     FindDuplicateArrValues dupFinder = new FindDuplicateArrValues();
-    Map<Integer, List> dupIndexes = dupFinder.findAllDuplicationsSingleLoop(_inputArray);
+    //Map<Integer, List> dupIndexes = dupFinder.findAllDuplicationsSingleLoop(_inputArray);
+    Map<Integer, List> dupIndexes = dupFinder.findAllDuplications(_inputArray);
     dupFinder.printDupOnly(dupIndexes);
   }
 
-  private void printDup(Map<Integer, List> dupIndexes) {
-    Set<Integer> duplicatedValues = dupIndexes.keySet();
-    for (Integer dupValue : duplicatedValues) {
-      List dupList = dupIndexes.get(dupValue);
-      for (int i = 0; i < dupList.size(); i++) {
-        Integer dupIndex = (Integer) dupList.get(i);
-        System.out.print(dupIndex);
-        if (i < dupList.size() - 1) {
-          System.out.print(" , ");
-        }
-        
-      }
-      
-      System.out.println("; ");
-    }
-    
-  }
+//  private void printDup(Map<Integer, List> dupIndexes) {
+//    Set<Integer> duplicatedValues = dupIndexes.keySet();
+//    for (Integer dupValue : duplicatedValues) {
+//      List dupList = dupIndexes.get(dupValue);
+//      for (int i = 0; i < dupList.size(); i++) {
+//        Integer dupIndex = (Integer) dupList.get(i);
+//        System.out.print(dupIndex);
+//        if (i < dupList.size() - 1) {
+//          System.out.print(" , ");
+//        }
+//        
+//      }
+//      
+//      System.out.println("; ");
+//    }
+//    
+//  }
 
   private List findDuplication(int arr[], int startPos) {
     List duplicateIndexes = new ArrayList();
@@ -56,12 +57,12 @@ public class FindDuplicateArrValues {
   public Map<Integer, List> findAllDuplications (int arr[]) {
     Map<Integer, List> duplications = new HashMap();
     for (int i = 0; i < arr.length; i++) {
-      List duplicationsForI = findDuplication(arr, i);
-      if (!duplicationsForI.isEmpty()) {
-         if (!duplications.containsKey(arr[i])) {
-           duplications.put(arr[i], duplicationsForI);
-         }
-      }
+    	if (!duplications.containsKey(arr[i])) {
+    		List duplicationsForI = findDuplication(arr, i);
+    		if (!duplicationsForI.isEmpty()) { 
+    			duplications.put(arr[i], duplicationsForI);
+    		}
+    	}
       
     }
     
@@ -89,6 +90,7 @@ public class FindDuplicateArrValues {
     for (Integer dupValue : duplicatedValues) {
       List dupList = dupIndexes.get(dupValue);
       if (dupList.size() > 1) {
+    	System.out.print(dupValue + " -> ");
         for (int i = 0; i < dupList.size(); i++) {
           Integer dupIndex = (Integer) dupList.get(i);
           System.out.print(dupIndex);

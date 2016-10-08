@@ -16,7 +16,7 @@ public class NODTest {
 	
 	@Test
 	public void testNod() {
-		int nod1 = NOD.nod(18, 12);
+		int nod1 = NOD.nod(84, 18);
 		int nod2 = NOD.nod(8, 12);
 		assertEquals(6, nod1);
 		assertEquals(4, nod2);

@@ -2,19 +2,12 @@ package projects.tetris;
 
 import java.awt.Color;
 
-public class Bar {
-
-	private TetrisBoard _board;
-
-	private Field[] fields = new Field[4];
-
-	private Color _color;
+public class Bar extends AbstractElement {
 
 	private boolean isHorizontal = true;
 
 	public Bar(TetrisBoard board, Color color) {
-		_color = color;
-		_board = board;
+		super(board, color);
 		fields[0] = board.getField(0, 3);
 		fields[0].setColor(color);
 		fields[1] = board.getField(0, 4);
@@ -25,50 +18,10 @@ public class Bar {
 		fields[3].setColor(color);
 	}
 
-	public void show() {
-		for (int i = 0; i < fields.length; i++) {
-			fields[i].show();
-		}
-
-	}
-
-	public void moveDown() {
-		if (isMovalbleDown()) {
-			hide();
-			for (int i = 0; i < fields.length; i++) {
-				fields[i] = _board.getDownFieldOf(fields[i]);
-				fields[i].setColor(_color);
-			}
-
-			show();
-		}
-	}
-
-	public void moveLeft() {
-		if (isMovalbleLeft()) {
-			hide();
-			for (int i = 0; i < fields.length; i++) {
-				fields[i] = _board.getLeftFieldOf(fields[i]);
-				fields[i].setColor(_color);
-			}
-			show();
-		}
-
-	}
-
-	public void moveRight() {
-		if (isMovalbleRight()) {
-			hide();
-			for (int i = 0; i < fields.length; i++) {
-				fields[i] = _board.getRightFieldOf(fields[i]);
-				fields[i].setColor(_color);
-			}
-
-			show();
-		}
-
-	}
-
+	/* (non-Javadoc)
+	 * @see projects.tetris.Element#rotate()
+	 */
+	@Override
 	public void rotate() {
 		if (isHorizontal && isRotatableV()) {
 			rotateToVertial();
@@ -99,39 +52,6 @@ public class Bar {
 		fields[3].setColor(_color);
 		isHorizontal = true;
 		show();
-	}
-
-	public boolean isMovalbleDown() {
-		boolean isMovalbleDown = true;
-		for (int i = 0; i < fields.length; i++) {
-			Field downField = _board.getDownFieldOf(fields[i]);
-			if (downField == null || !_board.getDownFieldOf(fields[i]).isFree()) {
-				isMovalbleDown = false;
-			}
-		}
-		return isMovalbleDown;
-	}
-
-	public boolean isMovalbleLeft() {
-		boolean isMovalbleLeft = true;
-		for (int i = 0; i < fields.length; i++) {
-			Field leftField = _board.getLeftFieldOf(fields[i]);
-			if (leftField == null || !leftField.isFree()) {
-				isMovalbleLeft = false;
-			}
-		}
-		return isMovalbleLeft;
-	}
-
-	public boolean isMovalbleRight() {
-		boolean isMovalbleRight = true;
-		for (int i = 0; i < fields.length; i++) {
-			Field rightField = _board.getRightFieldOf(fields[i]);
-			if (rightField == null || !rightField.isFree()) {
-				isMovalbleRight = false;
-			}
-		}
-		return isMovalbleRight;
 	}
 
 	private boolean isRotatableV() {
@@ -168,24 +88,6 @@ public class Bar {
 			return false;
 		}
 		return true;
-	}
-
-	private void hide() {
-		for (int i = 0; i < fields.length; i++) {
-			fields[i].hide();
-		}
-	}
-
-	public Color getColor() {
-		return _color;
-
-	}
-
-	public void engageFields() {
-		for (int i = 0; i < fields.length; i++) {
-			fields[i].setFree(false);
-		}
-
 	}
 
 }

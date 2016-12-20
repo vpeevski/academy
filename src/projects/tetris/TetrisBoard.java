@@ -17,7 +17,7 @@ public class TetrisBoard {
 
 	private Field[][] _fieldsGrid;
 
-	private Bar _fallingBar;
+	private Element _fallingElement;
 
 	private Timer _timer;
 
@@ -32,8 +32,16 @@ public class TetrisBoard {
 				addField(i, j, field);
 			}
 		}
-
-		_fallingBar = new Bar(TetrisBoard.this, Color.BLUE);
+		
+		double random = Math.random();
+		if(random < 0.33) {
+			_fallingElement = new Bar(TetrisBoard.this, Color.BLUE);
+		} else if (random < 0.66) {
+			_fallingElement = new SemiCross(TetrisBoard.this, Color.ORANGE);
+		} else {
+			_fallingElement = new Cube(TetrisBoard.this, Color.GREEN);
+		}
+		
 		_innerBoardPanel.setFocusable(true);
 		_innerBoardPanel.addKeyListener(new KeyboardListener());
 	}
@@ -59,13 +67,21 @@ public class TetrisBoard {
 		public void actionPerformed(ActionEvent e) {
 			row++;
 			if (row == 0) {
-				_fallingBar.show();
-			} else if (_fallingBar.isMovalbleDown()) {
-				_fallingBar.moveDown();
+				_fallingElement.show();
+			} else if (_fallingElement.isMovableDown()) {
+				_fallingElement.moveDown();
 			} else {
-				_fallingBar.engageFields();
+				_fallingElement.engageFields();
 				checkForCompletedRows();
-				_fallingBar = new Bar(TetrisBoard.this, Color.BLUE);
+				double random = Math.random();
+				if(random < 0.33) {
+					_fallingElement = new Bar(TetrisBoard.this, Color.BLUE);
+				} else if (random < 0.66) {
+					_fallingElement = new SemiCross(TetrisBoard.this, Color.ORANGE);
+				} else {
+					_fallingElement = new Cube(TetrisBoard.this, Color.GREEN);
+				}
+
 				row = -1;
 				_timer.setDelay(1000);
 			}
@@ -166,13 +182,21 @@ public class TetrisBoard {
 		public void keyPressed(KeyEvent e) {
 			int keyCode = e.getKeyCode();
 			if (keyCode == KeyEvent.VK_LEFT) {
-				_fallingBar.moveLeft();
+				_fallingElement.moveLeft();
 			} else if (keyCode == KeyEvent.VK_RIGHT) {
-				_fallingBar.moveRight();
+				_fallingElement.moveRight();
 			} else if (keyCode == KeyEvent.VK_DOWN) {
-				_timer.setDelay(1);
+				_timer.setDelay(30);
 			} else if (keyCode == KeyEvent.VK_UP) {
-				_fallingBar.rotate();
+				_fallingElement.rotate();
+			}
+		}
+		
+		@Override
+		public void keyReleased(KeyEvent e) {
+			int keyCode = e.getKeyCode();
+			if (keyCode == KeyEvent.VK_DOWN) {
+				_timer.setDelay(1000);
 			}
 		}
 	}

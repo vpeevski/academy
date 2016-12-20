@@ -15,7 +15,7 @@ public final class Field {
 	private int _col;
 
 	private boolean isFree = true;
-	
+
 	private Color _color;
 
 	private TetrisBoard _board;
@@ -28,6 +28,7 @@ public final class Field {
 		_row = row;
 		_col = col;
 		_board = board;
+		_color = Color.BLACK;
 	}
 
 	public JPanel asComponent() {
@@ -50,9 +51,9 @@ public final class Field {
 		this.isFree = isFree;
 	}
 
-	public void collapse () {
+	public void collapse() {
 		Field downField = _board.getDownFieldOf(this);
-		if(isFree) {
+		if (isFree) {
 			downField.hide();
 			downField.setFree(true);
 		} else {
@@ -62,29 +63,50 @@ public final class Field {
 		}
 
 	}
-	
-//	public Field moveDown () {
-//		hide();
-//		Field downField = _board.getDownFieldOf(this);
-//		downField.setColor(_color);
-//		downField.show();
-//		return downField;
-//	}
+
+	public Field moveDown() {
+		hide();
+		Field downField = _board.getDownFieldOf(this);
+		downField.setColor(_color);
+		downField.show();
+		return downField;
+	}
+
+	public Field moveLeft() {
+		hide();
+		Field leftField = _board.getLeftFieldOf(this);
+		leftField.setColor(_color);
+		leftField.show();
+		return leftField;
+	}
+
+	public Field moveRight() {
+		hide();
+		Field rightField = _board.getRightFieldOf(this);
+		rightField.setColor(_color);
+		rightField.show();
+		return rightField;
+	}
 
 	public void hide() {
 		_currentPanel.setBackground(Color.BLACK);
 		_currentPanel.setBorder(BorderFactory
 				.createLineBorder(Color.LIGHT_GRAY));
+		// _color = Color.BLACK;
 	}
 
 	public void show() {
 		_currentPanel.setBackground(_color);
-		_currentPanel.setBorder(
-				BorderFactory.createRaisedBevelBorder());
+		_currentPanel.setBorder(BorderFactory.createRaisedBevelBorder());
 	}
-	
-	public void setColor (Color color) {
+
+	public void setColor(Color color) {
 		_color = color;
+	}
+
+	@Override
+	public String toString() {
+		return "[" + _row + "," + _col + "] - " + _color;
 	}
 
 }

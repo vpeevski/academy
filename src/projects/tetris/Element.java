@@ -27,5 +27,7 @@ public interface Element {
 	public void engageFields();
 	
 	public Element moveToBoard (AbstractBoard board);
+	
+	public void checkFields ();
 
 }

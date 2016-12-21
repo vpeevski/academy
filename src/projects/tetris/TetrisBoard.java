@@ -28,7 +28,8 @@ public class TetrisBoard extends AbstractBoard {
 		_fieldsGrid[row][col] = field;
 	}
 
-	public void checkForCompletedRows() {
+	public int checkForCompletedRows() {
+		int count = 0;
 		for (int i = 0; i < _fieldsGrid.length; i++) {
 			boolean isCompleted = true;
 			for (int j = 0; j < _fieldsGrid[i].length; j++) {
@@ -39,11 +40,14 @@ public class TetrisBoard extends AbstractBoard {
 			}
 
 			if (isCompleted) {
+				count++;
 				removeRow(i);
 				pushDownUpperRows(i);
 			}
 		}
-
+		
+		return count;
+		
 	}
 
 	private void pushDownUpperRows(int rowRemoved) {

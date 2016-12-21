@@ -27,10 +27,20 @@ public abstract class AbstractElement implements Element {
 		}
 
 	}
-	
-	protected void setColor () {
+
+	protected void setColor() {
 		for (int i = 0; i < fields.length; i++) {
 			fields[i].setColor(_color);
+		}
+	}
+
+	@Override
+	public void checkFields() {
+		for (int i = 0; i < fields.length; i++) {
+			if (!fields[i].isFree()) {
+				throw new IllegalStateException(
+						"New field overlappes old shape");
+			}
 		}
 	}
 
@@ -158,7 +168,7 @@ public abstract class AbstractElement implements Element {
 		for (int i = 0; i < fields.length; i++) {
 			fields[i].hide();
 		}
-		
+
 	}
 
 }

@@ -6,16 +6,14 @@ public class Bar extends AbstractElement {
 
 	private boolean isHorizontal = true;
 
-	public Bar(TetrisBoard board, Color color) {
+	public Bar(AbstractBoard board) {
+		this(board, Color.BLUE);
+	}
+	
+	public Bar(AbstractBoard board, Color color) {
 		super(board, color);
-		fields[0] = board.getField(0, 3);
-		fields[0].setColor(color);
-		fields[1] = board.getField(0, 4);
-		fields[1].setColor(color);
-		fields[2] = board.getField(0, 5);
-		fields[2].setColor(color);
-		fields[3] = board.getField(0, 6);
-		fields[3].setColor(color);
+		fields = board.createBarFields();
+		setColor();
 	}
 
 	/* (non-Javadoc)
@@ -88,6 +86,11 @@ public class Bar extends AbstractElement {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public Element moveToBoard(AbstractBoard board) {
+		return new Bar (board);
 	}
 
 }

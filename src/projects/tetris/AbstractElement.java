@@ -4,13 +4,13 @@ import java.awt.Color;
 
 public abstract class AbstractElement implements Element {
 
-	protected TetrisBoard _board;
+	protected AbstractBoard _board;
 
 	protected Field[] fields = new Field[4];
 
 	protected Color _color;
 
-	public AbstractElement(TetrisBoard board, Color color) {
+	public AbstractElement(AbstractBoard board, Color color) {
 		_board = board;
 		_color = color;
 	}
@@ -26,6 +26,12 @@ public abstract class AbstractElement implements Element {
 			fields[i].show();
 		}
 
+	}
+	
+	protected void setColor () {
+		for (int i = 0; i < fields.length; i++) {
+			fields[i].setColor(_color);
+		}
 	}
 
 	/*
@@ -147,10 +153,12 @@ public abstract class AbstractElement implements Element {
 
 	}
 
-	protected void hide() {
+	@Override
+	public void hide() {
 		for (int i = 0; i < fields.length; i++) {
 			fields[i].hide();
 		}
+		
 	}
 
 }

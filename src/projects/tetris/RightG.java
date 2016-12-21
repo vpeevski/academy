@@ -12,20 +12,14 @@ public class RightG extends AbstractElement {
 
 	private boolean isUp = false;
 
-	public RightG(TetrisBoard board) {
+	public RightG(AbstractBoard board) {
 		this(board, Color.PINK);
 	}
 	
-	public RightG(TetrisBoard board, Color color) {
+	public RightG(AbstractBoard board, Color color) {
 		super(board, color);
-		fields[0] = board.getField(0, 4);
-		fields[0].setColor(color);
-		fields[1] = board.getField(0, 5);
-		fields[1].setColor(color);
-		fields[2] = board.getField(0, 6);
-		fields[2].setColor(color);
-		fields[3] = board.getField(1, 6);
-		fields[3].setColor(color);
+		fields = board.createRightGFields();
+		setColor();
 	}
 
 	@Override
@@ -237,6 +231,11 @@ public class RightG extends AbstractElement {
 			
 		}
 
+	}
+
+	@Override
+	public Element moveToBoard(AbstractBoard board) {
+		return new RightG(board);
 	}
 
 }

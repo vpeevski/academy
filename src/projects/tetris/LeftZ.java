@@ -6,20 +6,14 @@ public class LeftZ extends AbstractElement {
 
 	private boolean isHorizontal = true;
 
-	public LeftZ(TetrisBoard board) {
-		this(board, Color.CYAN);
+	public LeftZ(AbstractBoard onBoard) {
+		this(onBoard, Color.CYAN);
 	}
 
-	public LeftZ(TetrisBoard board, Color color) {
+	public LeftZ(AbstractBoard board, Color color) {
 		super(board, color);
-		fields[0] = board.getField(0, 6);
-		fields[0].setColor(color);
-		fields[1] = board.getField(0, 5);
-		fields[1].setColor(color);
-		fields[2] = board.getField(1, 5);
-		fields[2].setColor(color);
-		fields[3] = board.getField(1, 4);
-		fields[3].setColor(color);
+		fields = board.createLeftZFields();
+		setColor();
 	}
 
 	@Override
@@ -152,6 +146,11 @@ public class LeftZ extends AbstractElement {
 				}
 			}
 		}
+	}
+
+	@Override
+	public Element moveToBoard(AbstractBoard board) {
+		return new LeftZ(board);
 	}
 
 }

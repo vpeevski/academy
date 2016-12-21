@@ -12,16 +12,13 @@ public class SemiCross extends AbstractElement {
 
 	private boolean isUp = false;
 
-	public SemiCross(TetrisBoard board, Color color) {
+	public SemiCross(AbstractBoard board) {
+		this(board, Color.ORANGE);
+	}
+	public SemiCross(AbstractBoard board, Color color) {
 		super(board, color);
-		fields[0] = board.getField(0, 4);
-		fields[0].setColor(color);
-		fields[1] = board.getField(1, 4);
-		fields[1].setColor(color);
-		fields[2] = board.getField(2, 4);
-		fields[2].setColor(color);
-		fields[3] = board.getField(1, 5);
-		fields[3].setColor(color);
+		fields = board.createSemiCrossFields();
+		setColor();
 	}
 
 	@Override
@@ -230,5 +227,9 @@ public class SemiCross extends AbstractElement {
 			
 		}
 
+	}
+	@Override
+	public Element moveToBoard(AbstractBoard board) {
+		return new SemiCross(board);
 	}
 }

@@ -4,24 +4,28 @@ import java.awt.Color;
 
 public interface Element {
 
-	public abstract void show();
+	public void show();
+	
+	public void hide();
 
-	public abstract void moveDown();
+	public void moveDown();
 
-	public abstract void moveLeft();
+	public void moveLeft();
 
-	public abstract void moveRight();
+	public void moveRight();
 
-	public abstract void rotate();
+	public void rotate();
 
-	public abstract boolean isMovableDown();
+	public boolean isMovableDown();
 
-	public abstract boolean isMovableLeft();
+	public boolean isMovableLeft();
 
-	public abstract boolean isMovableRight();
+	public boolean isMovableRight();
 
-	public abstract Color getColor();
+	public Color getColor();
 
-	public abstract void engageFields();
+	public void engageFields();
+	
+	public Element moveToBoard (AbstractBoard board);
 
 }

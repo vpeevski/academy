@@ -29,7 +29,13 @@ public final class Field {
 		_col = col;
 		_board = board;
 		_color = Color.BLACK;
+		
 	}
+	
+	public Field(int row, int col) {
+		this(row, col, null);
+	}
+
 
 	public JPanel asComponent() {
 		return _currentPanel;

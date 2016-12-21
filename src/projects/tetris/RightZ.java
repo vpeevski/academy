@@ -6,20 +6,14 @@ public class RightZ extends AbstractElement {
 
 	private boolean isHorizontal = true;
 
-	public RightZ(TetrisBoard board) {
+	public RightZ(AbstractBoard board) {
 		this(board, new Color(78, 108, 229));
 	}
 
-	public RightZ(TetrisBoard board, Color color) {
+	public RightZ(AbstractBoard board, Color color) {
 		super(board, color);
-		fields[0] = board.getField(0, 4);
-		fields[0].setColor(color);
-		fields[1] = board.getField(0, 5);
-		fields[1].setColor(color);
-		fields[2] = board.getField(1, 5);
-		fields[2].setColor(color);
-		fields[3] = board.getField(1, 6);
-		fields[3].setColor(color);
+		fields = board.createRightZFields();
+		setColor();
 	}
 
 	@Override
@@ -144,6 +138,11 @@ public class RightZ extends AbstractElement {
 
 		}
 
+	}
+
+	@Override
+	public Element moveToBoard(AbstractBoard board) {
+		return new RightZ(board);
 	}
 
 }

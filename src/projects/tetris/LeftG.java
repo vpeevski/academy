@@ -12,20 +12,14 @@ public class LeftG extends AbstractElement {
 
 	private boolean isUp = false;
 
-	public LeftG(TetrisBoard board) {
+	public LeftG(AbstractBoard board) {
 		this(board, Color.YELLOW);
 	}
 	
-	public LeftG(TetrisBoard board, Color color) {
+	public LeftG(AbstractBoard board, Color color) {
 		super(board, color);
-		fields[0] = board.getField(0, 4);
-		fields[0].setColor(color);
-		fields[1] = board.getField(0, 5);
-		fields[1].setColor(color);
-		fields[2] = board.getField(0, 6);
-		fields[2].setColor(color);
-		fields[3] = board.getField(1, 4);
-		fields[3].setColor(color);
+		fields = board.createLeftGFields();
+		setColor();
 	}
 
 	@Override
@@ -237,6 +231,11 @@ public class LeftG extends AbstractElement {
 			
 		}
 
+	}
+
+	@Override
+	public Element moveToBoard(AbstractBoard board) {
+		return new LeftG(board);
 	}
 
 }

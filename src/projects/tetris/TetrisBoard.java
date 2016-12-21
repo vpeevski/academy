@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -32,16 +33,9 @@ public class TetrisBoard {
 				addField(i, j, field);
 			}
 		}
-		
-		double random = Math.random();
-		if(random < 0.33) {
-			_fallingElement = new Bar(TetrisBoard.this, Color.BLUE);
-		} else if (random < 0.66) {
-			_fallingElement = new SemiCross(TetrisBoard.this, Color.ORANGE);
-		} else {
-			_fallingElement = new Cube(TetrisBoard.this, Color.GREEN);
-		}
-		
+
+		_fallingElement = generateElement();
+
 		_innerBoardPanel.setFocusable(true);
 		_innerBoardPanel.addKeyListener(new KeyboardListener());
 	}
@@ -61,29 +55,22 @@ public class TetrisBoard {
 
 	public class TetrisTimerListener implements ActionListener {
 
-		int row = -1;
+		boolean showNewElement = true;
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			row++;
-			if (row == 0) {
+			if (showNewElement) {
 				_fallingElement.show();
+				_timer.setDelay(1000);
+				showNewElement = false;
 			} else if (_fallingElement.isMovableDown()) {
 				_fallingElement.moveDown();
 			} else {
 				_fallingElement.engageFields();
 				checkForCompletedRows();
-				double random = Math.random();
-				if(random < 0.33) {
-					_fallingElement = new Bar(TetrisBoard.this, Color.BLUE);
-				} else if (random < 0.66) {
-					_fallingElement = new SemiCross(TetrisBoard.this, Color.ORANGE);
-				} else {
-					_fallingElement = new Cube(TetrisBoard.this, Color.GREEN);
-				}
+				_fallingElement = generateElement();
 
-				row = -1;
-				_timer.setDelay(1000);
+				showNewElement = true;
 			}
 
 		}
@@ -167,7 +154,7 @@ public class TetrisBoard {
 				_fieldsGrid[i][j].collapse();
 			}
 		}
-		
+
 	}
 
 	private void removeRow(int i) {
@@ -177,7 +164,30 @@ public class TetrisBoard {
 		}
 	}
 
+	private Element generateElement() {
+		Element result = new LeftZ(TetrisBoard.this);
+		double random = Math.random();
+		if (random < 0.143) {
+			result = new Bar(TetrisBoard.this, Color.BLUE);
+		} else if (random < 0.286) {
+			result = new SemiCross(TetrisBoard.this, Color.ORANGE);
+		} else if (random < 0.428) {
+			result = new Cube(TetrisBoard.this, Color.GREEN);
+		} else if (random < 0.572) {
+			result = new RightG(TetrisBoard.this);
+		} else if (random < 0.715) {
+			result = new LeftG(TetrisBoard.this);
+		} else if (random < 0.858) {
+			result = new RightZ(TetrisBoard.this);
+		} else {
+			result = new LeftZ(TetrisBoard.this);
+		}
+
+		return result;
+	}
+
 	private class KeyboardListener extends KeyAdapter {
+
 		@Override
 		public void keyPressed(KeyEvent e) {
 			int keyCode = e.getKeyCode();
@@ -191,7 +201,7 @@ public class TetrisBoard {
 				_fallingElement.rotate();
 			}
 		}
-		
+
 		@Override
 		public void keyReleased(KeyEvent e) {
 			int keyCode = e.getKeyCode();

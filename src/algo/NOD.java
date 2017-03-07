@@ -84,7 +84,7 @@ public class NOD {
 	}
 	
 	public static int nodManyR (int current, int[] numbers) {
-		if (numbers.length == 0) throw new IllegalArgumentException("NOD operation is not definet for empty value : " + numbers); 
+		if (numbers.length == 0) throw new IllegalArgumentException("NOD operation is not defined for empty value : " + numbers); 
 		if (numbers.length == 1) return numbers[0];
 		if (current == numbers.length - 2) return nod (numbers[current], numbers[current + 1]);
 		

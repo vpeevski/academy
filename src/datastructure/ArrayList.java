@@ -5,6 +5,7 @@ import java.util.NoSuchElementException;
 
 public class ArrayList<T> extends AbstractList<T> implements List<T> {
 
+
   private static final int  MIN_SIZE = 30;
 
   private ArrayListSized<T> _innerSizedList = new ArrayListSized<T>(MIN_SIZE);

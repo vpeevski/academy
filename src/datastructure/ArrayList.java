@@ -3,7 +3,7 @@ package datastructure;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class ArrayList<T> extends AbstractList<T> implements List<T>{
+public class ArrayList<T> extends AbstractList<T> implements List<T> {
 
   private static final int  MIN_SIZE        = 5;
 

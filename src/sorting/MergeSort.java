@@ -35,10 +35,10 @@ public class MergeSort extends AbstractSortWithTimer {
     }
     mergeSort(left);
     mergeSort(right);
-    merge(left, right, arr);
+    merge((T[])left, (T[])right, arr);
   }
 
-  public <T extends Comparable<T>> void merge(T[] left, T[] right, T arr[]) {
+  private <T extends Comparable<T>> void merge(T[] left, T[] right, T arr[]) {
     int leftSize = left.length;
     int rightSize = right.length;
     int i = 0, j = 0, k = 0;

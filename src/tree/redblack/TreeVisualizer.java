@@ -44,8 +44,7 @@ public class TreeVisualizer<T extends Comparable<T>, V extends RBTreeNode<T>, E>
 		showRedBlackTree(graph, jGraph);
 	}
 
-	private void showRedBlackTree(
-			RedBlackTreeGraph<T, V, E> graph, JGraph jGraph) {
+	private void showRedBlackTree(RedBlackTreeGraph<T, V, E> graph, JGraph jGraph) {
 		for (RBTreeNode<T> vertex : graph) {
 			putVertexToPosition(vertex);
 		}
@@ -61,25 +60,30 @@ public class TreeVisualizer<T extends Comparable<T>, V extends RBTreeNode<T>, E>
 
 	private void putVertexToPosition(RBTreeNode<T> vertex) {
 		DefaultGraphCell gCell = _graphAdapter.getVertexCell(vertex);
-		Map atts = gCell.getAttributes();
+		if (gCell != null) {
+			Map atts = gCell.getAttributes();
 
-		GraphConstants.setBounds(atts, new Rectangle(vertex.getX(), vertex.getY(), 50, 50));
+			GraphConstants.setBounds(atts, new Rectangle(vertex.getX(), vertex.getY(), 50, 50));
 
-		Map cellAttr = new HashMap();
-		cellAttr.put(gCell, atts);
-		_graphAdapter.edit(cellAttr, null, null, null);
+			Map cellAttr = new HashMap();
+			cellAttr.put(gCell, atts);
+			_graphAdapter.edit(cellAttr, null, null, null);
+		}
+
 	}
 
 	private static RedBlackTreeGraph<Integer, RBTreeNode<Integer>, DummyEdge> produceRedBlackTree() {
 		RedBlackTreeGraph<Integer, RBTreeNode<Integer>, DummyEdge> graph = new RedBlackTreeGraph<>(DummyEdge.class);
 
 		graph.addVertex(new RBTreeNode<Integer>(10));
-		graph.addVertex(new RBTreeNode<Integer>(5));
+//		graph.addVertex(new RBTreeNode<Integer>(5));
 		graph.addVertex(new RBTreeNode<Integer>(20));
 		graph.addVertex(new RBTreeNode<Integer>(30));
 		graph.addVertex(new RBTreeNode<Integer>(25));
-		graph.addVertex(new RBTreeNode<Integer>(6));
-		//graph.addVertex(new RBTreeNode<Integer>(15));
+//		graph.addVertex(new RBTreeNode<Integer>(6));
+//		graph.addVertex(new RBTreeNode<Integer>(4));
+//		graph.addVertex(new RBTreeNode<Integer>(3));
+//		graph.addVertex(new RBTreeNode<Integer>(22));
 
 		return graph;
 	}
@@ -152,15 +156,17 @@ public class TreeVisualizer<T extends Comparable<T>, V extends RBTreeNode<T>, E>
 
 	}
 
-//	private class RBCellFactory<T extends Comparable<T>, V extends RBTreeNode<T>, E> extends DefaultCellFactory<V, E> {
-//
-//		@Override
-//		public DefaultGraphCell createVertexCell(V jGraphTVertex) {
-//			RBTreeNode<T> parentNode = ((RBTreeNode<T>) jGraphTVertex).getParent();
-//			return new RedBlackCell((RBTreeNode<T>) jGraphTVertex, parentNode == null ? null :
-//					(RedBlackCell) _graphAdapter.getVertexCell(parentNode));
-//		}
-//
-//	}
+	// private class RBCellFactory<T extends Comparable<T>, V extends
+	// RBTreeNode<T>, E> extends DefaultCellFactory<V, E> {
+	//
+	// @Override
+	// public DefaultGraphCell createVertexCell(V jGraphTVertex) {
+	// RBTreeNode<T> parentNode = ((RBTreeNode<T>) jGraphTVertex).getParent();
+	// return new RedBlackCell((RBTreeNode<T>) jGraphTVertex, parentNode == null
+	// ? null :
+	// (RedBlackCell) _graphAdapter.getVertexCell(parentNode));
+	// }
+	//
+	// }
 
 }

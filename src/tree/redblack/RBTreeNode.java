@@ -4,10 +4,12 @@ import tree.BSTreeNode;
 
 public class RBTreeNode<T extends Comparable<T>> {
 
+	private static final RBTreeNode LEAF_NODE = createLeafNode();
+
 	private final int ROOT_X = 500;
 	private final int ROOT_Y = 100;
 
-	private final int OFFSET_X = 100;
+	private final int OFFSET_X = 200;
 	private final int OFFSET_Y = 100;
 
 	private int x = ROOT_X;
@@ -39,6 +41,8 @@ public class RBTreeNode<T extends Comparable<T>> {
 		this.color = color;
 		this.parent = parent;
 		this.level = parent == null ? 0 : parent.level + 1;
+		left = LEAF_NODE;
+		right = LEAF_NODE;
 
 	}
 
@@ -104,12 +108,20 @@ public class RBTreeNode<T extends Comparable<T>> {
 		this.color = color;
 	}
 
+	public Color getColor() {
+		return color;
+	}
+
 	public boolean isLeftChild() {
 		return parent == null ? false : parent.getLeft() == this;
 	}
 
 	public boolean isRoot() {
 		return parent == null;
+	}
+	
+	public boolean isLeaf() {
+		return innerNode.getValue() == null;
 	}
 
 	public int getLevel() {
@@ -135,11 +147,17 @@ public class RBTreeNode<T extends Comparable<T>> {
 
 	private void calcCoordinates() {
 		if (isLeftChild()) {
-			x = parent.getX() - OFFSET_X;
+			x = parent.getX() - OFFSET_X + (level - 1) * OFFSET_X / 4;
 			y = parent.getY() + OFFSET_Y;
 		} else {
-			x = parent.getX() + OFFSET_X;
+			x = parent.getX() + OFFSET_X - (level - 1) * OFFSET_X / 4;
 			y = parent.getY() + OFFSET_Y;
 		}
+	}
+
+	private static RBTreeNode createLeafNode() {
+		RBTreeNode leaf = new RBTreeNode(null);
+		leaf.setColor(Color.BLACK);
+		return leaf;
 	}
 }

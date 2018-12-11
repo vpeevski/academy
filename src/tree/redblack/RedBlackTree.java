@@ -35,7 +35,7 @@ public final class RedBlackTree<T extends Comparable<T>> {
 	}
 
 	private void insertLeft(RBTreeNode<T> parent, RBTreeNode<T> insertNode) {
-		if (parent.getLeft() != null) {
+		if (!parent.getLeft().isLeaf()) {
 			insertRec(parent.getLeft(), insertNode);
 		} else {
 			parent.setLeft(insertNode);
@@ -43,7 +43,7 @@ public final class RedBlackTree<T extends Comparable<T>> {
 	}
 
 	private void insertRight(RBTreeNode<T> parent, RBTreeNode<T> insertNode) {
-		if (parent.getRight() != null) {
+		if (!parent.getRight().isLeaf()) {
 			insertRec(parent.getRight(), insertNode);
 		} else {
 			parent.setRight(insertNode);
@@ -53,14 +53,14 @@ public final class RedBlackTree<T extends Comparable<T>> {
 	private void insertRec(RBTreeNode<T> parent, RBTreeNode<T> insertNode) {
 		if (parent != null) {
 			if (insertNode.getValue().compareTo(parent.getValue()) >= 0) {
-				if (parent.getRight() == null) {
+				if (parent.getRight().isLeaf()) {
 					parent.setRight(insertNode);
 					reColorIfNeeded(insertNode);
 				} else {
 					insertRec(parent.getRight(), insertNode);
 				}
 			} else {
-				if (parent.getLeft() == null) {
+				if (parent.getLeft().isLeaf()) {
 					parent.setLeft(insertNode);
 					reColorIfNeeded(insertNode);
 				} else {
@@ -73,7 +73,8 @@ public final class RedBlackTree<T extends Comparable<T>> {
 
 	private void reColorIfNeeded(RBTreeNode<T> node) {
 		assert (node != null);
-		if (node.isRed() && node.getParent() != null && node.getParent().isRed()) {
+		if (node.isRed() && !node.isRoot() && node.getParent().isRed() && node.getUncle() != null
+				&& node.getUncle().isRed()) { // RED parent RED uncle
 			node.getParent().setColor(Color.BLACK);
 			if (node.getUncle() != null) {
 				node.getUncle().setColor(Color.BLACK);
@@ -83,11 +84,35 @@ public final class RedBlackTree<T extends Comparable<T>> {
 				node.getGrantFather().setColor(Color.RED);
 				reColorIfNeeded(node.getGrantFather());
 			}
+		} else if (node.isRed() && !node.isRoot() && node.getParent().isRed()
+				&& !node.getUncle().isRed() && !haveSameSide(node, node.getUncle())) {
+			if (node.getParent().isLeftChild()) {
+				rotateRight(node.getGrantFather());
+			} else {
+				rotateLeft(node.getGrantFather());
+			}
+
 		}
+	}
+
+	private boolean haveSameSide(RBTreeNode<T> node, RBTreeNode<T> uncle) {
+		return uncle != null && (node.isLeftChild() && uncle.isLeftChild()) || (!node.isLeftChild() && !uncle.isLeftChild());
 	}
 
 	private void rotateRight(RBTreeNode<T> rotationRoot) {
 
+	}
+
+	private RBTreeNode<T> rotateLeft(RBTreeNode<T> rotationRoot) {
+		if (rotationRoot == null) {
+			return null;
+		}
+		RBTreeNode<T> tmpNode = rotationRoot.getRight();
+		rotationRoot.setRight(tmpNode.getLeft());
+		tmpNode.setLeft(rotationRoot);
+		tmpNode.setColor(tmpNode.getLeft().getColor());
+		tmpNode.getLeft().setColor(Color.RED);
+		return tmpNode;
 	}
 
 	private RBTreeNode<T> createRootNode(T value) {
